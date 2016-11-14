@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="amtLoadSaleAmtMapper">    
+
+
+     <insert id="mergeFactorySaleAmt" parameterType="com.share.calendar.amt.Vo.amtFactorySaleAmtVO">
+			 merge into AMT_SALE A
+				using (
+			        select
+			           #{MODEL_CD} as MODEL_CD
+			          ,#{EFF_STA_DT} as EFF_STA_DT
+			          ,#{EFF_END_DT} as EFF_END_DT
+			          ,#{SALE_AMT} as SALE_AMT
+			        from dual
+						) B
+			      on ( A.MODEL_CD = B.MODEL_CD 
+			       and A.EFF_STA_DT=B.EFF_STA_DT 
+			       and A.EFF_END_DT=B.EFF_END_DT)
+			
+			when matched then
+			update set
+				A.SALE_AMT = B.SALE_AMT
+
+			when not matched then
+			insert (
+				A.MODEL_CD
+				,A.EFF_STA_DT
+				,A.EFF_END_DT
+				,A.SALE_AMT
+			)
+			values (
+				B.MODEL_CD
+				,B.EFF_STA_DT
+				,B.EFF_END_DT
+				,B.SALE_AMT
+			)
+     </insert>
+     
+     
+     <update id="updateJobStatus" parameterType="hashmap">
+     </update>
+    
+</mapper>

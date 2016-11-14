@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lotLotteryMapper">    
+
+
+     <update id="mergeLottery" parameterType="com.share.calendar.lot.Vo.lotLotteryVO">
+			 merge into LOT_LOTTERY_NUMBER A
+				using (
+			        select
+			           #{LOT_NUM} as LOT_NUM
+			          ,#{LOT_DT} as LOT_DT
+			          ,#{NUM_1} as NUM_1
+			          ,#{NUM_2} as NUM_2
+			          ,#{NUM_3} as NUM_3
+			          ,#{NUM_4} as NUM_4
+			          ,#{NUM_5} as NUM_5
+			          ,#{NUM_6} as NUM_6
+			          ,#{NUM_B} as NUM_B
+			        from dual
+						) B
+			      on ( A.LOT_NUM = B.LOT_NUM)
+			
+			when matched then
+			update set
+				A.LOT_DT = B.LOT_DT
+				,A.NUM_1 = B.NUM_1
+				,A.NUM_2 = B.NUM_2
+				,A.NUM_3 = B.NUM_3
+				,A.NUM_4 = B.NUM_4
+				,A.NUM_5 = B.NUM_5
+				,A.NUM_6 = B.NUM_6
+				,A.NUM_B = B.NUM_B
+
+			when not matched then
+			insert (
+				A.LOT_NUM
+				,A.LOT_DT
+				,A.NUM_1
+				,A.NUM_2
+				,A.NUM_3
+				,A.NUM_4
+				,A.NUM_5
+				,A.NUM_6
+				,A.NUM_B
+			)
+			values (
+				B.LOT_NUM
+				,B.LOT_DT
+				,B.NUM_1
+				,B.NUM_2
+				,B.NUM_3
+				,B.NUM_4
+				,B.NUM_5
+				,B.NUM_6
+				,B.NUM_B
+			)
+     </update>
+     
+     <select id="selectLotteryAll" resultType="com.share.calendar.lot.Vo.lotLotteryVO">
+     	select
+     		LOT_NUM as lOT_NUM
+			,LOT_DT as lOT_DT
+			,NUM_1 as nUM_1
+			,NUM_2 as nUM_2
+			,NUM_3 as nUM_3
+			,NUM_4 as nUM_4
+			,NUM_5 as nUM_5
+			,NUM_6 as nUM_6
+			,NUM_B as nUM_B
+     	from LOT_LOTTERY_NUMBER 
+     	order by to_number(lOT_NUM)
+     </select>
+     
+     <select id="selectLotteryAll2" resultType="hashmap">
+     	select
+     		LOT_NUM as LOT_NUM
+			,LOT_DT as LOT_DT
+			,NUM_1 as NUM_1
+			,NUM_2 as NUM_2
+			,NUM_3 as NUM_3
+			,NUM_4 as NUM_4
+			,NUM_5 as NUM_5
+			,NUM_6 as NUM_6
+			,NUM_B as NUM_B
+     	from LOT_LOTTERY_NUMBER 
+     	order by to_number(LOT_NUM)
+     </select>
+     
+</mapper>

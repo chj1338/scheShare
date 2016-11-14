@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultDir="/WEB-INF/views/include">
+
+    <!-- exclude url pattern defined -->
+    <excludes>
+        <pattern>/*/exclude/*</pattern>
+        <pattern>/*.json</pattern>
+    </excludes>
+
+    <!-- include exclude url pattern -->
+    <decorator name="layout" page="layout.jsp">
+        <pattern>/*</pattern>
+        <pattern>*/sys/*</pattern>
+        <pattern>*/amt/*</pattern>
+        <pattern>*/common/*</pattern>
+        <pattern>*/lot/*</pattern>
+        <pattern>*/map/*</pattern>
+        <pattern>*/sch/*</pattern>
+        <pattern>*/se2/*</pattern>
+    </decorator>
+
+</decorators>

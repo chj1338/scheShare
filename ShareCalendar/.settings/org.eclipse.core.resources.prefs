@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/share/calendar/common/Util/commonUtil.java=UTF-8
+encoding//src/main/java/com/share/calendar/common/Util/diskFree.java=EUC-KR
+encoding//src/main/java/com/share/calendar/lot/Controller/duty_jsp.java=UTF-8
+encoding//src/main/java/com/share/calendar/sch/Controller/SchController.java=MS949
+encoding//src/main/java/com/share/calendar/sys/Controller/SysScheduler.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/login.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/main/body.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/main/leftMenu.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/main/mainBoard.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/sch/schInsertM.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/sch/schListM.jsp=UTF-8
+encoding//src/main/webapp/resources/js/common.js=UTF-8
+encoding/<project>=UTF-8

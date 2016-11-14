@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sysLoginMapper">    
+
+    <select id="selectLoginList" 
+             parameterType="com.share.calendar.sys.Dto.SysLoginDto" 
+             resultType="string">
+    
+        SELECT
+        	  #{loginId} as loginId
+         FROM DUAL
+        
+    </select>
+    
+    <select id="selectSysLoginChk" parameterType="com.share.calendar.sys.Dto.SysLoginDto" resultType="com.share.calendar.sys.Vo.SysLoginVo">    
+        SELECT
+        	 count(*) as USER_CNT
+         	,USER_NM
+         	,LAST_LOGIN_DT
+         FROM COM_USER
+         WHERE LOGIN_ID = #{loginId}
+            AND LOGIN_PW = #{loginPW}
+         group by USER_NM, LAST_LOGIN_DT
+    </select>
+    
+    <insert id="insertLoginHistory" parameterType="com.share.calendar.sys.Dto.SysLoginDto">
+    	insert into COM_LOGIN_HISTORY(
+    		LOGIN_ID
+    		,CLIENT_IP
+    		,LOGIN_DT
+    	)
+    	values (
+    		#{loginId}
+    		,#{clientIp}
+    		,sysdate
+    	)
+    </insert>
+    
+    <update id="updateLastLoginDt" parameterType="com.share.calendar.sys.Dto.SysLoginDto">
+    	update COM_USER set
+    		 LAST_LOGIN_DT = to_char(sysdate, 'YYYY-MM-DD hh24:MI:ss')
+    		 ,WRONG_PW_CNT = 0
+    	WHERE LOGIN_ID = #{loginId}
+    </update>
+    
+</mapper>
