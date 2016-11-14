@@ -40,8 +40,7 @@ public class Se2Controller {
 //		return "/resources/smart_editor2/SmartEditor2.html";
 		return "/se2/SmartEditor2";
 	}
-	
-	
+
 	/**
 	 * 스마트에디터2 화면 띄우기.
 	 */
@@ -56,7 +55,7 @@ public class Se2Controller {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "/se2/SmartEditor2";
+		return "/se2/SmartEditor2.html";
 	}
 	
 	

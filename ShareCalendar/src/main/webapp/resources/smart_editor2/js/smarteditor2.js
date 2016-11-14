@@ -1,4 +1,4 @@
-/**
+﻿/**
  * SmartEditor2 NAVER_Library:SE2.8.2.O12056
  * Copyright NAVER Corp. Licensed under LGPL v2
  * See license text at http://dev.naver.com/projects/smarteditor/wiki/LICENSE
@@ -13251,7 +13251,7 @@ nhn.husky.SE2M_StyleRemover = jindo.$Class({
 		}else if(htBrowser.firefox){
 			//[SMARTEDITORSUS-477][개별블로그](파폭특정)포스트쓰기>요약글을 삽입 후 요약글 아래 임의의 본문영역에 마우스 클릭 시 커서가 요약안에 노출됩니다. 
 			// 본문에 table만 있는 경우, 커서가 밖으로 못나오는 현상이 있음.FF버그임.
-			sHtml += "<p>﻿<br></p>";
+			sHtml += "<p>?<br></p>";
 		}
 		
 		oSelection.selectNode(elDivHolder);
