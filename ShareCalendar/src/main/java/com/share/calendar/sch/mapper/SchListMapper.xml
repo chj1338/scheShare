@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="schListMapper">    
+
+    <select id="selectSchList" parameterType="com.share.calendar.sch.Dto.SchListDto" resultType="com.share.calendar.sch.Vo.SchVo">    
+        select
+			SCHE_NO as sche_no
+			,SCHE_DT as sche_dt
+			,SCHE_TITLE as sche_title
+			,SCHE_CONTENT as sche_content
+			,SCHE_SE as sche_se
+			,REGIST_ID as regist_id
+			,REGIST_DT as regist_dt
+         from SCHE_LIST
+         where SCHE_TITLE like '%' || #{sch_title} || '%'
+    </select>
+
+</mapper>

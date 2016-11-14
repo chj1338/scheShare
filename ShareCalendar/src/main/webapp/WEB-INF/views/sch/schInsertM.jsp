@@ -1,5 +1,6 @@
-<%@ page language="java" pageEncoding="UTF-8" %>
-<%@ page import="java.util.*" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/WEB-INF/views/include/common.jsp"%>
 
 <%
 	String clientIp = request.getRemoteHost();
@@ -13,6 +14,8 @@
 
     <script type="text/javascript">
     var SchShareApp = {
+    		rowData: '${rowData}',	
+    		
     		pageInit: function() {
                 'use strict';
                 this.data.init();
@@ -32,7 +35,7 @@
 	              var paramObj = {
 	    					sch_dt : $('#sch_dt').val(), 
 	    					sch_title : $('#sch_title').val(), 
-	    					sch_content : $('#sch_content').val()         			
+	    					sch_content : $('#sch_content').val(rowid)         			
 	            	};
                     
                     SchShareObj.data.ajax(url, {pars: paramObj, async: false, 
