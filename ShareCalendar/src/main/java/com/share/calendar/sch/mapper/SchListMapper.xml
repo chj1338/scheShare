@@ -13,7 +13,7 @@
 			,REGIST_ID as regist_id
 			,REGIST_DT as regist_dt
          from SCHE_LIST
-         where SCHE_TITLE like '%' || #{sch_title} || '%'
+         where SCHE_TITLE like '%' || #{schTitle} || '%'
     </select>
     
     <select id="selectSchDetail" parameterType="com.share.calendar.sch.Dto.SchListDto" resultType="com.share.calendar.sch.Vo.SchVo">    
@@ -28,5 +28,40 @@
          from SCHE_LIST
          where SCHE_NO = #{schId}
     </select>
+    
+    <insert id="insertSchedule" parameterType="com.share.calendar.sch.Dto.SchListDto">
+    	insert into SCHE_LIST (
+    		SCHE_NO
+			,SCHE_DT
+			,SCHE_TITLE
+			,SCHE_CONTENT
+			,SCHE_SE
+			,REGIST_ID
+			,REGIST_DT
+    	) values (
+    		#{schId}
+    		,#{schDtFrom}
+    		,#{schTitle}
+    		,#{schContent}
+    		,#{schSe}
+    		,#{registId}
+    		,sysdate
+    	)    	
+    </insert>
+    
+    <update id="updateSchedule" parameterType="com.share.calendar.sch.Dto.SchListDto">
+    	update SCHE_LIST set
+			SCHE_DT = #{schDtFrom}
+			,SCHE_TITLE = #{schTitle}
+			,SCHE_CONTENT = #{schContent}
+			,SCHE_SE = #{schSe}
+			,REGIST_ID = #{registId}
+		where SCHE_NO = #{schId}
+    </update>
+    
+    <delete id="deleteSchedule" parameterType="com.share.calendar.sch.Dto.SchListDto">
+    	delete from SCHE_LIST
+    	where SCHE_NO = #{schId}
+    </delete>
 
 </mapper>

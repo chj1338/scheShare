@@ -34,13 +34,17 @@ public class SchListDaoImpl implements SchListDao {
     public List<SchVo> selectSchDetail(SchListDto schListDto) throws Exception {   	
     	return sqlSession.selectList("schListMapper.selectSchDetail", schListDto);
     };
-/*
-    public void insertLoginHistory(SysLoginDto sysLoginDto) throws Exception {
-    	sqlSession.insert("sysLoginMapper.insertLoginHistory", sysLoginDto);
-    }
     
-    public void updateLastLoginDt(SysLoginDto sysLoginDto) throws Exception {
-    	sqlSession.insert("sysLoginMapper.updateLastLoginDt", sysLoginDto);
-    }
-    */
+	public void insertSchedule(SchListDto schListDto) throws Exception {
+		sqlSession.insert("schListMapper.insertSchedule", schListDto);
+	};
+	
+	public void updateSchedule(SchListDto schListDto) throws Exception {
+		sqlSession.update("schListMapper.updateSchedule", schListDto);
+	};
+	
+	public void deleteSchedule(SchListDto schListDto) throws Exception {
+		sqlSession.delete("schListMapper.deleteSchedule", schListDto);
+	};
+	
 }

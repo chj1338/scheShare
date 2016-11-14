@@ -21,8 +21,10 @@ public interface SchListDao {
     
     public List<SchVo> selectSchDetail(SchListDto schListDto) throws Exception;
     
-//    public void insertLoginHistory(SysLoginDto sysLoginDto) throws Exception;
-    
-//    public void updateLastLoginDt(SysLoginDto sysLoginDto) throws Exception; 
+	public void insertSchedule(SchListDto schListDto) throws Exception;
+	
+	public void updateSchedule(SchListDto schListDto) throws Exception;
+	
+	public void deleteSchedule(SchListDto schListDto) throws Exception;
     
 }

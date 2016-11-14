@@ -10,35 +10,37 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SchListDto {
 	
-	private String sch_title;
-	private String sch_content;
-	private String templDtFrom;
-	private String templDtTo;
+	private String schTitle;
+	private String schContent;
+	private String schDtFrom;
+	private String schDtTo;
 	private String schId;
+	private String schSe;
+	private String registId;
 	
-	public String getSch_title() {
-		return sch_title;
+	public String getSchTitle() {
+		return schTitle;
 	}
-	public void setSch_title(String sch_title) {
-		this.sch_title = sch_title;
+	public void setSchTitle(String schTitle) {
+		this.schTitle = schTitle;
 	}
-	public String getSch_content() {
-		return sch_content;
+	public String getSchContent() {
+		return schContent;
 	}
-	public void setSch_content(String sch_content) {
-		this.sch_content = sch_content;
+	public void setSchContent(String schContent) {
+		this.schContent = schContent;
 	}
-	public String getTemplDtFrom() {
-		return templDtFrom;
+	public String getSchDtFrom() {
+		return schDtFrom;
 	}
-	public void setTemplDtFrom(String templDtFrom) {
-		this.templDtFrom = templDtFrom;
+	public void setSchDtFrom(String schDtFrom) {
+		this.schDtFrom = schDtFrom;
 	}
-	public String getTemplDtTo() {
-		return templDtTo;
+	public String getSchDtTo() {
+		return schDtTo;
 	}
-	public void setTemplDtTo(String templDtTo) {
-		this.templDtTo = templDtTo;
+	public void setSchDtTo(String schDtTo) {
+		this.schDtTo = schDtTo;
 	}
 	public String getSchId() {
 		return schId;
@@ -46,5 +48,17 @@ public class SchListDto {
 	public void setSchId(String schId) {
 		this.schId = schId;
 	}
-	
+	public String getSchSe() {
+		return schSe;
+	}
+	public void setSchSe(String schSe) {
+		this.schSe = schSe;
+	}
+	public String getRegistId() {
+		return registId;
+	}
+	public void setRegistId(String registId) {
+		this.registId = registId;
+	}
+		
 }

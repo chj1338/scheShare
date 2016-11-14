@@ -35,13 +35,17 @@ public class SchListServiceImpl implements SchListService {
         return schListDao.selectSchDetail(schListDto);
     }
     
-/*
-    public void insertLoginHistory(SysLoginDto sysLoginDto) throws Exception {
-    	sqlSession.insert("sysLoginMapper.insertLoginHistory", sysLoginDto);
-    }
     
-    public void updateLastLoginDt(SysLoginDto sysLoginDto) throws Exception {
-    	sqlSession.insert("sysLoginMapper.updateLastLoginDt", sysLoginDto);
-    }
- */   
+	public void insertSchedule(SchListDto schListDto) throws Exception {
+		schListDao.insertSchedule(schListDto);
+	}
+	
+	public void updateSchedule(SchListDto schListDto) throws Exception {
+		schListDao.updateSchedule(schListDto);
+	}
+	
+	public void deleteSchedule(SchListDto schListDto) throws Exception {
+		schListDao.deleteSchedule(schListDto);
+	}
+
 }

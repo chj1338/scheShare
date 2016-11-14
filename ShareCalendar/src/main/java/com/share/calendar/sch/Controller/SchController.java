@@ -67,20 +67,20 @@ public class SchController {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
         try {
-    		String templDtFrom = new String(request.getParameter("templDtFrom").getBytes("ISO-8859-1"), "UTF-8");
-    		String templDtTo 	= new String(request.getParameter("templDtTo").getBytes("ISO-8859-1"), "UTF-8");
-    		String sch_title 		= new String(request.getParameter("sch_title").getBytes("ISO-8859-1"), "UTF-8");
-    		String sch_content 	= new String(request.getParameter("sch_content").getBytes("ISO-8859-1"), "UTF-8");
+    		String schDtFrom = new String(request.getParameter("schDtFrom").getBytes("ISO-8859-1"), "UTF-8");
+    		String schDtTo 	= new String(request.getParameter("schDtTo").getBytes("ISO-8859-1"), "UTF-8");
+    		String schTitle 		= new String(request.getParameter("schTitle").getBytes("ISO-8859-1"), "UTF-8");
+    		String schContent 	= new String(request.getParameter("schContent").getBytes("ISO-8859-1"), "UTF-8");
     		
-    		logger.debug("===== templDtFrom : {}", templDtFrom);
-    		logger.debug("===== templDtTo : {}", templDtTo);
-    		logger.debug("===== sch_title : {}", sch_title);
-    		logger.debug("===== sch_content : {}", sch_content); 
+    		logger.debug("===== schDtFrom : {}", schDtFrom);
+    		logger.debug("===== schDtTo : {}", schDtTo);
+    		logger.debug("===== schTitle : {}", schTitle);
+    		logger.debug("===== schContent : {}", schContent); 
     		
-    		schListDto.setTemplDtFrom(templDtFrom);
-    		schListDto.setTemplDtTo(templDtTo);
-    		schListDto.setSch_title(sch_title);
-    		schListDto.setSch_content(sch_content);
+    		schListDto.setSchDtFrom(schDtFrom);
+    		schListDto.setSchDtTo(schDtTo);
+    		schListDto.setSchTitle(schTitle);
+    		schListDto.setSchContent(schContent);
     		
     		List<SchVo> list = schListService.selectSchList(schListDto);
 
@@ -101,7 +101,9 @@ public class SchController {
 	}
 	
 	
-	
+	/* ½ºÄÉÁì »ó¼¼Á¶È¸ ÆË¾÷
+	 * 
+	 */
 	@ResponseBody
     @RequestMapping(value = "/sch/getSchDetailData", method = RequestMethod.POST)
     public Map<String, Object> getSchDetailData (HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -134,28 +136,45 @@ public class SchController {
 	}
 	
 	
+	/* ½ºÄÉÁì »ó¼¼Á¶È¸ ÆË¾÷
+	 * 
+	 */
 	@ResponseBody
-	@RequestMapping(value = "/schInsertData", method = RequestMethod.POST, produces = "application/json")
-	public Map<String, Object> schInsertData(Locale locale, 
-														Model model, 
-														HttpServletRequest request, 
-														HttpSession session) throws Exception {
-		logger.debug("===== SchController schInsertData()");
+    @RequestMapping(value = "/sch/schInsertData", method = RequestMethod.POST)
+    public Map<String, Object> schInsertData (HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.debug("========= SchController schInsertData !!!");
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
         try {
-    		String sch_dt = request.getParameter("sch_dt");
-    		String sch_title = request.getParameter("sch_title");
-    		String sch_content = request.getParameter("sch_content");
+    		String schId = request.getParameter("schId");
+    		String schDt = request.getParameter("schDt");
+    		String schSe = request.getParameter("schSe");
+    		String schTitle = new String(request.getParameter("schTitle").getBytes("ISO-8859-1"), "UTF-8");
+    		String schContent = new String(request.getParameter("schContent").getBytes("ISO-8859-1"), "UTF-8");
     		
-    		logger.debug("===== sch_dt : {}", sch_dt);
-    		logger.debug("===== sch_title : {}", sch_title);
-    		logger.debug("===== sch_content : {}", sch_content); 
-
+    		HttpSession session = request.getSession();
+    		String registId = session.getAttribute("loginId").toString();
+    		
+    		logger.debug("===== schId : {}", schId);
+    		logger.debug("===== schTitle : {}", schTitle);
+    		logger.debug("===== schContent : {}", schContent); 
+    		
+    		schListDto.setSchId(schId);
+    		schListDto.setSchDtFrom(schDt);
+    		schListDto.setSchSe(schSe);
+    		schListDto.setSchTitle(schTitle);
+    		schListDto.setSchContent(schContent);
+    		schListDto.setRegistId(registId);
+    		
+    		if(schId.equals("") || schId == null) {
+    			schListService.insertSchedule(schListDto);
+    		} else {
+    			schListService.updateSchedule(schListDto);
+    		}
+    		
             resultMap.put("resultCd", "1000");
             resultMap.put("resultMsg", "SUCCESS");
-            resultMap.put("resultData", "resultData");
         } catch(Exception e) {
             e.printStackTrace();
             logger.error("Error : {}", e.getMessage());
@@ -167,6 +186,6 @@ public class SchController {
         }
         
         return resultMap;
-	}	
-	
+	}
+		
 }
