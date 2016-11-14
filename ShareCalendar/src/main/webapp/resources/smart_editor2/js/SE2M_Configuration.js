@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Smart Editor 2 Configuration : This setting must be changed by service
  */
 window.nhn = window.nhn || {};

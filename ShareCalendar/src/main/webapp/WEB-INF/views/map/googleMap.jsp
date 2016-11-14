@@ -25,6 +25,10 @@
 </head>
 
 <body>
+	<div id="headLine">
+	  <h3>지도찾기(구글API)</h3>
+	</div>
+	
 <div id="search">주소 : <input type="text" id="adres"/><input type="button" id="searchBtn" value="검색" onClick="findMap()"/></div>
 <div id="sidebar" class="sb_blue"></div>
 <div id="map"></div>

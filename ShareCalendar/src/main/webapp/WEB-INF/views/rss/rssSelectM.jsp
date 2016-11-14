@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <HEAD>
-  <title>뉴스 RSS</title>
+  <title>RSS뉴스</title>
   <style type="text/css">
   	table, tr, td {
   		border-style:solid;
@@ -105,7 +105,7 @@
 <div id="center">
 
 	<div id="headLine">
-	  <h3>뉴스 RSS</h3>
+	  <h3>RSS 뉴스</h3>
 	</div>
 
 	<div id="condition">

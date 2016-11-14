@@ -84,10 +84,22 @@
   </form>
 </div>
 <br>
-
-랜 덤 : <input type="text" id="lottery_num"/><br>
-B제외 : <input type="text" id="lottery_num1"/><br>
-B포함 : <input type="text" id="lottery_num2"/>
+<table>
+	<tr>
+		<td align="right">랜 덤 :</td>
+		<td align="left"><input type="text" id="lottery_num"/></td>
+	</tr>
+	<tr><td> </td></tr>
+	<tr>
+		<td align="right">B제외 :</td>
+		<td align="left"><input type="text" id="lottery_num1"/></td>
+	</tr>
+	<tr><td> </td></tr>
+	<tr>
+		<td align="right">B포함 :</td>
+		<td align="left"><input type="text" id="lottery_num2"/></td>
+	</tr>
+</table>
 
 </div>  
 

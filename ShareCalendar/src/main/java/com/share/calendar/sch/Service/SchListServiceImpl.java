@@ -31,6 +31,10 @@ public class SchListServiceImpl implements SchListService {
         return schListDao.selectSchList(schListDto);
     }
     
+    public List<SchVo> selectSchDetail(SchListDto schListDto) throws Exception {
+        return schListDao.selectSchDetail(schListDto);
+    }
+    
 /*
     public void insertLoginHistory(SysLoginDto sysLoginDto) throws Exception {
     	sqlSession.insert("sysLoginMapper.insertLoginHistory", sysLoginDto);

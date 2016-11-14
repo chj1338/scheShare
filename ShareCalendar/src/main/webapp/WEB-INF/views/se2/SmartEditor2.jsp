@@ -1,15 +1,18 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page language="java" pageEncoding="UTF-8" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>네이버 :: Smart Editor 2 &#8482;</title>
-<script type="text/javascript" src="/resources/smart_editor2/js/HuskyEZCreator.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./resources/smart_editor2/js/HuskyEZCreator.js" charset="UTF-8"></script>
 
 </head>
 <body>
-<form action="SmartEditor2_Save.do" method="get">
+	<div id="headLine">
+	  <h3>네이버 스마트 에디터2</h3>
+	</div>
+<form action="SmartEditor2_Save.do" method="post">
 	<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:766px; height:412px; display:none;"></textarea>
 	<!--textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; min-width:610px; display:none;"></textarea-->
 	<p>

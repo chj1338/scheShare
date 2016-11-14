@@ -62,8 +62,8 @@ public class SysLoginController  {
 		session.setMaxInactiveInterval(60*60);
 		
 		try {
-			String loginId = request.getParameter("loginId");
-			String loginPW = request.getParameter("loginPW");
+			String loginId = new String(request.getParameter("loginId").getBytes("ISO-8859-1"), "UTF-8");
+			String loginPW = new String(request.getParameter("loginPW").getBytes("ISO-8859-1"), "UTF-8");
 			String clientIp = request.getParameter("clientIp");
 			
 			logger.debug("========= SysLoginController  loginId : " + loginId);

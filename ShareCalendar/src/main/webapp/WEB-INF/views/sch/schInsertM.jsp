@@ -8,34 +8,39 @@
 
 <HTML>
 <HEAD>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <title>일정등록</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <script type="text/javascript">
     var SchShareApp = {
-    		rowData: '${rowData}',	
+    		schId: '${schId}',	
     		
     		pageInit: function() {
                 'use strict';
                 this.data.init();
                 this.event.init();
                 
-                //$('#sch_dt').val(SchShareObj.date.getCurrentDate());
-                setToday();
+                if(SchShareApp.schId == "") {
+                    setToday();
+                    $('#sch_content').val(SchShareApp.schId);
+                } else {
+                	document.title = "일정조회";
+                	$('#scrTitle').val("일정조회");
+                	SchShareApp.data.schDetailData();
+                }
             },
             
             data: {
                 init: function() {
                 },
                 
-                // 템플릿 목록
+                // 스케쥴 등록
                 schInsertData: function() {
-                  var url = '/schInsertData';
+                  var url = '/sch/schInsertData';
 	              var paramObj = {
+	            		    schId : SchShareApp.schId,
 	    					sch_dt : $('#sch_dt').val(), 
-	    					sch_title : $('#sch_title').val(), 
-	    					sch_content : $('#sch_content').val(rowid)         			
+  	    					sch_title : $('#sch_title').val(), 
+  	    					sch_content : $('#sch_content').val()         			
 	            	};
                     
                     SchShareObj.data.ajax(url, {pars: paramObj, async: false, 
@@ -49,7 +54,29 @@
                         	alert(res.resultMsg);
                         }
                     });
-                }
+                },
+                
+                //스케쥴 상세조회
+                schDetailData: function() {
+                    var url = '/sch/getSchDetailData';
+  	              	var paramObj = {
+	    					schId : SchShareApp.schId
+					};
+                      
+                    SchShareObj.data.ajax(url, {pars: paramObj, async: false, 
+                        onsucc: function(res) {
+          					if(res.resultCd === "1000") {
+								var object = res.resultData;
+								sch_dt : $('#sch_dt').val( object[0].scheDt );
+	  	    					sch_title : $('#sch_title').val( object[0].scheTitle ); 
+	  	    					sch_content : $('#sch_content').val( object[0].scheContent );   
+          					}
+                          },
+                          onerr: function(res){
+                          	alert(res.resultMsg);
+                          }
+                      });
+                  }
             },
             
             event: {
@@ -92,7 +119,7 @@
 <div id="center">
 
 <div id="effect">
-  <h3>일정등록</h3>
+	<div id="scrTitle"><h3>일정등록</h3></div>
     
   <form id="schInsertForm">
       <div align="left">날짜 : <input type="text" name="sch_dt" id="sch_dt"></input></div>

@@ -4,7 +4,7 @@
 <html>
 <head>
 
-<title>기사수집3</title>
+<title>기사검색</title>
   <style type="text/css">
   	table, tr, td {
   		border-style:solid;
@@ -126,6 +126,10 @@
  
 </head>
 <body>
+	<div id="headLine">
+	  <h3>기사검색</h3>
+	</div>
+
 <input type="text" id="keyword" value=""/>
 <button id="articleSearchBtn">조회</button>
 <br><br>

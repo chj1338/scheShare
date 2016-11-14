@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <HEAD>
-  <title>날씨 RSS</title>
+  <title>RSS 날씨</title>
   <style type="text/css">
   	table, tr, td {
   		border-style:solid;
@@ -147,7 +147,7 @@
 <div id="center">
 
 	<div id="headLine">
-	  <h3>날씨 RSS</h3>
+	  <h3  bgcolor="#E8F5FF">RSS 날씨</h3>
 	</div>
 
 	<div id="condition">

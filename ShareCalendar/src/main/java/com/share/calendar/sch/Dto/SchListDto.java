@@ -14,6 +14,8 @@ public class SchListDto {
 	private String sch_content;
 	private String templDtFrom;
 	private String templDtTo;
+	private String schId;
+	
 	public String getSch_title() {
 		return sch_title;
 	}
@@ -38,5 +40,11 @@ public class SchListDto {
 	public void setTemplDtTo(String templDtTo) {
 		this.templDtTo = templDtTo;
 	}
-
+	public String getSchId() {
+		return schId;
+	}
+	public void setSchId(String schId) {
+		this.schId = schId;
+	}
+	
 }

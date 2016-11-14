@@ -112,10 +112,10 @@
                             alert(xhr.statusText);
                         },
                         onCellSelect: function(rowid, iCol, cellcontent, e) {
-                        	// 템플릿 명칭 상세조회 이벤트
+                        	// 스케쥴 상세조회 이벤트
                             if (iCol === 3) {
                                 var rowData = $('#gridList').getRowData(rowid);
-                                SchShareApp.popup.SchInsertPop(rowData);
+                                SchShareApp.popup.SchDetail(rowData);
                             }
                             
                             if (iCol !== 0) $('#gridList').setSelection(rowid);
@@ -226,13 +226,27 @@
             },
             
             popup: {
-                	SchInsertPop: function(rowData) {
+                	SchInsertPop: function() {
+
                         // 스케쥴 등록
                         SchShareObj.popup.open({
                           /* url : '<c:url value="/schInsertM" />', */
                           url : '/schInsertM',
-                          pars : rowData,
+                          pars : 'schId=',
                           title: 'title',
+                          method : 'get',
+                          width : '500',
+                          height : '450'
+                        });
+                    },
+                    
+                    SchDetail: function(rowData) {
+                        // 스케쥴 상세조회
+                        SchShareObj.popup.open({
+                          /* url : '<c:url value="/schInsertM" />', */
+                          url : '/schInsertM',
+                          pars : 'schId=' + rowData.schId,
+                          title: '스케쥴 상세조회',
                           method : 'get',
                           width : '500',
                           height : '450'

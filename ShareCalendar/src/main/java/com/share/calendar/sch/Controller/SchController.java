@@ -49,6 +49,10 @@ public class SchController {
 	public String schInsertM(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
 		logger.info("===== SchController schInsertM");
 		
+		String schId = request.getParameter("schId");
+		logger.info("===== SchController schInsertM {}", schId);
+		model.addAttribute("schId", schId);
+		
 		return "sch/schInsertM";
 	}
 	
@@ -79,12 +83,39 @@ public class SchController {
     		schListDto.setSch_content(sch_content);
     		
     		List<SchVo> list = schListService.selectSchList(schListDto);
-    		
-    		logger.debug("=====list size  {}", list.size() );
 
-    		for(int i=0; i<list.size(); i++) {
-    			logger.debug("=====getSche_title  {}", list.get(i).getScheTitle() );
-    		}
+            resultMap.put("resultCd", "1000");
+            resultMap.put("resultMsg", "SUCCESS");
+            resultMap.put("resultData", list);
+        } catch(Exception e) {
+            e.printStackTrace();
+            logger.error("Error : {}", e.getMessage());
+            
+            resultMap.put("resultCd", "9999");
+            resultMap.put("resultMsg", e.getMessage());
+        } finally {
+        	;
+        }
+        
+        return resultMap;
+	}
+	
+	
+	
+	@ResponseBody
+    @RequestMapping(value = "/sch/getSchDetailData", method = RequestMethod.POST)
+    public Map<String, Object> getSchDetailData (HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.debug("========= getScheduleList Controller Start !!!");
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+        try {
+    		String schId = new String(request.getParameter("schId"));
+    		logger.debug("===== schId : {}", schId);
+    		
+    		schListDto.setSchId(schId);
+    		
+    		List<SchVo> list = schListService.selectSchDetail(schListDto);
     		
             resultMap.put("resultCd", "1000");
             resultMap.put("resultMsg", "SUCCESS");
@@ -100,7 +131,7 @@ public class SchController {
         }
         
         return resultMap;
-	}	
+	}
 	
 	
 	@ResponseBody

@@ -20,7 +20,7 @@ import com.share.calendar.sys.Vo.SysLoginVo;
 @Repository
 public class SysLoginDaoImpl implements SysLoginDao {
 	
-	private static final Logger logger = LoggerFactory.getLogger(SysLoginController.class);
+	private static final Logger logger = LoggerFactory.getLogger(SysLoginDaoImpl.class);
 
     @Autowired
     private SqlSession sqlSession;

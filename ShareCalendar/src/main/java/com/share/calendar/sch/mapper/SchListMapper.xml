@@ -15,5 +15,18 @@
          from SCHE_LIST
          where SCHE_TITLE like '%' || #{sch_title} || '%'
     </select>
+    
+    <select id="selectSchDetail" parameterType="com.share.calendar.sch.Dto.SchListDto" resultType="com.share.calendar.sch.Vo.SchVo">    
+        select
+			SCHE_NO as sche_no
+			,SCHE_DT as sche_dt
+			,SCHE_TITLE as sche_title
+			,SCHE_CONTENT as sche_content
+			,SCHE_SE as sche_se
+			,REGIST_ID as regist_id
+			,REGIST_DT as regist_dt
+         from SCHE_LIST
+         where SCHE_NO = #{schId}
+    </select>
 
 </mapper>

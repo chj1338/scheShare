@@ -17,6 +17,8 @@ public interface SchListService {
      * 
      */
 	public List<SchVo> selectSchList(SchListDto schListDto) throws Exception;
+	
+	public List<SchVo> selectSchDetail(SchListDto schListDto) throws Exception;
     
 //	public void insertLoginHistory(SysLoginDto sysLoginDto) throws Exception;
 

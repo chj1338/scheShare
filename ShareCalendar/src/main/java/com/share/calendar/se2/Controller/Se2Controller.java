@@ -26,7 +26,7 @@ public class Se2Controller {
 	/**
 	 * 스마트에디터2 화면 띄우기.
 	 */
-	@RequestMapping(value = "/SmartEditor2.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/SmartEditor2.html", method = RequestMethod.GET)
 	public String SmartEditor2(HttpServletRequest request, HttpServletResponse response, Model model, Locale locale) {
 		logger.debug("***** Welcome to the SmartEditor2", locale);
 		
@@ -40,11 +40,12 @@ public class Se2Controller {
 //		return "/resources/smart_editor2/SmartEditor2.html";
 		return "/se2/SmartEditor2";
 	}
-
+	
+	
 	/**
 	 * 스마트에디터2 화면 띄우기.
 	 */
-	@RequestMapping(value = "/SmartEditor2.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/SmartEditor2.do", method = RequestMethod.GET)
 	public String SmartEditor2html(HttpServletRequest request, HttpServletResponse response, Model model, Locale locale) {
 		logger.debug("***** Welcome to the SmartEditor2", locale);
 		
@@ -55,7 +56,7 @@ public class Se2Controller {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "/se2/SmartEditor2.html";
+		return "/se2/SmartEditor2";
 	}
 	
 	
