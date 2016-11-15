@@ -148,20 +148,22 @@
                 	// validation check
                     var schDtFrom = $.trim($('#schDtFrom').val().replace(/-/g, ''));
                     var schDtTo = $.trim($('#schDtTo').val().replace(/-/g, ''));
-/*                    
-                    if (templDtFrom.length > 0 && templDtTo.length === 0) {
+                    
+                    if (schDtFrom.length > 0 && schDtTo.length === 0) {
                         alert('종료일자를 선택하세요.');
                         return false;
                     }
-                    if (templDtFrom.length === 0 && templDtTo.length > 0) {
+                    
+                    if (schDtFrom.length === 0 && schDtTo.length > 0) {
                         alert('시작일자를 선택하세요.');
                         return false;
                     }
-                    if (templDtFrom > templDtTo) {
+                    
+                    if (schDtFrom > schDtTo) {
                     	alert('시작일자를 종료일자 이전으로 선택하세요.');
                         return false;
                     }
-	        		 */
+
 					var url = "/sch/getScheduleList";
 	  	            var paramObj = "schDtFrom="	+ schDtFrom
 			                  + "&" + "schDtTo="	+ schDtTo
@@ -184,14 +186,15 @@
 								// 생성된 그리드에 값을 바인딩.(수동방식)
 								for(var i=0; i<object.length; i++ ) {
 									$('#gridList').jqGrid('setRowData', i+1,
-											 {	schId: 		object[i].scheNo,
-												schDt: 		object[i].scheDt,
-												schTitle: 		object[i].scheTitle,
-												schContent: 	object[i].scheContent,
-												schUseCo: 	(object[i].scheSe).replace('P', '공개').replace('S', '비공개'),
-												schRegistId: 	object[i].registId,
-												schRegistDt:	object[i].registDt
-										      });
+										 {
+											schId: 		object[i].scheNo,
+											schDt: 		object[i].scheDt,
+											schTitle: 		object[i].scheTitle,
+											schContent: 	object[i].scheContent,
+											schUseCo: 	(object[i].scheSe).replace('P', '공개').replace('S', '비공개'),
+											schRegistId: 	object[i].registId,
+											schRegistDt:	object[i].registDt
+									      });
 								}
 	      					}
 	                      },
@@ -227,10 +230,9 @@
             },
             
             popup: {
-                	SchInsertPop: function() {
-
-                        // 스케쥴 등록
-                        SchShareObj.popup.open({
+				SchInsertPop: function() {
+                    // 스케쥴 등록
+                    SchShareObj.popup.open({
                           /* url : '<c:url value="/schInsertM" />', */
                           url : '/schInsertM',
                           pars : 'schId=',
@@ -254,7 +256,6 @@
                         });
                     }
             }
-            
     };
 
     </script>
