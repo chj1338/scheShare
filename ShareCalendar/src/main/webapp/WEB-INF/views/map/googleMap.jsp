@@ -30,10 +30,10 @@
 	</div>
 	
 <div id="search">주소 : <input type="text" id="adres"/><input type="button" id="searchBtn" value="검색" onClick="findMap()"/></div>
+<div><input type="text" id="map-canvas2-description" cols='80'/></div>
 <div id="sidebar" class="sb_blue"></div>
 <div id="map"></div>
 <a href="makemarker_sidebar.htm">Back</a> 
-
 
 <script>
 
@@ -41,14 +41,22 @@
 /**
  * map
  */
+
 var mapOpts = {
 	zoom: 13,    
-	center: new google.maps.LatLng(37.5172363,127.0473248),	// 기준좌표(강남)
-	
+	center: new google.maps.LatLng(37.5172363, 127.0473248),	// 기준좌표(강남)
   	mapTypeId: google.maps.MapTypeId.ROADMAP,
+
+  	panControl: true, 
+  	zoomControl: true, 			// zoom 컨트롤 버튼 존재 여부
+  	mapTypeControl: true,		// map type 컨트롤 존재여부
+  	streetViewControl: true,	// 스트리트뷰 버튼 존재여부
+  	overviewMapControl: true,
+
   	scaleControl: true,
   	scrollwheel: false
-}
+};
+
 var map = new google.maps.Map(document.getElementById("map"), mapOpts);
 //  We set zoom and center later by fitBounds()
 
@@ -56,7 +64,7 @@ var map = new google.maps.Map(document.getElementById("map"), mapOpts);
 /**
  *   fit viewport to markers
  */
-map.fitBounds(markerBounds);
+//map.fitBounds(markerBounds);
 
 
 /**
@@ -72,21 +80,25 @@ var markerBounds = new google.maps.LatLngBounds();
 var markerArray = [];
  
 function makeMarker(options){
-  var pushPin = new google.maps.Marker({map:map});
-  pushPin.setOptions(options);
-  google.maps.event.addListener(pushPin, "click", function(){
-    infoWindow.setOptions(options);
-    infoWindow.open(map, pushPin);
-    if(this.sidebarButton)this.sidebarButton.button.focus();
-  });
-  var idleIcon = pushPin.getIcon();
-  if(options.sidebarItem){
-    pushPin.sidebarButton = new SidebarItem(pushPin, options);
-    pushPin.sidebarButton.addIn("sidebar");
-  }
-  markerBounds.extend(options.position);
-  markerArray.push(pushPin);
-  return pushPin;
+	var pushPin = new google.maps.Marker({map:map});
+  	pushPin.setOptions(options);
+  	google.maps.event.addListener(pushPin, "click", function(){
+    	infoWindow.setOptions(options);
+    	infoWindow.open(map, pushPin);
+    	if(this.sidebarButton)
+    		this.sidebarButton.button.focus();
+  	});
+  	
+  	var idleIcon = pushPin.getIcon();
+  	if(options.sidebarItem){
+    	pushPin.sidebarButton = new SidebarItem(pushPin, options);
+    	pushPin.sidebarButton.addIn("sidebar");
+  	}
+  	
+  	markerBounds.extend(options.position);
+  	markerArray.push(pushPin);
+  	
+  	return pushPin;
 }
 
 google.maps.event.addListener(map, "click", function(){
@@ -102,22 +114,26 @@ google.maps.event.addListener(map, "click", function(){
  * @param options object Supported properties: sidebarItem, sidebarItemClassName, sidebarItemWidth,
  */
 function SidebarItem(marker, opts){
-  var tag = opts.sidebarItemType || "button";
-  var row = document.createElement(tag);
-  row.innerHTML = opts.sidebarItem;
-  row.className = opts.sidebarItemClassName || "sidebar_item";  
-  row.style.display = "block";
-  row.style.width = opts.sidebarItemWidth || "120px";
-  row.onclick = function(){
-    google.maps.event.trigger(marker, 'click');
-  }
-  row.onmouseover = function(){
-    google.maps.event.trigger(marker, 'mouseover');
-  }
-  row.onmouseout = function(){
-    google.maps.event.trigger(marker, 'mouseout');
-  }
-  this.button = row;
+	var tag = opts.sidebarItemType || "button";
+	var row = document.createElement(tag);
+	row.innerHTML = opts.sidebarItem;
+	row.className = opts.sidebarItemClassName || "sidebar_item";  
+	row.style.display = "block";
+	row.style.width = opts.sidebarItemWidth || "120px";
+	
+	row.onclick = function(){
+		google.maps.event.trigger(marker, 'click');
+	};
+	
+	row.onmouseover = function(){
+		google.maps.event.trigger(marker, 'mouseover');
+	};
+	
+	row.onmouseout = function(){
+		google.maps.event.trigger(marker, 'mouseout');
+	};
+	
+	this.button = row;
 }
 
 // adds a sidebar item to a <div>
@@ -140,14 +156,34 @@ SidebarItem.prototype.remove = function(){
 function locationChg(address, title, content) {
 	var geocoder = new google.maps.Geocoder();
 	geocoder.geocode( { 'address': address}, function(results, status) {
-	    if (status == google.maps.GeocoderStatus.OK) {
-	    	makeMarker({
-	    		  position: results[0].geometry.location,
+        var location = results[0].geometry.location;
+
+        var lat = location.lat;
+        var lng = location.lng;
+   	
+        /* 
+        mapOpts = {
+        		zoom: 13,    
+        		center: new google.maps.LatLng(lat, lng),
+        	  	mapTypeId: google.maps.MapTypeId.ROADMAP,
+        	  	scaleControl: true,
+        	  	scrollwheel: false
+        };
+*/
+        var markerOpts = {
+	    		  position: location,
 	    		  title: title,
 	    		  sidebarItem: title,
 	    		  content: title + "<br>" + address + "<br>" + content
-	    	});
-	    }
+        };
+        
+		if (status == google.maps.GeocoderStatus.OK) {
+	    	makeMarker(markerOpts); 	// 마커찍기
+	    	map.fitBounds(markerBounds);
+        } else {
+            $('#map-canvas2-description').html('위도와 경도를 찾을 수 없습니다.');
+        }
+ 
 	});	
 }
 

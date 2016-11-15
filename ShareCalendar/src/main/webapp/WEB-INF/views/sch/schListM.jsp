@@ -250,7 +250,7 @@
                           title: '스케쥴 상세조회',
                           method : 'get',
                           width : '500',
-                          height : '450'
+                          height : '480'
                         });
                     }
             }

@@ -156,9 +156,11 @@
       						구분 : <input type="text" name="schSe" id="schSe"></input>
       </div>
       <div align="left">제목 : <input type="text" name="schTitle" id="schTitle"></input></div>
-      <div align="left">내용 : <br><textarea name="schContent" id="schContent" cols="50" rows="20"></textarea></div>
-      <button id="insertBtn">저장</button>
-      <button id="deleteBtn">삭제</button>
+      <div align="left">내용 : <br><textarea name="schContent" id="schContent" cols="58" rows="20"></textarea></div>
+      <br>
+      <div align="right">
+      	<button id="insertBtn">저장</button>  <button id="deleteBtn">삭제</button>
+      </div>
   </form>     
 </div>
 
