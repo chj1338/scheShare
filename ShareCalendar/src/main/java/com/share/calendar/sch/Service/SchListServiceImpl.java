@@ -35,6 +35,10 @@ public class SchListServiceImpl implements SchListService {
         return schListDao.selectSchDetail(schListDto);
     }
     
+    public String selectNewSchId() throws Exception {
+    	return schListDao.selectNewSchId();
+    }
+    
     
 	public void insertSchedule(SchListDto schListDto) throws Exception {
 		schListDao.insertSchedule(schListDto);

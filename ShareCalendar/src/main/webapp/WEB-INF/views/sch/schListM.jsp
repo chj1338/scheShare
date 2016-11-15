@@ -58,7 +58,8 @@
                         ],
                         colModel:[
                             {name:'schId', 		index:'schId', 		width:1, align:'center' },
-                            {name:'schDt', 		index:'schDt', 		width:1, align:'center'},
+/*                             {name:'schDt', 		index:'schDt', 		width:1, align:'center', formatter: 'date', formatoptions: {'srcformat' : 'Y-m-d H:i:s', 'newformat' : 'Y-m-d H:i' } }, */
+                            {name:'schDt', 		index:'schDt', 		width:1, align:'center', formatter: 'date', formatoptions: {'srcformat' : 'Ymd', 'newformat' : 'Y-m-d' } },
                             {name:'schTitle', 		index:'schTitle', 		width:1, align:'center', classes:'link1'},
                             {name:'schContent',	index:'schContent', 	width:5, align:'left'},
                             {name:'schUseCo', 	index:'schUseCo', 	width:1, align:'center'},
@@ -143,11 +144,11 @@
             
 	            schSearchData: function() {
 	        		SchShareApp.jqgrid.abort();
-/* 	        		
+ 	        		
                 	// validation check
-                    var templDtFrom = $.trim($('#templDtFrom').val().replace(/-/g, ''));
-                    var templDtTo = $.trim($('#templDtTo').val().replace(/-/g, ''));
-                    
+                    var schDtFrom = $.trim($('#schDtFrom').val().replace(/-/g, ''));
+                    var schDtTo = $.trim($('#schDtTo').val().replace(/-/g, ''));
+/*                    
                     if (templDtFrom.length > 0 && templDtTo.length === 0) {
                         alert('종료일자를 선택하세요.');
                         return false;
@@ -162,10 +163,10 @@
                     }
 	        		 */
 					var url = "/sch/getScheduleList";
-	  	            var paramObj = "templDtFrom="	+ templDtFrom
-			                  + "&" + "templDtTo="	+ templDtTo
-			                  + "&" + "sch_title="		+ $('#sch_title').val()
-			                  + "&" + "sch_content="	+ $('#sch_content').val();
+	  	            var paramObj = "schDtFrom="	+ schDtFrom
+			                  + "&" + "schDtTo="	+ schDtTo
+			                  + "&" + "schTitle="		+ $('#schTitle').val()
+			                  + "&" + "schContent="	+ $('#schContent').val();
 	                      
 	                  SchShareObj.data.ajax(url, {pars: paramObj, async: false, 
 	                      onsucc: function(res) {
@@ -187,7 +188,7 @@
 												schDt: 		object[i].scheDt,
 												schTitle: 		object[i].scheTitle,
 												schContent: 	object[i].scheContent,
-												schUseCo: 	object[i].scheSe,
+												schUseCo: 	(object[i].scheSe).replace('P', '공개').replace('S', '비공개'),
 												schRegistId: 	object[i].registId,
 												schRegistDt:	object[i].registDt
 										      });
@@ -265,8 +266,8 @@
 	</div>
 
 	<div id="condition">
-        제목 : <input type="text" id="sch_title"> 내용 : <input type="text" id="sch_content">
-  		시작일자 : <input type="text" id="templDtFrom"> ~ 종료일자 : <input type="text" id="templDtTo"> 
+        제목 : <input type="text" id="schTitle"> 내용 : <input type="text" id="schContent">
+  		시작일자 : <input type="text" id="schDtFrom"> ~ 종료일자 : <input type="text" id="schDtTo"> 
   		<input type="button" id="searchListBtn" value="조회">
 		<input type="button" id="openPopupBtn" value="신규등록">
 	</div>

@@ -136,7 +136,7 @@ public class SchController {
 	}
 	
 	
-	/* 스케쥴 상세조회 팝업
+	/* 스케쥴 등록/수정
 	 * 
 	 */
 	@ResponseBody
@@ -168,6 +168,9 @@ public class SchController {
     		schListDto.setRegistId(registId);
     		
     		if(schId.equals("") || schId == null) {
+    			schId = schListService.selectNewSchId();
+    			schListDto.setSchId(schId);
+    			
     			schListService.insertSchedule(schListDto);
     		} else {
     			schListService.updateSchedule(schListDto);
@@ -188,4 +191,39 @@ public class SchController {
         return resultMap;
 	}
 		
+	
+	/* 스케쥴 삭제
+	 * 
+	 */
+	@ResponseBody
+    @RequestMapping(value = "/sch/schDeleteData", method = RequestMethod.POST)
+    public Map<String, Object> schDeleteData (HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.debug("========= SchController schDeleteData !!!");
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+        try {
+    		String schId = request.getParameter("schId");
+    		
+    		logger.debug("===== schId : {}", schId);
+
+    		schListDto.setSchId(schId);
+
+   			schListService.deleteSchedule(schListDto);
+
+            resultMap.put("resultCd", "1000");
+            resultMap.put("resultMsg", "SUCCESS");
+        } catch(Exception e) {
+            e.printStackTrace();
+            logger.error("Error : {}", e.getMessage());
+            
+            resultMap.put("resultCd", "9999");
+            resultMap.put("resultMsg", e.getMessage());
+        } finally {
+        	;
+        }
+        
+        return resultMap;
+	}
+	
 }

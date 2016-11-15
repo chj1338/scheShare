@@ -21,7 +21,8 @@
                 
                 if(SchShareApp.schId == "") {
                     setToday();
-                    $('#sch_content').val(SchShareApp.schId);
+                    $('#schSe').val('P'),
+                    $('#schContent').val(SchShareApp.schId);
                 } else {
                 	document.title = "일정조회";
                 	$('#scrTitle').val("일정조회");
@@ -31,29 +32,6 @@
             
             data: {
                 init: function() {
-                },
-                
-                // 스케쥴 등록
-                schInsertData: function() {
-                  var url = '/sch/schInsertData';
-	              var paramObj = {
-	            		    schId : SchShareApp.schId,
-	    					sch_dt : $('#sch_dt').val(), 
-  	    					sch_title : $('#sch_title').val(), 
-  	    					sch_content : $('#sch_content').val()         			
-	            	};
-                    
-                    SchShareObj.data.ajax(url, {pars: paramObj, async: false, 
-                        onsucc: function(res) {
-        					if(res.resultCd === "1000") {
-        						alert("정상적으로 등록되었습니다.");
-        						window.close();
-        					}
-                        },
-                        onerr: function(res){
-                        	alert(res.resultMsg);
-                        }
-                    });
                 },
                 
                 //스케쥴 상세조회
@@ -67,9 +45,56 @@
                         onsucc: function(res) {
           					if(res.resultCd === "1000") {
 								var object = res.resultData;
-								sch_dt : $('#sch_dt').val( object[0].scheDt );
-	  	    					sch_title : $('#sch_title').val( object[0].scheTitle ); 
-	  	    					sch_content : $('#sch_content').val( object[0].scheContent );   
+								schDt : $('#schDt').val( object[0].scheDt );
+								schSe : $('#schSe').val( object[0].scheSe );
+	  	    					schTitle : $('#schTitle').val( object[0].scheTitle ); 
+	  	    					schContent : $('#schContent').val( object[0].scheContent );   
+          					}
+                          },
+                          onerr: function(res){
+                          	alert(res.resultMsg);
+                          }
+                      });
+                  },
+                  
+                  // 스케쥴 등록
+                  schInsertData: function() {
+                    var url = '/sch/schInsertData';
+  	              var paramObj = {
+  	            		    schId : SchShareApp.schId,
+  	    					schDt : $('#schDt').val(),
+  	    					schSe : $('#schSe').val(),
+   	    					schTitle : $('#schTitle').val(), 
+   	    					schContent : $('#schContent').val()         			
+  	            	};
+                      
+                      SchShareObj.data.ajax(url, {pars: paramObj, async: false, 
+                          onsucc: function(res) {
+          					if(res.resultCd === "1000") {
+          						alert("정상적으로 등록되었습니다.");
+          						opener.SchShareApp.data.schSearchData();
+          						window.close();
+          					}
+                          },
+                          onerr: function(res){
+                          	alert(res.resultMsg);
+                          }
+                      });
+                  },
+                  
+                  // 스케쥴 삭제
+                  schDeleteData: function() {
+                    var url = '/sch/schDeleteData';
+  	              var paramObj = {
+  	            		    schId : SchShareApp.schId         			
+  	            	};
+                      
+                      SchShareObj.data.ajax(url, {pars: paramObj, async: false, 
+                          onsucc: function(res) {
+          					if(res.resultCd === "1000") {
+          						alert("정상적으로 삭제되었습니다.");
+          						opener.SchShareApp.data.schSearchData();
+          						window.close();
           					}
                           },
                           onerr: function(res){
@@ -84,7 +109,12 @@
                     // 신규 스케쥴 등록
                     $('#insertBtn').on('click', function() {
                       SchShareApp.data.schInsertData();
-                    });                    
+                    });
+                    
+                    // 스케쥴 삭제
+                    $('#deleteBtn').on('click', function() {
+                      SchShareApp.data.schDeleteData();
+                    });  
                 }
             },
             
@@ -98,7 +128,7 @@
     function setToday() {
 		// 오늘날짜 셋팅
 		var toDate = new Date();
-		var toDay = toDate.getFullYear();
+		var toDay = toDate.getFullYear() + "";
 		var nowMonth = toDate.getMonth() + 1;
 		var nowDay = toDate.getDate();
 		
@@ -108,7 +138,7 @@
 		if(nowDay < 10) toDay += "0" + nowDay;
 		else toDay += nowDay;
 		
-		$('#sch_dt').val(toDay);
+		$('#schDt').val(toDay);
     }
     </script>
 
@@ -122,10 +152,13 @@
 	<div id="scrTitle"><h3>일정등록</h3></div>
     
   <form id="schInsertForm">
-      <div align="left">날짜 : <input type="text" name="sch_dt" id="sch_dt"></input></div>
-      <div align="left">제목 : <input type="text" name="sch_title" id="sch_title"></input></div>
-      <div align="left">내용 : <br><textarea name="sch_content" id="sch_content" cols="50" rows="20"></textarea></div>
+      <div align="left">날짜 : <input type="text" name="schDt" id="schDt"></input>
+      						구분 : <input type="text" name="schSe" id="schSe"></input>
+      </div>
+      <div align="left">제목 : <input type="text" name="schTitle" id="schTitle"></input></div>
+      <div align="left">내용 : <br><textarea name="schContent" id="schContent" cols="50" rows="20"></textarea></div>
       <button id="insertBtn">저장</button>
+      <button id="deleteBtn">삭제</button>
   </form>     
 </div>
 

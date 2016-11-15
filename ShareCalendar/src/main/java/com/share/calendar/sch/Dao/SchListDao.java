@@ -21,6 +21,8 @@ public interface SchListDao {
     
     public List<SchVo> selectSchDetail(SchListDto schListDto) throws Exception;
     
+    public String selectNewSchId() throws Exception;
+    
 	public void insertSchedule(SchListDto schListDto) throws Exception;
 	
 	public void updateSchedule(SchListDto schListDto) throws Exception;

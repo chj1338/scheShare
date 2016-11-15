@@ -14,6 +14,20 @@
 			,REGIST_DT as regist_dt
          from SCHE_LIST
          where SCHE_TITLE like '%' || #{schTitle} || '%'
+         and    SCHE_CONTENT like '%' || #{schContent} || '%'
+         
+         <if test="schDtFrom != '' and schDtFrom != null">
+         	<![CDATA[
+         		and SCHE_DT >= #{schDtFrom}
+         	]]>
+         </if>
+         <if test="schDtTo != '' and schDtTo != null">
+         	<![CDATA[
+         		and SCHE_DT <= #{schDtTo}
+         	]]>
+         </if>
+                  
+         order by SCHE_DT, SCHE_NO
     </select>
     
     <select id="selectSchDetail" parameterType="com.share.calendar.sch.Dto.SchListDto" resultType="com.share.calendar.sch.Vo.SchVo">    
@@ -29,6 +43,12 @@
          where SCHE_NO = #{schId}
     </select>
     
+    <select id="selectNewSchId" resultType="string">    
+        select
+        	'SCH' || lpad(SEQ_SCHE_LIST.nextval+1, 7, '0') as sche_no
+        from dual
+    </select>
+    
     <insert id="insertSchedule" parameterType="com.share.calendar.sch.Dto.SchListDto">
     	insert into SCHE_LIST (
     		SCHE_NO
@@ -39,7 +59,7 @@
 			,REGIST_ID
 			,REGIST_DT
     	) values (
-    		#{schId}
+    		 #{schId}
     		,#{schDtFrom}
     		,#{schTitle}
     		,#{schContent}
@@ -56,6 +76,7 @@
 			,SCHE_CONTENT = #{schContent}
 			,SCHE_SE = #{schSe}
 			,REGIST_ID = #{registId}
+			,REGIST_DT = sysdate
 		where SCHE_NO = #{schId}
     </update>
     
