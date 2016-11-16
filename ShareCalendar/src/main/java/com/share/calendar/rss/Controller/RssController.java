@@ -68,10 +68,9 @@ public class RssController {
 
 			List<RssListVo> resultList = new ArrayList<RssListVo>();
 			
-//			resultList.addAll( getMessage("http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1114060500", 		keyword, "날씨") );
+			resultList.addAll( getMessage("http://www.ciokorea.com/rss/feed/index.php", 	keyword, "CIO Korea") );
 			
 			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/newsflash.xml", 		keyword, "JTBC 속보") );
-
 			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/politics.xml", 			keyword, "JTBC 정치") );
 			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/economy.xml", 			keyword, "JTBC 경제") );
 			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/international.xml", 		keyword, "JTBC 국제") );
@@ -86,7 +85,7 @@ public class RssController {
 			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/fullvideo.xml", 			keyword, "JTBC 풀영상") );
 			
 			resultList.addAll( getMessage("http://rss.joins.com/joins_news_list.xml", 			keyword, "중앙일보 전체기사") );
-			
+/*	
 			resultList.addAll( getMessage("http://rss.joins.com/joins_money_list.xml", 			keyword, "중앙일보 머니") );
 			resultList.addAll( getMessage("http://rss.joins.com/joins_topic_list.xml", 			keyword, "중앙일보 화제") );
 			resultList.addAll( getMessage("http://rss.joins.com/joins_sports_list.xml", 			keyword, "중앙일보 스포츠") );
@@ -96,15 +95,15 @@ public class RssController {
 			resultList.addAll( getMessage("http://rss.joins.com/joins_world_list.xml", 			keyword, "중앙일보 지구촌") );
 			resultList.addAll( getMessage("http://rss.joins.com/joins_it_list.xml", 				keyword, "중앙일보 IT") );
 			resultList.addAll( getMessage("http://rss.joins.com/joins_opinion_list.xml", 			keyword, "중앙일보 사설") );
-			
+*/			
 			resultList.addAll( getMessage("http://rss.cbs.co.kr/nocutnews.xml", 					keyword, "노컷뉴스") );
 			resultList.addAll( getMessage("http://rss.donga.com/total.xml", 						keyword, "동아일보") );
 			resultList.addAll( getMessage("http://www.chosun.com/site/data/rss/rss.xml", 	keyword, "조선일보") );
 			resultList.addAll( getMessage("http://www.hani.co.kr/rss/", 							keyword, "한겨레") );
 			resultList.addAll( getMessage("http://www.khan.co.kr/rss/rssdata/total_news.xml", keyword, "경향신문") );
 					
-			resultList.addAll( getMessage("http://rss.hankooki.com/economy/sk00_list.xml", 	keyword, "서울경제") );
-			resultList.addAll( getMessage("http://rss.hankyung.com/economy.xml", 			keyword, "한국경제") );
+//			resultList.addAll( getMessage("http://rss.hankooki.com/economy/sk00_list.xml", 	keyword, "서울경제") );		// 2015년 이후 업데이트 안됨
+//			resultList.addAll( getMessage("http://rss.hankyung.com/economy.xml", 			keyword, "한국경제") );		// 2012년 이후 업데이트 안됨
 			resultList.addAll( getMessage("http://rss.joins.com/joins_ilgan_list.xml", 			keyword, "일간스포츠") );
 			resultList.addAll( getMessage("http://rss.joins.com/joins_ilgan_list.xml", 			keyword, "일간스포츠 전체기사") );
 

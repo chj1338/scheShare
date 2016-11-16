@@ -21,7 +21,8 @@ public class RssFeedParser {
         static final String AUTHOR = "author";
         static final String ITEM = "item";
         static final String PUB_DATE = "pubDate";
-        static final String GUID = "guid";
+        static final String DC_DATE = "date";	// PUB_DATE 대신 dc:date를 쓰는데도 있음.
+        static final String GUID = "guid";        
 
         final URL url;
 
@@ -87,6 +88,9 @@ public class RssFeedParser {
                                         case PUB_DATE:
                                                 pubdate = getCharacterData(event, eventReader);
                                                 break;
+                                        case DC_DATE:
+                                            pubdate = getCharacterData(event, eventReader);
+                                            break;
                                         case COPYRIGHT:
                                                 copyright = getCharacterData(event, eventReader);
                                                 break;
