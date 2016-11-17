@@ -47,6 +47,7 @@
 		<tr><td style="font-weight : bold">◎ 일정관리</td></tr>
 		<tr><td class="position"><a href="/schListM.do" target="appbody" class="no-uline">일정조회</a></td></tr>
 		<tr><td class="position"><a href="/schInsertM.do" target="appbody" class="no-uline">일정등록</a></td></tr>
+		<tr><td class="position"><a href="/schDutyM.do" target="appbody" class="no-uline">일정달력</a></td></tr>
 		<tr><td>&nbsp;</td></tr>
 		<tr><td style="font-weight : bold">◎ 기타</td></tr>
 		<tr><td class="position"><a href="/map/googleMap.do" target="appbody" class="no-uline">지도찾기</a></td></tr>

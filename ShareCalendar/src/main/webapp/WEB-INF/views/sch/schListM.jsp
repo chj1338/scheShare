@@ -82,7 +82,7 @@
                         rowList: [100, 200, 300],           			// 한번에 가져오는 row개수
                         loadtext: 'Data Loading From Server',	// 로드 되는 Text 문구
                         loadui: 'block',         						// 로드 블럭 스타일
-                        height: 300,            						// 세로높이
+                        height: 500,            						// 세로높이
                         rowNum: 100,         						// 최초 가져올 row 수
                         emptyrecords: '조회된 데이터가 없습니다.',     // 데이터 없을시 표시 
                         jsonReader: {

@@ -85,4 +85,24 @@
     	where SCHE_NO = #{schId}
     </delete>
 
+	<select id="selectSchDutyCnt" parameterType="com.share.calendar.sch.Dto.SchDutyDto" resultType="string">
+		select
+			count(*) as cnt 
+		from SCH_DUTY_LIST 
+		where DUTY_MONTH = #{month} 
+		  and DUTY_YEAR = #{year}
+	    order by SORT_ORDER asc 
+	</select>
+	
+	<select id="selectSchDutyList" parameterType="com.share.calendar.sch.Dto.SchDutyDto" resultType="com.share.calendar.sch.Vo.SchVo">
+		select
+			DUTY_MONTH
+			,DUTY_DAY
+			,USER_NM
+		from SCH_DUTY_LIST 
+		where DUTY_MONTH = #{month} 
+		  and DUTY_YEAR = #{year}
+	    order by SORT_ORDER asc 
+	</select>
+
 </mapper>

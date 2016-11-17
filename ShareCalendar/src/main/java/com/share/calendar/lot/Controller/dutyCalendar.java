@@ -1,16 +1,27 @@
 package com.share.calendar.lot.Controller;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.jsp.*;
-import org.apache.jasper.runtime.*;
-import java.util.*;
-import java.sql.*;
-import java.sql.*;
-import java.util.*;
-import java.net.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class duty_jsp extends HttpJspBase {
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.JspFactory;
+import javax.servlet.jsp.JspWriter;
+
+public abstract class dutyCalendar implements Servlet {
 
 
 
@@ -608,8 +619,7 @@ public class duty_jsp extends HttpJspBase {
     try {
       _jspxFactory = JspFactory.getDefaultFactory();
       response.setContentType("text/html; charset=UTF-8");
-      pageContext = _jspxFactory.getPageContext(this, request, response,
-      			null, true, 8192, true);
+      pageContext = _jspxFactory.getPageContext(this, request, response, null, true, 8192, true);
       application = pageContext.getServletContext();
       config = pageContext.getServletConfig();
       session = pageContext.getSession();
