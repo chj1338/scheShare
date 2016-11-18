@@ -239,7 +239,7 @@
                           title: 'title',
                           method : 'get',
                           width : '500',
-                          height : '450'
+                          height : '480'
                         });
                     },
                     
