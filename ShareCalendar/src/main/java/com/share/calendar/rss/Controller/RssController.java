@@ -64,27 +64,50 @@ public class RssController {
 		
         try {
         	String keyword = new String(request.getParameter("keyword").getBytes("ISO-8859-1"), "UTF-8");
-        	logger.debug("===== keyword : " + keyword);
+        	
+        	String ciokorea = request.getParameter("ciokorea");
+        	String jtbc_newsflash = request.getParameter("jtbc_newsflash");
+        	String jtbc_politics = request.getParameter("jtbc_politics");
+        	String jtbc_economy = request.getParameter("jtbc_economy");
+        	String jtbc_international = request.getParameter("jtbc_international");
+        	String jtbc_society = request.getParameter("jtbc_society");
+        	String jtbc_culture = request.getParameter("jtbc_culture");
+        	String jtbc_sports = request.getParameter("jtbc_sports");
+        	String jtbc_entertainment = request.getParameter("jtbc_entertainment");
+        	String jtbc_newsrank = request.getParameter("jtbc_newsrank");
+        	String jtbc_newssite = request.getParameter("jtbc_newssite");
+        	String jtbc_politicaldesk = request.getParameter("jtbc_politicaldesk");
+        	String jtbc_morningand = request.getParameter("jtbc_morningand");
+        	String jtbc_fullvideo = request.getParameter("jtbc_fullvideo");
+        	String joins_news_list = request.getParameter("joins_news_list");
+        	String nocutnews = request.getParameter("nocutnews");
+        	String donga = request.getParameter("donga");
+        	String chosun = request.getParameter("chosun");
+        	String hani = request.getParameter("hani");
+        	String khan_rss = request.getParameter("khan_rss");
+        	String joins_ilgan_list = request.getParameter("joins_ilgan_list");
 
 			List<RssListVo> resultList = new ArrayList<RssListVo>();
 			
-			resultList.addAll( getMessage("http://www.ciokorea.com/rss/feed/index.php", 	keyword, "CIO Korea") );
+			logger.debug("===== RssController jtbc_newsflash : {}", jtbc_newsflash);
 			
-			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/newsflash.xml", 		keyword, "JTBC 속보") );
-			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/politics.xml", 			keyword, "JTBC 정치") );
-			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/economy.xml", 			keyword, "JTBC 경제") );
-			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/international.xml", 		keyword, "JTBC 국제") );
-			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/society.xml", 			keyword, "JTBC 사회") );
-			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/culture.xml", 			keyword, "JTBC 문화") );
-			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/sports.xml", 				keyword, "JTBC 스포츠") );
-			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/entertainment.xml", 	keyword, "JTBC 연예") );
-			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/newsrank.xml", 			keyword, "JTBC 뉴스랭킹") );
-			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/newssite.xml", 			keyword, "JTBC 뉴스현장") );
-			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/politicaldesk.xml", 		keyword, "JTBC 정치부회의") );
-			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/morningand.xml", 		keyword, "JTBC 아침&") );
-			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/fullvideo.xml", 			keyword, "JTBC 풀영상") );
+			if(ciokorea.equals("true"))				resultList.addAll( getMessage("http://www.ciokorea.com/rss/feed/index.php", 	keyword, "CIO Korea") );
 			
-			resultList.addAll( getMessage("http://rss.joins.com/joins_news_list.xml", 			keyword, "중앙일보 전체기사") );
+			if(jtbc_newsflash.equals("true")) 		resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/newsflash.xml", 		keyword, "JTBC 속보") );
+			if(jtbc_politics.equals("true"))			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/politics.xml", 			keyword, "JTBC 정치") );
+			if(jtbc_economy.equals("true"))		resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/economy.xml", 			keyword, "JTBC 경제") );
+			if(jtbc_international.equals("true"))	resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/international.xml", 		keyword, "JTBC 국제") );
+			if(jtbc_society.equals("true"))			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/society.xml", 			keyword, "JTBC 사회") );
+			if(jtbc_culture.equals("true"))			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/culture.xml", 			keyword, "JTBC 문화") );
+			if(jtbc_sports.equals("true"))			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/sports.xml", 				keyword, "JTBC 스포츠") );
+			if(jtbc_entertainment.equals("true"))	resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/entertainment.xml", 	keyword, "JTBC 연예") );
+			if(jtbc_newsrank.equals("true"))		resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/newsrank.xml", 			keyword, "JTBC 뉴스랭킹") );
+			if(jtbc_newssite.equals("true"))			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/newssite.xml", 			keyword, "JTBC 뉴스현장") );
+			if(jtbc_politicaldesk.equals("true"))	resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/politicaldesk.xml", 		keyword, "JTBC 정치부회의") );
+			if(jtbc_morningand.equals("true"))	resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/morningand.xml", 		keyword, "JTBC 아침&") );
+			if(jtbc_fullvideo.equals("true"))			resultList.addAll( getMessage("http://fs.jtbc.joins.com/RSS/fullvideo.xml", 			keyword, "JTBC 풀영상") );
+			
+			if(joins_news_list.equals("true"))		resultList.addAll( getMessage("http://rss.joins.com/joins_news_list.xml", 			keyword, "중앙일보 전체기사") );
 /*	
 			resultList.addAll( getMessage("http://rss.joins.com/joins_money_list.xml", 			keyword, "중앙일보 머니") );
 			resultList.addAll( getMessage("http://rss.joins.com/joins_topic_list.xml", 			keyword, "중앙일보 화제") );
@@ -96,15 +119,15 @@ public class RssController {
 			resultList.addAll( getMessage("http://rss.joins.com/joins_it_list.xml", 				keyword, "중앙일보 IT") );
 			resultList.addAll( getMessage("http://rss.joins.com/joins_opinion_list.xml", 			keyword, "중앙일보 사설") );
 */			
-			resultList.addAll( getMessage("http://rss.cbs.co.kr/nocutnews.xml", 					keyword, "노컷뉴스") );
-			resultList.addAll( getMessage("http://rss.donga.com/total.xml", 						keyword, "동아일보") );
-			resultList.addAll( getMessage("http://www.chosun.com/site/data/rss/rss.xml", 	keyword, "조선일보") );
-			resultList.addAll( getMessage("http://www.hani.co.kr/rss/", 							keyword, "한겨레") );
-			resultList.addAll( getMessage("http://www.khan.co.kr/rss/rssdata/total_news.xml", keyword, "경향신문") );
+			if(nocutnews.equals("true"))			resultList.addAll( getMessage("http://rss.cbs.co.kr/nocutnews.xml", 					keyword, "노컷뉴스") );
+			if(donga.equals("true")) 				resultList.addAll( getMessage("http://rss.donga.com/total.xml", 						keyword, "동아일보") );
+			if(chosun.equals("true"))				resultList.addAll( getMessage("http://www.chosun.com/site/data/rss/rss.xml", 	keyword, "조선일보") );
+			if(hani.equals("true"))					resultList.addAll( getMessage("http://www.hani.co.kr/rss/", 							keyword, "한겨레") );
+			if(khan_rss.equals("true"))				resultList.addAll( getMessage("http://www.khan.co.kr/rss/rssdata/total_news.xml", keyword, "경향신문") );
 					
 //			resultList.addAll( getMessage("http://rss.hankooki.com/economy/sk00_list.xml", 	keyword, "서울경제") );		// 2015년 이후 업데이트 안됨
 //			resultList.addAll( getMessage("http://rss.hankyung.com/economy.xml", 			keyword, "한국경제") );		// 2012년 이후 업데이트 안됨
-			resultList.addAll( getMessage("http://rss.joins.com/joins_ilgan_list.xml", 			keyword, "일간스포츠") );
+			if(joins_ilgan_list.equals("true"))		resultList.addAll( getMessage("http://rss.joins.com/joins_ilgan_list.xml", 			keyword, "일간스포츠") );
 
             resultMap.put("resultCd", "1000");
             resultMap.put("resultMsg", "SUCCESS");

@@ -39,7 +39,30 @@
             
             	rssSelectData: function() {
 					var url = '/rssSelectData.do';
-	  	            var paramObj = "keyword=" + $('#keyword').val();
+	  	            var paramObj = {
+	  	            		keyword : $('#keyword').val(),
+	  	            		ciokorea : $('#ciokorea').is(':checked'),
+	  	            		jtbc_newsflash : $('#jtbc_newsflash').is(':checked'),
+	  	            		jtbc_politics : $('#jtbc_politics').is(':checked'),
+	  	            		jtbc_economy : $('#jtbc_economy').is(':checked'),
+	  	            		jtbc_international : $('#jtbc_international').is(':checked'),
+	  	            		jtbc_society : $('#jtbc_society').is(':checked'),
+	  	            		jtbc_culture : $('#jtbc_culture').is(':checked'),
+	  	            		jtbc_sports : $('#jtbc_sports').is(':checked'),
+	  	            		jtbc_entertainment : $('#jtbc_entertainment').is(':checked'),
+	  	            		jtbc_newsrank : $('#jtbc_newsrank').is(':checked'),
+	  	            		jtbc_newssite : $('#jtbc_newssite').is(':checked'),
+	  	            		jtbc_politicaldesk : $('#jtbc_politicaldesk').is(':checked'),
+	  	            		jtbc_morningand : $('#jtbc_morningand').is(':checked'),
+	  	            		jtbc_fullvideo : $('#jtbc_fullvideo').is(':checked'),
+	  	            		joins_news_list : $('#joins_news_list').is(':checked'),
+	  	            		nocutnews : $('#nocutnews').is(':checked'),
+	  	            		donga : $('#donga').is(':checked'),
+	  	            		chosun : $('#chosun').is(':checked'),
+	  	            		hani : $('#hani').is(':checked'),
+	  	            		khan_rss : $('#khan_rss').is(':checked'),
+	  	            		joins_ilgan_list : $('#joins_ilgan_list').is(':checked')
+	  	            };
 	                      
                       SchShareObj.data.ajax(url, {pars: paramObj, async: false, 
                           onsucc: function(res) {
@@ -89,22 +112,22 @@
                     });
                     
                     // 체크박스 전체
-                    $('#check_all').click(function() {
+                    $('#check_all').click(function() {                    	                    	
                          if( $(this).is(":checked") ) {
                         	 $('#ciokorea').prop('checked', true);
-                        	 $('#joins_newsflash').prop('checked', true);
-                        	 $('#joins_politics').prop('checked', true);
-                        	 $('#joins_economy').prop('checked', true);
-                        	 $('#joins_international').prop('checked', true);
-                        	 $('#joins_society').prop('checked', true);
-                        	 $('#joins_culture').prop('checked', true);
-                        	 $('#joins_sports').prop('checked', true);
-                        	 $('#joins_entertainment').prop('checked', true);
-                        	 $('#joins_newsrank').prop('checked', true);
-                        	 $('#joins_newssite').prop('checked', true);
-                        	 $('#joins_politicaldesk').prop('checked', true);
-                        	 $('#joins_morningand').prop('checked', true);
-                        	 $('#joins_fullvideo').prop('checked', true);
+                        	 $('#jtbc_newsflash').prop('checked', true);
+                        	 $('#jtbc_politics').prop('checked', true);
+                        	 $('#jtbc_economy').prop('checked', true);
+                        	 $('#jtbc_international').prop('checked', true);
+                        	 $('#jtbc_society').prop('checked', true);
+                        	 $('#jtbc_culture').prop('checked', true);
+                        	 $('#jtbc_sports').prop('checked', true);
+                        	 $('#jtbc_entertainment').prop('checked', true);
+                        	 $('#jtbc_newsrank').prop('checked', true);
+                        	 $('#jtbc_newssite').prop('checked', true);
+                        	 $('#jtbc_politicaldesk').prop('checked', true);
+                        	 $('#jtbc_morningand').prop('checked', true);
+                        	 $('#jtbc_fullvideo').prop('checked', true);
                         	 $('#joins_news_list').prop('checked', true);
                         	 $('#nocutnews').prop('checked', true);
                         	 $('#donga').prop('checked', true);
@@ -115,19 +138,19 @@
                          }
                          else {
                         	 $('#ciokorea').prop('checked', false);
-                        	 $('#joins_newsflash').prop('checked', false);
-                        	 $('#joins_politics').prop('checked', false);
-                        	 $('#joins_economy').prop('checked', false);
-                        	 $('#joins_international').prop('checked', false);
-                        	 $('#joins_society').prop('checked', false);
-                        	 $('#joins_culture').prop('checked', false);
-                        	 $('#joins_sports').prop('checked', false);
-                        	 $('#joins_entertainment').prop('checked', false);
-                        	 $('#joins_newsrank').prop('checked', false);
-                        	 $('#joins_newssite').prop('checked', false);
-                        	 $('#joins_politicaldesk').prop('checked', false);
-                        	 $('#joins_morningand').prop('checked', false);
-                        	 $('#joins_fullvideo').prop('checked', false);
+                        	 $('#jtbc_newsflash').prop('checked', false);
+                        	 $('#jtbc_politics').prop('checked', false);
+                        	 $('#jtbc_economy').prop('checked', false);
+                        	 $('#jtbc_international').prop('checked', false);
+                        	 $('#jtbc_society').prop('checked', false);
+                        	 $('#jtbc_culture').prop('checked', false);
+                        	 $('#jtbc_sports').prop('checked', false);
+                        	 $('#jtbc_entertainment').prop('checked', false);
+                        	 $('#jtbc_newsrank').prop('checked', false);
+                        	 $('#jtbc_newssite').prop('checked', false);
+                        	 $('#jtbc_politicaldesk').prop('checked', false);
+                        	 $('#jtbc_morningand').prop('checked', false);
+                        	 $('#jtbc_fullvideo').prop('checked', false);
                         	 $('#joins_news_list').prop('checked', false);
                         	 $('#nocutnews').prop('checked', false);
                         	 $('#donga').prop('checked', false);
@@ -167,16 +190,16 @@
 					<td colspan="7"><input type="checkbox" class="minimal" id="check_all" name="check_all" > 모두 체크</td>
 				</tr>
 				<tr>
-					<td><input type='checkbox' class='minimal' id='ciokorea' name='agree2' > CIO Korea</td>
-					<td><input type='checkbox' class='minimal' id='joins_news_list' name='agree2' > 중앙일보</td>
-					<td><input type='checkbox' class='minimal' id='nocutnews' name='agree2' > 노컷뉴스</td>
-					<td><input type='checkbox' class='minimal' id='donga' name='agree2' > 동아일보</td>
-					<td><input type='checkbox' class='minimal' id='chosun' name='agree2' > 조선일보</td>
-					<td><input type='checkbox' class='minimal' id='hani' name='agree2' > 한겨레</td>
-					<td><input type='checkbox' class='minimal' id='khan_rss' name='agree2' > 경향신문</td> 
+					<td><input type='checkbox' class='minimal' id='ciokorea' name='ciokorea' > CIO Korea</td>
+					<td><input type='checkbox' class='minimal' id='joins_news_list' name='joins_news_list' > 중앙일보</td>
+					<td><input type='checkbox' class='minimal' id='nocutnews' name='nocutnews' > 노컷뉴스</td>
+					<td><input type='checkbox' class='minimal' id='donga' name='donga' > 동아일보</td>
+					<td><input type='checkbox' class='minimal' id='chosun' name='chosun' > 조선일보</td>
+					<td><input type='checkbox' class='minimal' id='hani' name='hani' > 한겨레</td>
+					<td><input type='checkbox' class='minimal' id='khan_rss' name='khan_rss' > 경향신문</td> 
 				</tr>
 				<tr>
-					<td><input type='checkbox' class='minimal' id='joins_ilgan_list' name='agree2' > 일간스포츠</td>
+					<td><input type='checkbox' class='minimal' id='joins_ilgan_list' name='joins_ilgan_list' > 일간스포츠</td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -185,21 +208,21 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td><input type='checkbox' class='minimal' id='joins_newsflash' name='agree2' > JTBC 속보</td>
-					<td><input type='checkbox' class='minimal' id='joins_politics' name='agree2' > JTBC 정치</td>
-					<td><input type='checkbox' class='minimal' id='joins_economy' name='agree2' > JTBC 경제</td>
-					<td><input type='checkbox' class='minimal' id='joins_international' name='agree2' > JTBC 국제</td>
-					<td><input type='checkbox' class='minimal' id='joins_society' name='agree2' > JTBC 사회</td>
-					<td><input type='checkbox' class='minimal' id='joins_culture' name='agree2' > JTBC 문화</td>
-					<td><input type='checkbox' class='minimal' id='joins_sports' name='agree2' > JTBC 스포츠</td>
+					<td><input type='checkbox' class='minimal' id='jtbc_newsflash' name='jtbc_newsflash' > JTBC 속보</td>
+					<td><input type='checkbox' class='minimal' id='jtbc_politics' name='jtbc_politics' > JTBC 정치</td>
+					<td><input type='checkbox' class='minimal' id='jtbc_economy' name='jtbc_economy' > JTBC 경제</td>
+					<td><input type='checkbox' class='minimal' id='jtbc_international' name='jtbc_international' > JTBC 국제</td>
+					<td><input type='checkbox' class='minimal' id='jtbc_society' name='jtbc_society' > JTBC 사회</td>
+					<td><input type='checkbox' class='minimal' id='jtbc_culture' name='jtbc_culture' > JTBC 문화</td>
+					<td><input type='checkbox' class='minimal' id='jtbc_sports' name='jtbc_sports' > JTBC 스포츠</td>
 				</tr>
 				<tr>
-					<td><input type='checkbox' class='minimal' id='joins_entertainment' name='agree2' > JTBC 연예</td>
-					<td><input type='checkbox' class='minimal' id='joins_newsrank' name='agree2' > JTBC 뉴스랭킹</td>
-					<td><input type='checkbox' class='minimal' id='joins_newssite' name='agree2' > JTBC 뉴스현장</td>
-					<td><input type='checkbox' class='minimal' id='joins_politicaldesk' name='agree2' > JTBC 정치부회의</td>
-					<td><input type='checkbox' class='minimal' id='joins_morningand' name='agree2' > JTBC 아침&</td>
-					<td><input type='checkbox' class='minimal' id='joins_fullvideo' name='agree2' > JTBC 풀영상</td>
+					<td><input type='checkbox' class='minimal' id='jtbc_entertainment' name='jtbc_entertainment' > JTBC 연예</td>
+					<td><input type='checkbox' class='minimal' id='jtbc_newsrank' name='jtbc_newsrank' > JTBC 뉴스랭킹</td>
+					<td><input type='checkbox' class='minimal' id='jtbc_newssite' name='jtbc_newssite' > JTBC 뉴스현장</td>
+					<td><input type='checkbox' class='minimal' id='jtbc_politicaldesk' name='jtbc_politicaldesk' > JTBC 정치부회의</td>
+					<td><input type='checkbox' class='minimal' id='jtbc_morningand' name='jtbc_morningand' > JTBC 아침&</td>
+					<td><input type='checkbox' class='minimal' id='jtbc_fullvideo' name='jtbc_fullvideo' > JTBC 풀영상</td>
 					<td></td>
 				</tr>
 			</table>
