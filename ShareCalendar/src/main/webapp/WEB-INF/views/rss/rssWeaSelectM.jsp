@@ -69,25 +69,26 @@
           							}
 
 									if(rss_content[i].sky == 1) {
-										content += "<td>" + "<img src='/resources/images/weather/NB01.png'/>" + "</td>";
+										content += "<td>" + "<img src='/resources/images/weather/NB01.png'/>" + "<br>"+ rss_content[i].wfKor +"</td>";
 									} else if(rss_content[i].sky == 2) {
-										content += "<td>" + "<img src='/resources/images/weather/NB02.png'/>" + "</td>";
+										content += "<td>" + "<img src='/resources/images/weather/NB02.png'/>" + "<br>"+ rss_content[i].wfKor +"</td>";
 									} else if(rss_content[i].sky == 3) {
-										content += "<td>" + "<img src='/resources/images/weather/NB03.png'/>" + "</td>";
+										content += "<td>" + "<img src='/resources/images/weather/NB03.png'/>" + "<br>"+ rss_content[i].wfKor +"</td>";
 									} else if(rss_content[i].sky == 4) {
-										content += "<td>" + "<img src='/resources/images/weather/NB04.png'/>" + "</td>";
+										content += "<td>" + "<img src='/resources/images/weather/NB04.png'/>" + "<br>"+ rss_content[i].wfKor +"</td>";
 									} else {
 										content += "<td>" + rss_content[i].sky + " : " + rss_content[i].wfKor + "</td>";	
 									} 
-
+									
+									var ptyKor = rss_content[i].pty.replace("0", "없음").replace("1", "비").replace("2", "비 또는 눈").replace("3", "눈");
 									if(rss_content[i].pty == 1) {
-										content += "<td>" + "<img src='/resources/images/weather/NB08.png'/>" + "</td>";		// 비
+										content += "<td>" + "<img src='/resources/images/weather/NB08.png'/>" + "<br>"+ ptyKor +"</td>";		// 비
 									} else if(rss_content[i].pty == 2) {
-										content += "<td>" + "<img src='/resources/images/weather/NB12.png'/>" + "</td>";		// 비 또는 눈
+										content += "<td>" + "<img src='/resources/images/weather/NB12.png'/>" + "<br>"+ ptyKor +"</td>";		// 비 또는 눈
 									} else if(rss_content[i].pty == 3) {
-										content += "<td>" + "<img src='/resources/images/weather/NB11.png'/>" + "</td>";		// 눈
+										content += "<td>" + "<img src='/resources/images/weather/NB11.png'/>" + "<br>"+ ptyKor +"</td>";		// 눈
 									} else {
-										content += "<td>" + rss_content[i].pty.replace("0", "없음") + "</td>";
+										content += "<td>" + ptyKor + "</td>";
 									}
 
           							content += "<td>" + rss_content[i].pop + "(%)" + "</td>";

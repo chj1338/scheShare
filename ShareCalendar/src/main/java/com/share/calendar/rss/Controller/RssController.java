@@ -105,7 +105,6 @@ public class RssController {
 //			resultList.addAll( getMessage("http://rss.hankooki.com/economy/sk00_list.xml", 	keyword, "서울경제") );		// 2015년 이후 업데이트 안됨
 //			resultList.addAll( getMessage("http://rss.hankyung.com/economy.xml", 			keyword, "한국경제") );		// 2012년 이후 업데이트 안됨
 			resultList.addAll( getMessage("http://rss.joins.com/joins_ilgan_list.xml", 			keyword, "일간스포츠") );
-			resultList.addAll( getMessage("http://rss.joins.com/joins_ilgan_list.xml", 			keyword, "일간스포츠 전체기사") );
 
             resultMap.put("resultCd", "1000");
             resultMap.put("resultMsg", "SUCCESS");

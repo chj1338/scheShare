@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.share.calendar.sch.Dto.SchListDto;
 import com.share.calendar.sch.Service.SchListService;
-import com.share.calendar.sch.Vo.SchDutyListVo;
 import com.share.calendar.sch.Vo.SchDutyVo;
 import com.share.calendar.sch.Vo.SchVo;
 
@@ -40,7 +39,7 @@ public class SchController {
 	@Autowired
 	private SchListDto schListDto;
 
-	//////////////////////////////////  È­¸é¿µ¿ª
+	//////////////////////////////////  í™”ë©´ì˜ì—­
 	
 	@RequestMapping(value = "/schListM", method = RequestMethod.GET)
 	public String schListM(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
@@ -67,7 +66,7 @@ public class SchController {
 		return "sch/schDutyM";
 	}
 
-	//////////////////////////////////  API ¿µ¿ª
+	//////////////////////////////////  API ì˜ì—­
 	
 	@ResponseBody
     @RequestMapping(value = "/sch/getScheduleList", method = RequestMethod.POST)
@@ -112,7 +111,7 @@ public class SchController {
 	
 	
 	/*
-	 * ½ºÄÉÁì »ó¼¼Á¶È¸ 
+	 * ìŠ¤ì¼€ì¥´ ìƒì„¸ì¡°íšŒ 
 	 */
 	@ResponseBody
     @RequestMapping(value = "/sch/getSchDetailData", method = RequestMethod.POST)
@@ -147,7 +146,7 @@ public class SchController {
 	
 	
 	/*
-	 * ½ºÄÉÁì µî·Ï/¼öÁ¤ 
+	 * ìŠ¤ì¼€ì¥´ ë“±ë¡/ìˆ˜ì • 
 	 */
 	@ResponseBody
     @RequestMapping(value = "/sch/schInsertData", method = RequestMethod.POST)
@@ -203,7 +202,7 @@ public class SchController {
 		
 	
 	/*
-	 * ½ºÄÉÁì »èÁ¦ 
+	 * ìŠ¤ì¼€ì¥´ ì‚­ì œ 
 	 */
 	@ResponseBody
     @RequestMapping(value = "/sch/schDeleteData", method = RequestMethod.POST)
@@ -237,7 +236,7 @@ public class SchController {
 	}
 
 	/*
-	 * ½ºÄÉÁì ´Ş·Â 
+	 * ìŠ¤ì¼€ì¥´ ë‹¬ë ¥ 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/sch/schDutyData.do", method = RequestMethod.POST)
@@ -279,9 +278,9 @@ public class SchController {
     		schListDto.setSchTitle("");
     		schListDto.setSchContent("");
     		
-    		List<SchVo> schList = schListService.selectSchList(schListDto);				// ½ºÄÉÁì ¸®½ºÆ®
-        	List<SchDutyVo> resultList = setCalendar(thisYear, thisMonth, thisDay);	// ´Ş·Â ¸®½ºÆ®
-        	List<SchDutyVo> tempList = setCalendar(thisYear, thisMonth, thisDay);	// ´Ş·Â ¸®½ºÆ®
+    		List<SchVo> schList = schListService.selectSchList(schListDto);				// ìŠ¤ì¼€ì¥´ ë¦¬ìŠ¤íŠ¸
+        	List<SchDutyVo> resultList = setCalendar(thisYear, thisMonth, thisDay);	// ë‹¬ë ¥ ë¦¬ìŠ¤íŠ¸
+        	List<SchDutyVo> tempList = setCalendar(thisYear, thisMonth, thisDay);	// ë‹¬ë ¥ ë¦¬ìŠ¤íŠ¸
         	
         	for(int i=0; i<tempList.size(); i++)  {
         		for(int j=0; j<schList.size(); j++) {
@@ -358,16 +357,16 @@ public class SchController {
 	
 	
 	/*
-	 * ÆÄ¶ó¸ŞÅÍ·Î ´Ş·Â ¸¸µé±â 
+	 * íŒŒë¼ë©”í„°ë¡œ ë‹¬ë ¥ ë§Œë“¤ê¸° 
 	 */
 	public List<SchDutyVo> setCalendar(int thisYear, int thisMonth, int thisDay) {
-		int endDay = 0;		// ¸Å¿ù ¸¶Áö¸·ÀÏ
-		int sumDay = 0;		// ¿À´Ã±îÁö °æ°úÀÏÀÚ(¸Å¿ù 1ÀÏÀÇ ¿äÀÏÀ» ±¸ÇÏ±âÀ§ÇØ)
-		int firstWeek = 0;	// ¸Å¿ù 1ÀÏÀÇ ¿äÀÏ
+		int endDay = 0;		// ë§¤ì›” ë§ˆì§€ë§‰ì¼
+		int sumDay = 0;		// ì˜¤ëŠ˜ê¹Œì§€ ê²½ê³¼ì¼ì(ë§¤ì›” 1ì¼ì˜ ìš”ì¼ì„ êµ¬í•˜ê¸°ìœ„í•´)
+		int firstWeek = 0;	// ë§¤ì›” 1ì¼ì˜ ìš”ì¼
 		
 		String[] dayWeek = {"", "", "", "", "", "", ""};
 		
-		// Áö±İ±îÁö °æ°úÇÑ ³âµµ·Î °æ°úÀÏ¼ö¸¦ Ãß°¡
+		// ì§€ê¸ˆê¹Œì§€ ê²½ê³¼í•œ ë…„ë„ë¡œ ê²½ê³¼ì¼ìˆ˜ë¥¼ ì¶”ê°€
 		for(int i=1; i<thisYear; i++) {
 			sumDay += 365;
 			if( (i%4 == 0 && i%100 != 0) || i%400 == 0) {
@@ -375,12 +374,12 @@ public class SchController {
 			}
 		}
 		
-		// ¿ÃÇØ °æ°úÇÑ ¿ù¼ö·Î °æ°úÀÏ¼ö¸¦ Ãß°¡
+		// ì˜¬í•´ ê²½ê³¼í•œ ì›”ìˆ˜ë¡œ ê²½ê³¼ì¼ìˆ˜ë¥¼ ì¶”ê°€
 		for(int i=1; i<thisMonth; i++) {
     		if(i == 1 || i == 3 || i == 5 || i == 7 || i == 8 || i == 10 || i == 12) {
     			endDay = 31;
     		} else if(i == 2) {
-    			if( (thisYear%4 == 0 && thisYear%100 != 0) || thisYear%400 == 0) {	// À±³âÀÌ¸é
+    			if( (thisYear%4 == 0 && thisYear%100 != 0) || thisYear%400 == 0) {	// ìœ¤ë…„ì´ë©´
         			endDay = 29;
     			} else {
         			endDay = 28;
@@ -389,25 +388,25 @@ public class SchController {
     			endDay = 30;
     		}
     		
-    		sumDay += endDay;		// ¿©±â±îÁö°¡ Áö³­´Ş ¸¶Áö¸· ÀÏÀÚ
+    		sumDay += endDay;		// ì—¬ê¸°ê¹Œì§€ê°€ ì§€ë‚œë‹¬ ë§ˆì§€ë§‰ ì¼ì
 		}
 		
-		//	´ç¿ù °æ°úÇÑ ³¯Â¥ Ãß°¡
+		//	ë‹¹ì›” ê²½ê³¼í•œ ë‚ ì§œ ì¶”ê°€
 		//	sumDay += thisDay;
 
 		/*
-		 * µåµğ¾î ÀÌ´Ş 1ÀÏÀÇ ¿äÀÏÀÌ ³ª¿Ô´Ù.
-		 * firstWeekÀÌ ´ÙÀ½ ¼ıÀÚÀÌ¸é ÇØ´ç ¿ùÀÇ 1ÀÏÀº
+		 * ë“œë””ì–´ ì´ë‹¬ 1ì¼ì˜ ìš”ì¼ì´ ë‚˜ì™”ë‹¤.
+		 * firstWeekì´ ë‹¤ìŒ ìˆ«ìì´ë©´ í•´ë‹¹ ì›”ì˜ 1ì¼ì€
 		 *  0  1  2  3  4  5  6
-		 * ÀÏ ¿ù È­ ¼ö ¸ñ ±İ Åä 
+		 * ì¼ ì›” í™” ìˆ˜ ëª© ê¸ˆ í†  
 		 */
-		firstWeek = ( (sumDay % 7) + 1) % 7;	//	Áö³­´Ş ¸¶Áö¸· ¿äÀÏ + 1 = ÀÌ¹ø´Ş 1ÀÏ... ÀÇ ¿äÀÏ
+		firstWeek = ( (sumDay % 7) + 1) % 7;	//	ì§€ë‚œë‹¬ ë§ˆì§€ë§‰ ìš”ì¼ + 1 = ì´ë²ˆë‹¬ 1ì¼... ì˜ ìš”ì¼
 
-		// ÀÌ¹ø´Ş ¸¶Á÷¸» ³¯Â¥
+		// ì´ë²ˆë‹¬ ë§ˆì§ë§ ë‚ ì§œ
 		if(thisMonth == 1 || thisMonth == 3 || thisMonth == 5 || thisMonth == 7 || thisMonth == 8 || thisMonth == 10 || thisMonth == 12) {
 			endDay = 31;
 		} else if(thisMonth == 2) {
-			if( (thisYear%4 == 0 && thisYear%100 != 0) || thisYear%400 == 0) {	// À±³âÀÌ¸é
+			if( (thisYear%4 == 0 && thisYear%100 != 0) || thisYear%400 == 0) {	// ìœ¤ë…„ì´ë©´
     			endDay = 29;
 			} else {
     			endDay = 28;
@@ -416,7 +415,7 @@ public class SchController {
 			endDay = 30;
 		}
 
-		// ´Ş·Â ¸Ç¾Õ ºóÄ­
+		// ë‹¬ë ¥ ë§¨ì• ë¹ˆì¹¸
 		int checkWeek = 0;
 
 		for(int i=0; i<firstWeek; i++) {
@@ -427,7 +426,7 @@ public class SchController {
     	SchDutyVo schDutyVo = new SchDutyVo();
     	List<SchDutyVo> calList = new ArrayList<SchDutyVo>();
 
-		// ¿äÀÏº° ³¯Â¥
+		// ìš”ì¼ë³„ ë‚ ì§œ
 		for(int i=1; i<=endDay; i++) {
 			dayWeek[checkWeek] = i + "";
 			checkWeek++;
@@ -451,7 +450,7 @@ public class SchController {
 			}
 		}
 
-		// ¸¶Áö¸·ÁÖ ¼ÂÆÃ
+		// ë§ˆì§€ë§‰ì£¼ ì…‹íŒ…
 		if(checkWeek < 7 && checkWeek != 0) {
     		while(checkWeek < 7) {
     			dayWeek[checkWeek] = "";
@@ -476,7 +475,7 @@ public class SchController {
 		return calList;		
 	}
 	
-	//YY, M, D ¸¦ ¹Ş¾Æ¼­ YYMMDD Çü´ë·Î º¯°æ
+	//YY, M, D ë¥¼ ë°›ì•„ì„œ YYMMDD í˜•ëŒ€ë¡œ ë³€ê²½
 	public String listSum(int thisYear, int thisMonth, String thisDay) {
 		String yearMonthDay = "";
 

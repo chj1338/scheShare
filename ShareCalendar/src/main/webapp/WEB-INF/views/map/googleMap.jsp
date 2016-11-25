@@ -240,10 +240,10 @@
   */
   
 	function findMap() {
-		var title = address;
-		var content = address;
 		var address = "";
-		address = document.getElementById("adres").value;
+		address = document.getElementById("adres").value;	  
+	  	var title = address;
+		var content = address;
 		
 		if(address == "") address = "서울역";
 
