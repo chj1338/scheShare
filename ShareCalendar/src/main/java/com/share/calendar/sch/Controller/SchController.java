@@ -391,7 +391,7 @@ public class SchController {
     		sumDay += endDay;		// 여기까지가 지난달 마지막 일자
 		}
 		
-		//	당월 경과한 날짜 추가
+		//	당월 경과한 날짜 추가(오늘날짜 구할때만)
 		//	sumDay += thisDay;
 
 		/*

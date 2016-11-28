@@ -27,6 +27,8 @@
  
     <script type="text/javascript">
     var SchShareApp = {
+            scrID : 'schDutyM',
+    
     		pageInit: function() {
                 'use strict';
                 this.data.init();

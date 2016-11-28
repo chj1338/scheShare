@@ -33,6 +33,8 @@
 
     <script type="text/javascript">
     var SchShareApp = {
+            scrID : 'schListM',
+    
     		pageInit: function() {
                 'use strict';
                 this.jqgrid.init();
