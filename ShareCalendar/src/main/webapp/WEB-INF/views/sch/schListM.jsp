@@ -80,7 +80,10 @@
                             {name:'schDt', 		index:'schDt', 		width:1, align:'center', formatter: 'date', formatoptions: {'srcformat' : 'Ymd', 'newformat' : 'Y-m-d' } },
                             {name:'schTitle', 		index:'schTitle', 		width:1, align:'center', classes:'link1'},
                             {name:'schContent',	index:'schContent', 	width:5, align:'left'},
-                            {name:'schUseCo', 	index:'schUseCo', 	width:1, align:'center'},
+/*                             {name:'schUseCo', 	index:'schUseCo', 	width:1, align:'center'}, */                            
+                            {name:'schUseCo', 	index:'schUseCo', 	width:1, align:'center', formatter:"select", editable:false, editoptions: {
+                            	value:"P:공개;S:비공개"
+                            }},
                             {name:'schRegistId',	index:'schRegistId', 	width:1, align:'center'},
                             {name:'schRegistDt',	index:'schRegistDt', 	width:2, align:'center'}
                         ],
@@ -91,6 +94,7 @@
                         shrinkToFit: true,  							// 컬럼 넓이로만 width 설정
                         scrollOffset: 0,    							// 우측 스크롤 여부
                         vScrollOffset: 0,   							// 우측 스크롤 여부
+//                        width: 1024,
                         autowidth: true,           					// width와 동시에 사용 안됨
                         viewrecords: true,  							// records의 View여부
                         gridview: true,     							// 처리속도 향상 ==> treeGrid, subGrid, afterInsertRow(event)와 동시 사용불가
@@ -206,10 +210,10 @@
 									$('#gridList').jqGrid('setRowData', i+1,
 										 {
 											schId: 		object[i].scheNo,
-											schDt: 		object[i].scheDt,
+											schDt: 		object[i].scheDt.substr(0, 4) + "-" + object[i].scheDt.substr(4, 2) + "-" + object[i].scheDt.substr(6, 2) ,
 											schTitle: 		object[i].scheTitle,
 											schContent: 	object[i].scheContent,
-											schUseCo: 	(object[i].scheSe).replace('P', '공개').replace('S', '비공개'),
+											schUseCo: 	object[i].scheSe,
 											schRegistId: 	object[i].registId,
 											schRegistDt:	object[i].registDt
 									      });

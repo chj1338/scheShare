@@ -41,21 +41,41 @@
 <body>
 	<div id="f_title1" class="menu_title" ><h3>*&nbsp;메  뉴&nbsp;*</h3></div>
 	<table width="80%" border="0" height="100%">
-		<tr><td style="font-weight : bold">◎ 게시판</td></tr>
-		<tr><td class="position"><a href="/SmartEditor2.do" target="appbody" class="no-uline">스마트에디터2</a></td></tr>
+		<tr><td style="font-weight : bold">
+			<a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"  class="no-uline">	◎ 게시판
+			</a><div style="DISPLAY: block">
+				<table>
+					<tr><td class="position" style="font-weight : normal"><a href="/SmartEditor2.do" target="appbody" class="no-uline">스마트에디터2</a></td></tr>
+				</table>
+			</div>
+		</td></tr>
 		<tr><td>&nbsp;</td></tr>
-		<tr><td style="font-weight : bold">◎ 일정관리</td></tr>
-		<tr><td class="position"><a href="/schListM.do" target="appbody" class="no-uline">일정조회</a></td></tr>
-		<tr><td class="position"><a href="/schInsertM.do" target="appbody" class="no-uline">일정등록</a></td></tr>
-		<tr><td class="position"><a href="/schDutyM.do" target="appbody" class="no-uline">일정달력</a></td></tr>
+		<tr><td style="font-weight : bold">
+			<a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"  class="no-uline">	◎ 일정관리
+			</a><div style="DISPLAY: none">
+				<table>
+					<tr><td class="position" style="font-weight : normal"><a href="/schListM.do" target="appbody" class="no-uline">일정조회</a></td></tr>
+					<tr><td class="position" style="font-weight : normal"><a href="/schInsertM.do" target="appbody" class="no-uline">일정등록</a></td></tr>
+					<tr><td class="position" style="font-weight : normal"><a href="/schDutyM.do" target="appbody" class="no-uline">일정달력</a></td></tr>
+				</table>
+			</div>
+		</td></tr>
 		<tr><td>&nbsp;</td></tr>
-		<tr><td style="font-weight : bold">◎ 기타</td></tr>
-		<tr><td class="position"><a href="/map/googleMap.do" target="appbody" class="no-uline">지도찾기</a></td></tr>
-		<tr><td class="position"><a href="/lot/lotSelectM.do" target="appbody" class="no-uline">당신의행운</a></td></tr>
-		<tr><td class="position"><a href="/searchArticleList.do" target="appbody" class="no-uline">기사검색</a></td></tr>
-		<tr><td class="position"><a href="/rss/rssSelectM.do" target="appbody" class="no-uline">RSS뉴스</a></td></tr>
-		<tr><td class="position"><a href="/rss/rssWeaSelectM.do" target="appbody" class="no-uline">RSS날씨</a></td></tr>
+		<tr><td style="font-weight : bold">
+				<a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"  class="no-uline">	◎ 기타
+				</a><div style="DISPLAY: none">
+					<table>
+						<tr><td class="position" style="font-weight : normal"><a href="/map/googleMap.do" target="appbody" class="no-uline">지도찾기</a></td></tr>
+						<tr><td class="position" style="font-weight : normal"><a href="/lot/lotSelectM.do" target="appbody" class="no-uline">당신의행운</a></td></tr>
+						<tr><td class="position" style="font-weight : normal"><a href="/searchArticleList.do" target="appbody" class="no-uline">기사검색</a></td></tr>
+						<tr><td class="position" style="font-weight : normal"><a href="/rss/rssSelectM.do" target="appbody" class="no-uline">RSS뉴스</a></td></tr>
+						<tr><td class="position" style="font-weight : normal"><a href="/rss/rssWeaSelectM.do" target="appbody" class="no-uline">RSS날씨</a></td></tr>
+					</table>
+				</div>		
+		</td></tr>
 	</table>
 
+
+				
 </body>
 </html>

@@ -34,6 +34,8 @@
                 'use strict';
                 this.data.init();
                 this.event.init();
+                
+                SchShareApp.data.rssSelectData();
             },
             
             data: {
@@ -150,12 +152,12 @@
 	<div id="headLine">
 	  <h3  bgcolor="#E8F5FF">RSS 날씨</h3>
 	</div>
-
+<!-- 
 	<div id="condition">
 			<input type="button" id="rssSelectBtn" value="날씨조회"/>
 			<input type="button" id="rssSelectCtnBtn" value="날씨연속조회"/>
 	</div>
-
+ -->
 	<br>
 
 	<div id="bodyGrid"> 

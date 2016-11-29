@@ -10,9 +10,9 @@
 			,SCHE_TITLE as sche_title
 			,SCHE_CONTENT as sche_content
 			,SCHE_SE as sche_se
-			,REGIST_ID as regist_id
-			,REGIST_DT as regist_dt
-         from SCHE_LIST
+			,(select CU.USER_NM from COM_USER CU where CU.LOGIN_ID = SL.REGIST_ID) as regist_id
+			,to_char(REGIST_DT, 'yyyy-MM-dd HH24:MI:SS') as regist_dt
+         from SCHE_LIST SL
          where SCHE_TITLE like '%' || #{schTitle} || '%'
          and    SCHE_CONTENT like '%' || #{schContent} || '%'
          

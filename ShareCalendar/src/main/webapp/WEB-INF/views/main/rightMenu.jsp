@@ -15,7 +15,9 @@
 
 <body>
 	<div class="weaApp">
-		<iframe name="weaAppFrame" src="/main/weatherApple.do" style="height:200px;width:100%;overflow:hidden;border:0;"></iframe>
+		<a href="/rss/rssWeaSelectM.do" target="appbody" class="no-uline">
+			<iframe name="weaAppFrame" src="/main/weatherApple.do" style="height:200px;width:100%;overflow:hidden;border:0;"></iframe>
+		</a>
 	</div>
 	
 </body>

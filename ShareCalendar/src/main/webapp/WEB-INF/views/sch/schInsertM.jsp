@@ -195,8 +195,8 @@
   <form id="schInsertForm">
       <div align="left">날짜 : <input type="text" name="schDt" id="schDt"></input>
       						구분 : <select name="schSe" id="schSe">
-      									<option value="P">공유</option>
-      									<option value="S">개인</option>
+      									<option value="P">공개</option>
+      									<option value="S">비공개</option>
       						        </select>
       </div>
       <div align="left">제목 : <input type="text" name="schTitle" id="schTitle"></input></div>
