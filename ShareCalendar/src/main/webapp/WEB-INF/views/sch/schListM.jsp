@@ -40,6 +40,22 @@
                 this.jqgrid.init();
                 this.data.init();
                 this.event.init();
+                
+                // 날짜 달력모양 셋팅
+                $("#schDtFrom").datepicker({ 
+                    dateFormat: 'yy-mm-dd', 
+                    changeMonth: true, 
+                    changeYear: true, 
+                    yearRange: '${fromNS}:${toNS}'
+                 });
+                
+                // 날짜 달력모양 셋팅
+                $("#schDtTo").datepicker({ 
+                    dateFormat: 'yy-mm-dd', 
+                    changeMonth: true, 
+                    changeYear: true, 
+                    yearRange: '${fromNS}:${toNS}'
+                 });
             },
 
             jqgrid: {
@@ -81,7 +97,7 @@
                         scroll: 0,     									// 휠 페이징 사용 1
                         recordpos: 'right',     						// 우측좌측 기준변경 records 카운트의 위치 설정
                         pager: 'gridPager',             				// 하단 페이지처리 selector
-                        rowList: [100, 200, 300],           			// 한번에 가져오는 row개수
+                        rowList: [10, 20, 30],           			// 한번에 가져오는 row개수
                         loadtext: 'Data Loading From Server',	// 로드 되는 Text 문구
                         loadui: 'block',         						// 로드 블럭 스타일
                         height: 500,            						// 세로높이

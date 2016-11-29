@@ -40,7 +40,7 @@
 
 <body>
 	<div id="f_title1" class="menu_title" ><h3>*&nbsp;메  뉴&nbsp;*</h3></div>
-	<table width="80%" border="0">
+	<table width="80%" border="0" height="100%">
 		<tr><td style="font-weight : bold">◎ 게시판</td></tr>
 		<tr><td class="position"><a href="/SmartEditor2.do" target="appbody" class="no-uline">스마트에디터2</a></td></tr>
 		<tr><td>&nbsp;</td></tr>
@@ -56,5 +56,6 @@
 		<tr><td class="position"><a href="/rss/rssSelectM.do" target="appbody" class="no-uline">RSS뉴스</a></td></tr>
 		<tr><td class="position"><a href="/rss/rssWeaSelectM.do" target="appbody" class="no-uline">RSS날씨</a></td></tr>
 	</table>
+
 </body>
 </html>

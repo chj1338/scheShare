@@ -49,6 +49,14 @@ public class RssWeaController {
 		return "/rss/rssWeaSelectM";
 	}
 	
+	// Left 메뉴 apple 창
+	@RequestMapping(value = "/main/weatherApple.do", method = RequestMethod.GET)
+	public String weatherApple(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
+		logger.info("===== RssWeaController rssWeaSelectM");
+		
+		return "/main/weatherApple";
+	}
+	
 	
 	//////////////////////////////////  API 영역
 	

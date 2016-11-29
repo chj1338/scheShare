@@ -60,6 +60,13 @@ public class SysController {
 
 		return "/main/leftMenu";
 	}
+
+	@RequestMapping(value = "/rightMenu", method = RequestMethod.GET)
+	public String rightMenu(Locale locale, Model model) {
+		logger.debug("SysController leftMenu");
+
+		return "/main/rightMenu";
+	}
 	
 	@RequestMapping(value = "/body", method = RequestMethod.GET)
 	public String body(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {

@@ -35,6 +35,16 @@
       color : black;
       background-color : #FFF;
     }
+    .right_menu_area
+    {
+      top : 8%;
+      right : 0;
+      position : absolute;
+      height : 90%;
+      width : 12%;
+      color : black;
+      background-color : #FFF;
+    }
     .userinfo_area
     {
     	vertical-align : top;
@@ -48,7 +58,7 @@
       left : 12%;
       position : absolute;
       height : 90%;
-      width : 88%;
+      width : 76%;
       color : black;
       background-color : #FFF;
     }
@@ -105,6 +115,7 @@
 		</div>
 	    <div id="menu" class="menu_area" ><iframe name="menu" src="${ctx}/leftMenu" style="height:100%;width:100%;overflow:hidden;border:0;"></iframe></div>
 	    <div id="content" class="content_area"><iframe name="appbody" src="${ctx}/body" style="height:100%;width:100%;overflow:hidden;border:0;"></iframe></div>
+	    <div id="right_menu" class="right_menu_area" ><iframe name="right_menu" src="${ctx}/rightMenu" style="height:100%;width:100%;overflow:hidden;border:0;"></iframe></div>
 	</form>
 </body>
 
