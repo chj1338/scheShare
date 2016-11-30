@@ -65,7 +65,8 @@
 				<a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"  class="no-uline">	◎ 기타
 				</a><div style="DISPLAY: none">
 					<table>
-						<tr><td class="position" style="font-weight : normal"><a href="/map/googleMap.do" target="appbody" class="no-uline">지도찾기</a></td></tr>
+						<tr><td class="position" style="font-weight : normal"><a href="/map/googleMap.do" target="appbody" class="no-uline">구글지도찾기</a></td></tr>
+						<tr><td class="position" style="font-weight : normal"><a href="/map/naverMap.do" target="appbody" class="no-uline">네이버지도찾기</a></td></tr>
 						<tr><td class="position" style="font-weight : normal"><a href="/lot/lotSelectM.do" target="appbody" class="no-uline">당신의행운</a></td></tr>
 						<tr><td class="position" style="font-weight : normal"><a href="/searchArticleList.do" target="appbody" class="no-uline">기사검색</a></td></tr>
 						<tr><td class="position" style="font-weight : normal"><a href="/rss/rssSelectM.do" target="appbody" class="no-uline">RSS뉴스</a></td></tr>
