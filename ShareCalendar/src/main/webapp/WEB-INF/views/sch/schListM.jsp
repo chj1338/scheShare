@@ -25,6 +25,24 @@
   		padding:3px;
   		width:6%;
   	}
+  	
+	/*   datepicker 메인크기 및 폰트 */
+  	.ui-datepicker {
+  		font-size:9pt;
+  		width: 12%;
+  	}
+  	
+  	/*   datepicker 월 콤보 크기 및 폰트 */
+  	.ui-datepicker select.ui-datepicker-month {
+  		width:50%;
+  		font-size: 10px;
+  	}
+
+	/*   datepicker 년 콤보 크기 및 폰트 */
+  	.ui-datepicker select.ui-datepicker-year {
+  		width:50%;
+  		font-size: 10px;
+  	}  	
 
   </style>
   
@@ -45,7 +63,14 @@
                 $("#schDtFrom").datepicker({ 
                     dateFormat: 'yy-mm-dd', 
                     changeMonth: true, 
-                    changeYear: true
+                    changeYear: true,
+              	   prevText: '이전 달',
+            	   nextText: '다음 달',
+            	   monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            	   monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            	   dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            	   dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            	   dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
 /*                     ,yearRange: '${fromNS}:${toNS}' */
                  });
                 
@@ -53,7 +78,14 @@
                 $("#schDtTo").datepicker({ 
                     dateFormat: 'yy-mm-dd', 
                     changeMonth: true, 
-                    changeYear: true
+                    changeYear: true,
+              	   prevText: '이전 달',
+            	   nextText: '다음 달',
+            	   monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            	   monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            	   dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            	   dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            	   dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
 /*                     ,yearRange: '${fromNS}:${toNS}' */
                  });
             },
