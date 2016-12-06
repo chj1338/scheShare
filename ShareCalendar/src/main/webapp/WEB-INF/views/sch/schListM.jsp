@@ -45,16 +45,16 @@
                 $("#schDtFrom").datepicker({ 
                     dateFormat: 'yy-mm-dd', 
                     changeMonth: true, 
-                    changeYear: true, 
-                    yearRange: '${fromNS}:${toNS}'
+                    changeYear: true
+/*                     ,yearRange: '${fromNS}:${toNS}' */
                  });
                 
                 // 날짜 달력모양 셋팅
                 $("#schDtTo").datepicker({ 
                     dateFormat: 'yy-mm-dd', 
                     changeMonth: true, 
-                    changeYear: true, 
-                    yearRange: '${fromNS}:${toNS}'
+                    changeYear: true
+/*                     ,yearRange: '${fromNS}:${toNS}' */
                  });
             },
 

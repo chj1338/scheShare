@@ -33,8 +33,8 @@
                 $("#schDt").datepicker({ 
                     dateFormat: 'yy-mm-dd', 
                     changeMonth: true, 
-                    changeYear: true, 
-                    yearRange: '${fromNS}:${toNS}'
+                    changeYear: true
+/*                     ,yearRange: '${fromNS}:${toNS}' */
                  });
                 
                 if(SchShareApp.schId == "") {

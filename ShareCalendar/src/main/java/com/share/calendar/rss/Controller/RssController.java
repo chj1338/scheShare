@@ -48,7 +48,15 @@ public class RssController {
 		
 		return "/rss/rssSelectM";
 	}
+
 	
+	// 메이화면 애플창
+	@RequestMapping(value = "/main/rssApple.do", method = RequestMethod.GET)
+	public String rssApple(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
+		logger.info("===== RssController rssSelectM");
+		
+		return "/main/rssApple";
+	}
 	
 	//////////////////////////////////  API 영역
 	
