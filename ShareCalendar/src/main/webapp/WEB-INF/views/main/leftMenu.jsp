@@ -71,12 +71,20 @@
 						<tr><td class="position" style="font-weight : normal"><a href="/searchArticleList.do" target="appbody" class="no-uline">기사검색</a></td></tr>
 						<tr><td class="position" style="font-weight : normal"><a href="/rss/rssSelectM.do" target="appbody" class="no-uline">RSS뉴스</a></td></tr>
 						<tr><td class="position" style="font-weight : normal"><a href="/rss/rssWeaSelectM.do" target="appbody" class="no-uline">RSS날씨</a></td></tr>
+						<tr><td class="position" style="font-weight : normal"><a href="/main/sqlTestM.do" target="appbody" class="no-uline">SQL 테스트</a></td></tr>
 					</table>
-				</div>		
+				</div>
+		<tr><td>&nbsp;</td></tr>
+		<tr><td style="font-weight : bold">
+				<a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"  class="no-uline">	◎ Shop
+				</a><div style="DISPLAY: none">
+					<table>
+						<tr><td class="position" style="font-weight : normal"><a href="/shopListM.do" target="appbody" class="no-uline">상품리스트조회</a></td></tr>
+						<tr><td class="position" style="font-weight : normal"><a href="/shopGridM.do" target="appbody" class="no-uline">상품그리드조회</a></td></tr>
+						<tr><td class="position" style="font-weight : normal"><a href="/shopInsertM.do" target="appbody" class="no-uline">상품등록</a></td></tr>
+					</table>
+				</div>
 		</td></tr>
-	</table>
-
-
-				
+	</table>				
 </body>
 </html>

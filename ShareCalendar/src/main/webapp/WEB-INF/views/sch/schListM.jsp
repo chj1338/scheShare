@@ -6,12 +6,21 @@
 
   <title>일정리스트</title>
   <style type="text/css">
+/*   
   	table, tr, td {
   		border-style:solid;
   		border-collapse:collapse;
   		border-width:1px;
   	}
-  	
+ */  
+ table {
+ 	width: 98%;
+/* 
+ 	border-style:solid;
+ 	border-width:1px;
+ */
+ }
+ 	
   	thead tr td {
   	  	font-size:9pt;
   	 	font-weight:bold;
@@ -26,6 +35,11 @@
   		width:6%;
   	}
   	
+  	paginate {
+  		width: 80%;
+  		border-width:0px;
+  	}
+
 	/*   datepicker 메인크기 및 폰트 */
   	.ui-datepicker {
   		font-size:9pt;
@@ -48,6 +62,8 @@
   
    
 <script  src="/resources/js/jquery/grid/jquery.jqGrid.min.js"></script>
+<script  src="/resources/js/jqgrid-paging.js"></script>
+
 
     <script type="text/javascript">
     var SchShareApp = {
@@ -59,35 +75,23 @@
                 this.data.init();
                 this.event.init();
                 
-                // 날짜 달력모양 셋팅
-                $("#schDtFrom").datepicker({ 
-                    dateFormat: 'yy-mm-dd', 
-                    changeMonth: true, 
-                    changeYear: true,
-              	   prevText: '이전 달',
-            	   nextText: '다음 달',
-            	   monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            	   monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            	   dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-            	   dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-            	   dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
-/*                     ,yearRange: '${fromNS}:${toNS}' */
-                 });
+                var datepickerOption = {
+                        dateFormat: 'yy-mm-dd', 
+                        changeMonth: true, 
+                        changeYear: true,
+                  	   prevText: '이전 달',
+                	   nextText: '다음 달',
+                	   monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                	   monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                	   dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+                	   dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+                	   dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
+    /*                     ,yearRange: '${fromNS}:${toNS}' */                		
+                };
                 
                 // 날짜 달력모양 셋팅
-                $("#schDtTo").datepicker({ 
-                    dateFormat: 'yy-mm-dd', 
-                    changeMonth: true, 
-                    changeYear: true,
-              	   prevText: '이전 달',
-            	   nextText: '다음 달',
-            	   monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            	   monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            	   dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-            	   dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-            	   dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
-/*                     ,yearRange: '${fromNS}:${toNS}' */
-                 });
+                $("#schDtFrom").datepicker(datepickerOption);
+                $("#schDtTo").datepicker(datepickerOption);
             },
 
             jqgrid: {
@@ -126,14 +130,14 @@
                         shrinkToFit: true,  							// 컬럼 넓이로만 width 설정
                         scrollOffset: 0,    							// 우측 스크롤 여부
                         vScrollOffset: 0,   							// 우측 스크롤 여부
-//                        width: 1024,
+//                        width: 1000px,
                         autowidth: true,           					// width와 동시에 사용 안됨
                         viewrecords: true,  							// records의 View여부
                         gridview: true,     							// 처리속도 향상 ==> treeGrid, subGrid, afterInsertRow(event)와 동시 사용불가
                         scroll: 0,     									// 휠 페이징 사용 1
                         recordpos: 'right',     						// 우측좌측 기준변경 records 카운트의 위치 설정
                         pager: 'gridPager',             				// 하단 페이지처리 selector
-                        rowList: [10, 20, 30],           			// 한번에 가져오는 row개수
+                        rowList: [10, 20, 30],           				// 한번에 가져오는 row개수
                         loadtext: 'Data Loading From Server',	// 로드 되는 Text 문구
                         loadui: 'block',         						// 로드 블럭 스타일
                         height: 500,            						// 세로높이
@@ -143,10 +147,10 @@
                             repeatitems: false,
                             //root: 'resultData.list',
                             root: 'resultData',
-                            records: 'resultData.records',
-                            total: 'resultData.total',
-                            page: 'resultData.page',
-                            id: 'resultData.list.templSn'
+                            records: 'resultRecords',
+                            total: 'resultTotal',
+                            page: 'resultPage',
+                            id: 'resultData.schId'
                         },
                         loadBeforeSend :function(xhr, settings) {
                             SchShareApp.jqgrid.gridXhr = xhr;
@@ -158,6 +162,7 @@
                                 return false;
                             }
                              */
+                        	initPage("gridList", "paginate", true, "TOT");
                         },
                         loadError: function(xhr, status, err) {
                             if(xhr.status === '0' || xhr.statusText === 'abort') {
@@ -233,7 +238,10 @@
 								$('#gridList').jqGrid('setGridParam', {
 									datatype: 'local'
 									,data: object
-									,page: 1
+									,records: res.resultRecords
+		                            ,total: res.resultTotal
+		                            ,page: res.resultPage
+		                            ,id: res.resultData[0].schId
 									,rowNum: object.length
 								}).trigger('reloadGrid');
 
@@ -321,7 +329,7 @@
 	</div>
 
 	<div id="condition">
-        제목 : <input type="text" id="schTitle"> 내용 : <input type="text" id="schContent">
+        제목 : <input type="text" id="schTitle"> 내용 : <input type="text" id="schContent"><br>
   		시작일자 : <input type="text" id="schDtFrom"> ~ 종료일자 : <input type="text" id="schDtTo"> 
   		<input type="button" id="searchListBtn" value="조회">
 		<input type="button" id="openPopupBtn" value="신규등록">
@@ -330,6 +338,7 @@
 
     <table id="gridList"></table>
     <div id="gridPager"></div>
+	<div id="paginate"></div>
 
 </body>
  

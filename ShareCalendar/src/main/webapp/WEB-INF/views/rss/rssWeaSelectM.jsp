@@ -94,7 +94,10 @@
 									}
 
           							content += "<td>" + rss_content[i].pop + "(%)" + "</td>";
-          							content += "<td>" + rss_content[i].ws + "㎧" + "</td>";
+          							
+          							var ws_str = rss_content[i].ws.substr(0, rss_content[i].ws.indexOf(".") +2);		// 소숫점 이하 1자리까지만
+          							content += "<td>" + ws_str + "㎧" + "</td>";
+          							
           							content += "<td>" + rss_content[i].wdKor + "</td>";
           							content += "<td>" + rss_content[i].reh + "(%)" + "</td>";
           							content += "<td>" + rss_content[i].r12 + "</td>";

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shopListMapper">    
+
+    <select id="selectShopList" parameterType="com.share.calendar.shop.Dto.ShopListDto" resultType="com.share.calendar.shop.Vo.ShopVo">    
+		select
+		     PROD_ID
+		    ,PROD_NM
+		    ,PROD_PRICE
+		    ,PROD_CN
+		    ,PROD_MAKER_ID
+		    ,PROD_MAKER_NM
+		    ,PROD_IMG
+		from SHOP_MAIN
+		where 1=1
+		
+	   	<if test="keyword != '' and keyword != null">
+	       	<![CDATA[
+				and PROD_NM like '%' || #{keyword} || '%'
+         	]]>
+         </if>
+         
+		order by PROD_ID
+    </select>
+    
+    <select id="selectShopDetail" parameterType="com.share.calendar.shop.Dto.ShopListDto" resultType="com.share.calendar.shop.Vo.ShopVo">    
+        select
+			SCHE_NO as shope_no
+			,SCHE_DT as shope_dt
+			,SCHE_TITLE as shope_title
+			,SCHE_CONTENT as shope_content
+			,SCHE_SE as shope_se
+			,REGIST_ID as regist_id
+			,REGIST_DT as regist_dt
+         from SCHE_LIST
+         where SCHE_NO = #{shopId}
+    </select>
+    
+    <select id="selectNewShopId" resultType="string">    
+        select
+        	'SCH' || lpad(SEQ_SCHE_LIST.nextval+1, 7, '0') as shope_no
+        from dual
+    </select>
+    
+    <insert id="insertShopedule" parameterType="com.share.calendar.shop.Dto.ShopListDto">
+    	insert into SCHE_LIST (
+    		SCHE_NO
+			,SCHE_DT
+			,SCHE_TITLE
+			,SCHE_CONTENT
+			,SCHE_SE
+			,REGIST_ID
+			,REGIST_DT
+    	) values (
+    		 #{shopId}
+    		,#{shopDtFrom}
+    		,#{shopTitle}
+    		,#{shopContent}
+    		,#{shopSe}
+    		,#{registId}
+    		,sysdate
+    	)    	
+    </insert>
+    
+    <update id="updateShopedule" parameterType="com.share.calendar.shop.Dto.ShopListDto">
+    	update SCHE_LIST set
+			SCHE_DT = #{shopDtFrom}
+			,SCHE_TITLE = #{shopTitle}
+			,SCHE_CONTENT = #{shopContent}
+			,SCHE_SE = #{shopSe}
+			,REGIST_ID = #{registId}
+			,REGIST_DT = sysdate
+		where SCHE_NO = #{shopId}
+    </update>
+    
+    <delete id="deleteShopedule" parameterType="com.share.calendar.shop.Dto.ShopListDto">
+    	delete from SCHE_LIST
+    	where SCHE_NO = #{shopId}
+    </delete>
+
+</mapper>

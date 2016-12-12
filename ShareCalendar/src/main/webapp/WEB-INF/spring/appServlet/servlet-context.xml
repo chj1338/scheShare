@@ -35,6 +35,7 @@
 			<mvc:mapping path="/**/*.jsp"/>
  			<mvc:exclude-mapping path="/**/*.png"/>
  			<mvc:exclude-mapping path="/**/*.html"/>
+ 			<mvc:exclude-mapping path="/**/*.jpg"/>
   			
 			<beans:bean id="WebInterceptor" class="com.share.calendar.sys.Controller.SysInterceptor"/>
 		</mvc:interceptor>

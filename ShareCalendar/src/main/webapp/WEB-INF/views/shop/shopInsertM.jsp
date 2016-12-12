@@ -8,7 +8,7 @@
 
 <HTML>
 <HEAD>
-  <title>일정등록</title>
+  <title>상품등록</title>
   <style type="text/css">
   	.formTitle {
   		border-style:solid;
@@ -47,31 +47,14 @@
                 this.data.init();
                 this.event.init();
                 
-                var datepickerOption = {
-                        dateFormat: 'yy-mm-dd', 
-                        changeMonth: true, 
-                        changeYear: true,
-                  	   prevText: '이전 달',
-                	   nextText: '다음 달',
-                	   monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                	   monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                	   dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-                	   dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-                	   dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
-    /*                     ,yearRange: '${fromNS}:${toNS}' */                		
-                };
-                
-                // 날짜 달력모양 셋팅
-                $("#schDt").datepicker(datepickerOption);
-                
-                if(SchShareApp.schId == "") {
+                if(SchShareApp.shopId == "") {
                     setToday();
                     $('#schSe').val('P'),
                     $('#schContent').val(SchShareApp.schId);
-                    SchShareApp.pageTitle = "일정등록";
+                    SchShareApp.pageTitle = "상품등록";
                     schSe.val('P');
                 } else {
-                	SchShareApp.pageTitle = "일정상세";
+                	SchShareApp.pageTitle = "상품상세";
                 	SchShareApp.data.schDetailData();
                 }
 
@@ -220,14 +203,13 @@
 	<div id="formTitle"><textarea type="text" name="scrTitle" id="scrTitle" class='formTitle' value='일정등록' style='overflow-y:hidden;'></textarea></div>
     
   <form id="schInsertForm">
-      <div align="left">날짜 : <input type="text" name="schDt" id="schDt"></input>
-      						구분 : <select name="schSe" id="schSe">
+      <div align="left">제조사 : <select name="schSe" id="schSe">
       									<option value="P">공개</option>
       									<option value="S">비공개</option>
       						        </select>
       </div>
-      <div align="left">제목 : <input type="text" name="schTitle" id="schTitle"></input></div>
-      <div align="left">내용 : <br><textarea name="schContent" id="schContent" cols="58" rows="20"></textarea></div>
+      <div align="left">상품명 : <input type="text" name="schTitle" id="schTitle"></input></div>
+      <div align="left">상품상세 : <br><textarea name="schContent" id="schContent" cols="58" rows="20"></textarea></div>
       <br>
       <div align="left">
       	<button id="insertBtn">저장</button>  <button id="deleteBtn">삭제</button>

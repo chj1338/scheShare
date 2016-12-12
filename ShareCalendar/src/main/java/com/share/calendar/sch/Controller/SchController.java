@@ -94,6 +94,9 @@ public class SchController {
     		List<SchVo> list = schListService.selectSchList(schListDto);
 
             resultMap.put("resultData", list);
+            resultMap.put("resultTotal", list.size());
+            resultMap.put("resultRecords", list.size());
+            resultMap.put("resultPage", 1);
             resultMap.put("resultCd", "1000");
             resultMap.put("resultMsg", "SUCCESS");
         } catch(Exception e) {
