@@ -46,21 +46,6 @@
                 'use strict';
                 this.data.init();
                 this.event.init();
-                
-                if(SchShareApp.shopId == "") {
-                    setToday();
-                    $('#schSe').val('P'),
-                    $('#schContent').val(SchShareApp.schId);
-                    SchShareApp.pageTitle = "상품등록";
-                    schSe.val('P');
-                } else {
-                	SchShareApp.pageTitle = "상품상세";
-                	SchShareApp.data.schDetailData();
-                }
-
-                // 화면 제목 셋팅
-                document.title = SchShareApp.pageTitle;
-                $('#scrTitle').val( SchShareApp.pageTitle );
             },
             
             data: {
@@ -151,20 +136,47 @@
 							window.open('about:blank', '_self').close();
 						}
                 	}
-                  }
+                  },
                   
+  				// 파일업로드
+                  imgSearch: function() {
+                	    // Change this to the location of your server-side upload handler:
+                	    var url = '/file/upload.do';  // 사용
+                	    $('#fileupload').fileupload({
+                	        url: url,
+                	        dataType: 'json',
+                	        done: function (e, data) {
+                	            $.each(data.result.files, function (index, file) {
+                	                $('<p/>').text(file.name).appendTo('#files');
+                	            });
+                	        },
+
+                	        progressall: function (e, data) {
+                	            var progress = parseInt(data.loaded / data.total * 100, 10);
+                	            $('#progress .progress-bar').css(
+                	                'width',
+                	                progress + '%'
+                	            );
+                	        }
+                	    }).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');                	  
+                  }                 
             },
             
             event: {
                 init: function() {
-                    // 신규 스케쥴 등록
+                    // 등록
                     $('#insertBtn').on('click', function() {
                       SchShareApp.data.schInsertData();
                     });
                     
-                    // 스케쥴 삭제
+                    // 삭제
                     $('#deleteBtn').on('click', function() {
                       SchShareApp.data.schDeleteData();
+                    });  
+                    
+                    // 이미지 찾기
+                    $('#imgSearchBtn').on('click', function() {
+                      SchShareApp.data.imgSearch();
                     });  
                 }
             },
@@ -173,23 +185,12 @@
 
             }
     };
-    
-    
-    
-    function setToday() {
-		// 오늘날짜 셋팅
-		var toDate = new Date();
-		var toDay = toDate.getFullYear() + "";
-		var nowMonth = toDate.getMonth() + 1;
-		var nowDay = toDate.getDate();
-		
-		if(nowMonth < 10) toDay += "-0" + nowMonth;
-		else toDay += "-" + nowMonth;
-		
-		if(nowDay < 10) toDay += "-0" + nowDay;
-		else toDay += "-" + nowDay;
-		
-		$('#schDt').val(toDay);
+
+    function imgChange(reserve) {
+//    	alert($('#fileupload').val());
+//    	reserve.imgView.src = $('#fileupload').val();
+    	reserve.imgView.src = "\resources\images\atlantis5.jpg";
+    	reserve.imgView.refresh();    	
     }
     </script>
 
@@ -202,12 +203,19 @@
 <div id="effect">
 	<div id="formTitle"><textarea type="text" name="scrTitle" id="scrTitle" class='formTitle' value='일정등록' style='overflow-y:hidden;'></textarea></div>
     
-  <form id="schInsertForm">
+  <form id="schInsertForm" enctype="multipart/form-data">
+	  <div align="left">이미지<br><img src="$('#fileupload').val()" width='200' height='200' id='imgView'/>
+	  						<img src="\resources\images\atlantis5.jpg" width='200' height='200'/>
+	  						<img src="C:/Users/Administrator/Pictures/절당.jpg" width='200' height='200'/>
+	  						<br>
+	                      <input type="file" name="fileupload" id="fileupload" onChange="imgChange(this.form);"></input>
+	  </div>
       <div align="left">제조사 : <select name="schSe" id="schSe">
       									<option value="P">공개</option>
       									<option value="S">비공개</option>
       						        </select>
       </div>
+	  <br>
       <div align="left">상품명 : <input type="text" name="schTitle" id="schTitle"></input></div>
       <div align="left">상품상세 : <br><textarea name="schContent" id="schContent" cols="58" rows="20"></textarea></div>
       <br>

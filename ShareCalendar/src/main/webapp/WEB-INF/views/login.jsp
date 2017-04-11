@@ -53,8 +53,8 @@
 	    
 	  <form id="loginForm" name="loginForm" method="POST" action="/sysLoginProc.do" target="mainBoard">
 	<!--  <H3>◎ 임시 로그인 (테스트용) ◎</H3> -->    
-	      <div class="padding" align="right">아 이 디 : <input type="text" name="loginId" id="loginId" value="UK330" ></input></div>
-	      <div class="padding" align="right">비밀번호 : <input type="password" name="loginPW" id="loginPW" value="UK330" ></input></div>
+	      <div class="padding" align="right">아 이 디 : <input type="text" name="loginId" id="loginId" value="" ></input></div>
+	      <div class="padding" align="right">비밀번호 : <input type="password" name="loginPW" id="loginPW" value="" ></input></div>
 	      <div align="right"><input class="ui-state-default ui-corner-all button" type="submit"  value="로그인" /></div>
 	      <input type="input" name="clientIp" id="clientIp" value="<%=clientIp %>"  style="visibility:hidden">
 	  </form>     

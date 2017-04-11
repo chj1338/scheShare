@@ -8,5 +8,33 @@
         	  ${sqlContent}
         
     </select>
+
+    <insert  id="sinmungoSaveCom" parameterType="hashmap">
+    	insert into COM_SINMUNGO (
+    		 USER_OPINION
+    		,REG_DATE
+    		,REG_ID
+    	) 
+    	values (
+    		#{sinmungoData}
+    		,sysdate
+    		,#{userId}
+    	)
+    </insert>
+    
+    <insert  id="sinmungoSave" parameterType="hashmap">
+    	insert into SINMUNGO (
+    		 USER_OPINION
+    		,REG_DATE
+    		,REG_ID
+    		,REG_IP
+    	) 
+    	values (
+    		#{sinmungoData}
+    		,sysdate
+    		,#{userId}
+    		,#{userIp}
+    	)
+    </insert>
         
 </mapper>

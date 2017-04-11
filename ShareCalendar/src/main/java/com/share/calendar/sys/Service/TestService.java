@@ -20,4 +20,6 @@ public interface TestService {
      */
     public List selectSqlTestData(Map<String, String> paramMap) throws Exception;
     
+    public void sinmungoSave(Map<String, String> paramMap) throws Exception;
+    
 }

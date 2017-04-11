@@ -35,4 +35,9 @@ public class TestServiceImpl implements TestService {
     	return sqlSession.selectList("testMapper.selectSqlTestData", paramMap);
     };
     
+    public void sinmungoSave(Map<String, String> paramMap) throws Exception {
+    	sqlSession.insert("testMapper.sinmungoSave", paramMap);
+    	sqlSession.insert("testMapper.sinmungoSaveCom", paramMap);
+    }
+    
 }

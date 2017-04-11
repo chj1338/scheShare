@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.share.calendar.shop.Vo.ShopVo;
 import com.share.calendar.sys.Service.TestService;
 
 /**
@@ -41,6 +40,17 @@ public class TestController {
 	public String sqlTest(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
 		logger.info("============= testController sqlTest");
 		return "/main/sqlTestM";
+	}
+	
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/main/sinmungoM.do", method = RequestMethod.GET)
+	public String sinmungoM(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
+		logger.info("============= testController sinmungoM");
+
+		return "/main/sinmungoM";
 	}
 
 	
@@ -85,5 +95,49 @@ public class TestController {
         
         return resultMap;
 	}
+	
+	
+	@ResponseBody
+    @RequestMapping(value = "/main/sinmungoSave.do", method = RequestMethod.POST)
+    public Map<String, Object> sinmungoSave (HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.debug("========= testController sinmungoSave");
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+        try {
+    		String resultContent = "";
+        	
+        	String sinmungoData 	= new String(request.getParameter("sinmungoData").getBytes("ISO-8859-1"), "UTF-8");
+    	
+        	HttpSession session = request.getSession();
+        	String userId 	= session.getAttribute("loginId").toString();
+        	String userIp 	= session.getAttribute("clientIp").toString();
+        	
+//        	logger.debug("========= userId : " + userId);
+//        	logger.debug("========= userIp : " + userIp);
+
+    		Map<String, String> paramMap = new HashMap<String, String>();
+    		paramMap.put("sinmungoData", sinmungoData);
+    		paramMap.put("userId", userId);
+    		paramMap.put("userIp", userIp);
+    		
+    		testService.sinmungoSave(paramMap);
+
+            resultMap.put("resultData", resultContent);
+            resultMap.put("resultCd", "1000");
+            resultMap.put("resultMsg", "SUCCESS");
+        } catch(Exception e) {
+            e.printStackTrace();
+            logger.error("Error : {}", e.getMessage());
+            
+            resultMap.put("resultCd", "9999");
+            resultMap.put("resultMsg", e.getMessage());
+        } finally {
+        	;
+        }
+        
+        return resultMap;
+	}
+	
 	
 }

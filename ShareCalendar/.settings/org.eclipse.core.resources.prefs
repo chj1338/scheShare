@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/share/calendar/amt/Controller/amtController.java=EUC-KR
 encoding//src/main/java/com/share/calendar/common/Util/commonUtil.java=UTF-8
 encoding//src/main/java/com/share/calendar/common/Util/diskFree.java=EUC-KR
 encoding//src/main/java/com/share/calendar/lot/Controller/dutyCalendar.java=UTF-8

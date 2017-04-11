@@ -1,8 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
+    <%
+    	String loginId = (String)session.getAttribute("loginId");
+    %>
+
 <html>
 <head>
 	<title>바디</title>
+	
+<% 
+	if(loginId.equals("test") ) {
+%>	
+	<jsp:forward page="/main/sinmungoM.do" />
+<%
+	}
+%>	
 	
 	<style type="text/css">
     html {

@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
+    <%
+    	String loginId = (String)session.getAttribute("loginId");
+//		String clientIp = request.getRemoteHost();
+		
+//		System.out.println("=== loginId : " + loginId);
+//		System.out.println("=== clientIp : " + clientIp);
+    %>
+
 <html>
 <head>
 	<title>메뉴</title>
@@ -41,6 +49,23 @@
 <body>
 	<div id="f_title1" class="menu_title" ><h3>*&nbsp;메  뉴&nbsp;*</h3></div>
 	<table width="80%" border="0" height="100%">
+
+<% 
+	if(loginId.equals("test") ) {
+%>	
+	
+		<tr><td style="font-weight : bold">
+			<a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"  class="no-uline">	◎ 통신개발1팀
+			</a><div style="DISPLAY: block">
+				<table>
+					<tr><td class="position" style="font-weight : normal"><a href="/main/sinmungoM.do" target="appbody" class="no-uline">신문고</a></td></tr>
+				</table>
+			</div>
+		</td></tr>
+		<tr><td>&nbsp;</td></tr>
+<% 
+	} else {
+%>
 		<tr><td style="font-weight : bold">
 			<a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"  class="no-uline">	◎ 게시판
 			</a><div style="DISPLAY: block">
@@ -50,9 +75,10 @@
 			</div>
 		</td></tr>
 		<tr><td>&nbsp;</td></tr>
+	
 		<tr><td style="font-weight : bold">
 			<a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"  class="no-uline">	◎ 일정관리
-			</a><div style="DISPLAY: none">
+			</a><div style="DISPLAY: block">
 				<table>
 					<tr><td class="position" style="font-weight : normal"><a href="/schListM.do" target="appbody" class="no-uline">일정조회</a></td></tr>
 					<tr><td class="position" style="font-weight : normal"><a href="/schInsertM.do" target="appbody" class="no-uline">일정등록</a></td></tr>
@@ -61,9 +87,10 @@
 			</div>
 		</td></tr>
 		<tr><td>&nbsp;</td></tr>
+
 		<tr><td style="font-weight : bold">
 				<a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"  class="no-uline">	◎ 기타
-				</a><div style="DISPLAY: none">
+				</a><div style="DISPLAY: block">
 					<table>
 						<tr><td class="position" style="font-weight : normal"><a href="/map/googleMap.do" target="appbody" class="no-uline">구글지도찾기</a></td></tr>
 						<tr><td class="position" style="font-weight : normal"><a href="/map/naverMap.do" target="appbody" class="no-uline">네이버지도찾기</a></td></tr>
@@ -75,6 +102,7 @@
 					</table>
 				</div>
 		<tr><td>&nbsp;</td></tr>
+
 		<tr><td style="font-weight : bold">
 				<a onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"  class="no-uline">	◎ Shop
 				</a><div style="DISPLAY: none">
@@ -85,6 +113,10 @@
 					</table>
 				</div>
 		</td></tr>
-	</table>				
+<%
+	}
+%>		
+	</table>
+
 </body>
 </html>

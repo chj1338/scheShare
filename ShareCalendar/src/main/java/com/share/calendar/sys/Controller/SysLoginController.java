@@ -66,9 +66,9 @@ public class SysLoginController  {
 			String loginPW = new String(request.getParameter("loginPW").getBytes("ISO-8859-1"), "UTF-8");
 			String clientIp = request.getParameter("clientIp");
 			
-			logger.debug("========= SysLoginController  loginId : " + loginId);
-			logger.debug("========= SysLoginController  loginPW : " + loginPW);
-			logger.debug("========= SysLoginController  clientIp : " + clientIp);
+//			logger.debug("========= SysLoginController  loginId : " + loginId);
+//			logger.debug("========= SysLoginController  loginPW : " + loginPW);
+//			logger.debug("========= SysLoginController  clientIp : " + clientIp);
 
 			sysLoginDto.setLoginId(loginId);
 			sysLoginDto.setLoginPW(loginPW);
@@ -100,9 +100,9 @@ public class SysLoginController  {
 			String userNm = list.get(0).getUserNm();
 			String lastLoginDt = list.get(0).getLastLoginDt();
 			
-			logger.debug("========= user_chk : {}", user_chk);
-			logger.debug("========= userNm : {}", userNm);
-			logger.debug("========= lastLoginDt : {}", lastLoginDt);
+//			logger.debug("========= user_chk : {}", user_chk);
+//			logger.debug("========= userNm : {}", userNm);
+//			logger.debug("========= lastLoginDt : {}", lastLoginDt);
 			
 			if( user_chk == 0 )  {
 				model.addAttribute("SYS_MSG", "ID나 PW가 잘못되었습니다.");
@@ -115,6 +115,7 @@ public class SysLoginController  {
 			session.removeAttribute("SCHE");
 			session.setAttribute("SCHE", loginId);
 			session.setAttribute("loginId", loginId);
+			session.setAttribute("clientIp", clientIp);
 			session.setAttribute("userNm", userNm);
 			session.setAttribute("lastLoginDt", lastLoginDt);
 			
