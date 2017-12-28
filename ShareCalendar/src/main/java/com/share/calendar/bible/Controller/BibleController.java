@@ -121,11 +121,16 @@ public class BibleController {
     			String colData[] = rowData[0].split(":");
     			
     			if(colData[0].equals(thisBook + thisPage)) {
+        			logger.debug("=================" + rowData[0] + " " + colData[0] + " " + colData[1]);
+        			
     				bibleListVo bl = new bibleListVo();
     				cnt++;
 
+    				String tempContent = line.replaceAll(rowData[0]+" ", "");
+    				
     				bl.setNum(cnt);
-    				bl.setBibleContent(line);
+    				bl.setBookIndex(rowData[0]);
+    				bl.setBibleContent(tempContent);
 
         			resultList.add(bl);
     			}

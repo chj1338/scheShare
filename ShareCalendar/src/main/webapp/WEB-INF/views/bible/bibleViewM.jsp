@@ -6,12 +6,13 @@
 <HEAD>
   <title>Bible</title>
   <style type="text/css">
+/*   
   	table, tr, td {
   		border-style:solid;
   		border-collapse:collapse;
   		border-width:1px;
   	}
-  	
+   */	
   	thead tr td {
   	  	font-size:10pt;
   	 	font-weight:bold;
@@ -34,6 +35,8 @@
                 this.data.init();
                 this.event.init();
                 
+                $('#thisPage').val("1");
+
                 SchShareApp.data.bibleSearchData();
             },
             
@@ -58,7 +61,7 @@
           						
           						for(var i=0; i<duty_content.length; i++) {
           							content += "<tr>";
-          							content += "<td valign='top' align='left'>" + duty_content[i].num + "</td>";
+          							content += "<td valign='top' align='left'>" + duty_content[i].bookIndex + "</td>";
           							content += "<td valign='top' align='left'>" + duty_content[i].bibleContent + "</td>";
           							content += "</tr>";
           						}
@@ -67,7 +70,7 @@
           						$('#thisPage').val(thisPage);
           						$('#duty_list').html(content);
           					}
-                  	},
+                  		  },
                           onerr: function(res){
                           	alert(res.resultMsg);
                           }
@@ -89,7 +92,7 @@
                 		tempBook = Number(tempBook) - 1;
                 	}
                 	
-                	$('#thisBook').val( tempBook);
+                	$('#thisBook').val(tempBook);
                 	$('#thisPage').val(tempPage);
                 },
                 
@@ -103,13 +106,13 @@
                 		tempBook = Number(tempBook) + 1;
                 	}
                 	
-                	$('#thisBook').val( tempBook);
+                	$('#thisBook').val(tempBook);
                 	$('#thisPage').val(tempPage);
                 },
                 
                 nextBook: function() {
                 	var temp = $('#thisBook').val();
-                	$('#thisBook').val( Number(temp) + 1);
+                	$('#thisBook').val(Number(temp) + 1);
                 }
                 
             },
@@ -168,8 +171,8 @@
 	<div id="condition">
 			<input type="button" id="beforBookBtn" value="◀◀"/>
 			<input type="button" id="beforPageBtn" value="◀"/>
-			<input type="text" id="thisBook" style="text-align:right;" size="4">
-			<input type="text" id="thisPage" style="text-align:right;" size="2">장
+			<input type="text" id="thisBook" style="text-align:right;" size="4" value="창">
+			<input type="text" id="thisPage" style="text-align:right;" size="2" value="1">장
 			<input type="button" id="nextPageBtn" value="▶"/>
 			<input type="button" id="nextBookBtn" value="▶▶"/>
 			<input type="button" id="dutySelectBtn" value="조회"/>
@@ -178,11 +181,11 @@
 	<br>
 
 	<div id="bodyGrid"> 
-	    <table border="1" width="50%">
+	    <table width="50%">
 	    <thead>
 	    	<tr bgcolor="gray">
-	    		<td width="15%">순번</td>
-	    		<td width="85%">내용</td>
+	    		<td width="10%">장:절</td>
+	    		<td width="90%">내용</td>
 	    	</tr>
 	    </thead>
 	     <tbody  id="duty_list" >
