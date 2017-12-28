@@ -99,6 +99,8 @@
 						<tr><td class="position" style="font-weight : normal"><a href="/rss/rssSelectM.do" target="appbody" class="no-uline">RSS뉴스</a></td></tr>
 						<tr><td class="position" style="font-weight : normal"><a href="/rss/rssWeaSelectM.do" target="appbody" class="no-uline">RSS날씨</a></td></tr>
 						<tr><td class="position" style="font-weight : normal"><a href="/main/sqlTestM.do" target="appbody" class="no-uline">SQL 테스트</a></td></tr>
+						<tr><td class="position" style="font-weight : normal"><a href="/etc/manCount" target="appbody" class="no-uline">사람찾기</a></td></tr>
+						<tr><td class="position" style="font-weight : normal"><a href="/bible/bibleViewM.do" target="appbody" class="no-uline">Bible</a></td></tr>
 					</table>
 				</div>
 		<tr><td>&nbsp;</td></tr>

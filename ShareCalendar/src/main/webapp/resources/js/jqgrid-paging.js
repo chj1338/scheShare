@@ -29,13 +29,17 @@ function initPage(gridId, pagerId, pI, pit){
  
  // 현재 페이지
  var currentPage = $('#'+gridId).getGridParam('page');
+
  // 전체 리스트 수
- 
- var totalSize = $('#'+gridId).getGridParam('recods');
+ var totalSize = $('#'+gridId).getGridParam('records');
+ //var totalSize = $('#'+gridId).getGridParam('total');
+
  // 그리드 데이터 전체의 페이지 수
  var totalPage = Math.ceil(totalSize/$('#'+gridId).getGridParam('rowNum'));
+
  // 전체 페이지 수를 한화면에 보여줄 페이지로 나눈다.
  var totalPageList = Math.ceil(totalPage/pageCount);
+
  // 페이지 리스트가 몇번째 리스트인지
  var pageList=Math.ceil(currentPage/pageCount);
  //alert("currentPage="+currentPage+"/ totalPage="+totalSize);
@@ -81,9 +85,9 @@ function initPage(gridId, pagerId, pI, pit){
   var titleGoPage = i + "페이지로 이동";
   
   if(i==currentPage){
-   pageInner = pageInner +"<span class='customPageNumberBtn'><a href='javascript:goPage(\""+ gridId +"\", "+(i)+");' id='"+(i)+"' title='"+ titleGoPage +"'><strong>"+(i)+"</strong></a></span>";
+   pageInner = pageInner +"<span class='customPageNumberBtn'><a href='javascript:goPage(\""+ gridId +"\", "+(i)+");' id='"+(i)+"' title='"+ titleGoPage +"'><strong> ["+(i)+"]</strong></a></span>";
   }else{
-   pageInner = pageInner +"<span class='customPageNumberBtn'><a href='javascript:goPage(\""+ gridId +"\", "+(i)+");' id='"+(i)+"' title='"+ titleGoPage +"'>"+(i)+"</a></span>";
+   pageInner = pageInner +"<span class='customPageNumberBtn'><a href='javascript:goPage(\""+ gridId +"\", "+(i)+");' id='"+(i)+"' title='"+ titleGoPage +"'> ["+(i)+"]</a></span>";
   }
   
  }
@@ -107,46 +111,46 @@ function initPage(gridId, pagerId, pI, pit){
  //alert(pageInner);
  
  // 페이지 정보 셋팅
- var pageInfoText = ""; // 페이지 정보를 담을 변수
- if(customPageInfo){
-  //////////////////////////////////////////////////////////////////////////////////////////
-  var base = parseInt($('#'+gridId).getGridParam('page'),10)-1 ;
-  if(base < 0) { base = 0; }
-  base = base*parseInt($('#'+gridId).getGridParam('rowNum'),10);
-  var from = base+1;
-  var to = base + $('#'+gridId).getGridParam('reccount') ;
-  //////////////////////////////////////////////////////////////////////////////////////////
+var pageInfoText = ""; // 페이지 정보를 담을 변수
+if(customPageInfo){
+ //////////////////////////////////////////////////////////////////////////////////////////
+var base = parseInt($('#'+gridId).getGridParam('page'),10)-1 ;
+if(base < 0) { base = 0; }
+base = base*parseInt($('#'+gridId).getGridParam('rowNum'),10);
+var from = base+1;
+var to = base + $('#'+gridId).getGridParam('reccount') ;
+//////////////////////////////////////////////////////////////////////////////////////////
   
   if(totalSize == 0){
-   pageInfoText = "표시할 데이터가 없습니다";
+	  pageInfoText = "표시할 데이터가 없습니다";
   }else{
-   var totpTxt = "총 " + commify(totalPage) + " 페이지" + " / " + commify(totalSize) + " 개";
-   var pseTxt = "( " + commify(from) + " ~ " + commify(to) + " )";
-   var totTxt = totpTxt+ " 중 " + pseTxt;
-   if(customPageInfoType == "TOTP"){
-    pageInfoText = totpTxt;
-   }else if(customPageInfoType == "PSE"){
-    pageInfoText = pseTxt;
-   }else{
-    pageInfoText = totTxt;
-   }
-  }
+	   var totpTxt = "총 " + commify(totalPage) + " 페이지" + " / " + commify(totalSize) + " 개";
+	   var pseTxt = "( " + commify(from) + " ~ " + commify(to) + " )";
+	   var totTxt = totpTxt+ " 중 " + pseTxt;
+	   if(customPageInfoType == "TOTP"){
+		   pageInfoText = totpTxt;
+	   }else if(customPageInfoType == "PSE"){
+			   pageInfoText = pseTxt;
+		   }else{
+			   pageInfoText = totTxt;
+		   }
+	  }
  }
  
  
  var table = "";
- table+= "<table width='100%'>";
- table+= "<tr>";
- table+= "<td width='29%'>";
- table+= "</td>";
- table+= "<td align='center'>";
- table+= pageInner;
- table+= "</td>";
- table+= "<td width='29%' align='right'>";
- table += customPageInfo ? pageInfoText + " " : "" ;
- table+= "</td>";
- table+= "</tr>";
- table+= "</table>";
+	 table+= "<table width='100%'>";
+	 table+= "<tr>";
+	 table+= "<td width='29%'>";
+	 table+= "</td>";
+	 table+= "<td align='center'>";
+	 table+= pageInner;
+	 table+= "</td>";
+	 table+= "<td width='29%' align='right'>";
+	 table += customPageInfo ? pageInfoText + " " : "" ;
+	 table+= "</td>";
+	 table+= "</tr>";
+	 table+= "</table>";
   
  
  
@@ -176,8 +180,8 @@ function initPage(gridId, pagerId, pI, pit){
 // 그리드 첫페이지로 이동 
 function firstPage(gridId){
  $("#"+gridId).jqGrid('setGridParam', {
-      page:1,
-     }).trigger("reloadGrid");
+  page:1,
+ }).trigger("reloadGrid");
 }
  
 // 그리드 이전페이지 이동 
@@ -189,8 +193,8 @@ function prePage(gridId){
  currentPage=(pageList-1)*pageCount+pageCount;
  
  $("#"+gridId).jqGrid('setGridParam', {
-      page:currentPage,
-     }).trigger("reloadGrid");
+  page:currentPage,
+ }).trigger("reloadGrid");
 }
  
 // 그리드 다음페이지 이동  
@@ -202,8 +206,8 @@ function nextPage(gridId){
  currentPage=(pageList-1)*pageCount+1;
  
  $("#"+gridId).jqGrid('setGridParam', {
-      page:currentPage,
-     }).trigger("reloadGrid");
+  page:currentPage,
+ }).trigger("reloadGrid");
 }
  
 // 그리드 마지막페이지 이동 
@@ -212,24 +216,23 @@ function lastPage(gridId){
  var totalPage = Math.ceil(totalSize/$('#'+gridId).getGridParam('rowNum'));
  
  $("#"+gridId).jqGrid('setGridParam', {
-      page:totalPage,
-     }).trigger("reloadGrid");
+  page:totalPage,
+ }).trigger("reloadGrid");
 }
  
 // 그리드 페이지 이동 
 function goPage(gridId, num){
- $("#"+gridId).jqGrid('setGridParam', {
-      page:num,
-     }).trigger("reloadGrid");
-  
+	$("#"+gridId).jqGrid('setGridParam', {
+		page:num,
+	}).trigger("reloadGrid");  
 }
 
 function commify(n) {
 	var reg = /(^[+_]?\d+)(\d{3})/;
-	n += "";
-	
-	while( reg.test(n))
-		n = n.replace( reg, '$1' + ',' + '$2');
+n += "";
+
+while( reg.test(n))
+	n = n.replace( reg, '$1' + ',' + '$2');
 	
 	return n;	
 }

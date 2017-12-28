@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="manCountMapper">    
+
+     <delete id="manDelete" parameterType="hashmap">
+			delete from MAN_RESOURCE
+			where COMPANY = #{company}
+     </delete>
+
+     <insert id="manInsert" parameterType="hashmap">
+			insert into MAN_RESOURCE (
+				  COMPANY
+				, NUM
+				, NAME
+				, JOB_SE
+				, GRADE
+				, CAREER_YEAR
+				, EXPERIENCE
+				, CAPABILITY
+				, MID
+				, LOCATION
+				, EMPLOY_SE
+			) values (
+				 #{company}
+				,#{num}
+				,#{name}
+				,#{job_se}
+				,#{grade}
+				,#{career_year}
+				,#{experience}
+				,#{capability}
+				,#{mid}
+				,#{location}
+				,#{employ_se}
+			)			
+     </insert>
+     
+     <select id="selectCompanyList" parameterType="hashMap" resultType="map">
+     	select distinct
+     		COMPANY as COM_CD,
+     		COMPANY as COM_NM 
+     	 from MAN_RESOURCE
+       where COMPANY is not null
+		 order by COMPANY
+     </select>
+     
+     <select id="selectGradeList" parameterType="hashMap" resultType="map">
+     	select distinct
+     		GRADE as GRADE_CD,
+     		GRADE as GRADE_NM 
+     	 from MAN_RESOURCE
+       where GRADE is not null
+		 order by GRADE
+     </select>
+     
+     <select id="selectMidList" parameterType="hashMap" resultType="map">
+     	select distinct
+     		MID as MID_CD,
+     		MID as MID_NM 
+     	 from MAN_RESOURCE
+       where MID is not null
+		 order by MID
+     </select>
+     
+     <select id="selectCoclcdList" parameterType="hashMap" resultType="map">
+     	select distinct
+     		CO_CL_CD as CO_CL_CD,
+     		CO_CL_CD as CO_CL_NM 
+     	 from MAN_RESOURCE
+       where CO_CL_CD is not null
+		 order by CO_CL_CD
+     </select>
+     
+     <select id="selectManList" parameterType="hashMap" resultType="hashMap">
+     	select
+     		*
+     	from (
+		     	select
+					  COMPANY
+					, NUM
+					, NAME
+					, JOB_SE
+					, GRADE
+					, CAREER_YEAR
+					, EXPERIENCE
+					, CAPABILITY
+					, MID
+					, LOCATION
+					, EMPLOY_SE
+					, CO_CL_CD
+					, (select to_char(count(*)) from MAN_RESOURCE) as TOT_CNT
+		     	 from MAN_RESOURCE
+		     	 where 1=1
+		     	 
+		         <if test="company != '' and company != null">
+		         	<![CDATA[
+		     	    and company like '%' || #{company} || '%'
+		         	]]>
+		         </if>
+		         
+		         <if test="name != '' and name != null">
+		         	<![CDATA[
+					and name like '%' || #{name} || '%'
+		         	]]>
+		         </if>
+		         
+		         <if test="grade != '' and grade != null">
+		         	<![CDATA[
+					and grade like '%' || #{grade} || '%'
+		         	]]>
+		         </if>
+		         
+		         <if test="mid != '' and mid != null">
+		         	<![CDATA[
+					and mid like '%' || #{mid} || '%'
+		         	]]>
+		         </if>
+		         
+		         <if test="coclcd != '' and coclcd != null">
+		         	<![CDATA[
+					and CO_CL_CD like '%' || #{coclcd} || '%'
+		         	]]>
+		         </if>
+		         
+		         <if test="experience != '' and experience != null">
+		         	<![CDATA[
+					and upper(experience) like '%' || upper(#{experience}) || '%'
+		         	]]>
+		         </if>
+		         
+		         <if test="capa != '' and capa != null">
+		         	<![CDATA[
+					and upper(CAPABILITY) like '%' || upper( #{capa} ) || '%'
+		         	]]>
+		         </if>
+		         
+		 		order by NAME
+		       )
+<!-- 		       
+		 <![CDATA[
+		 where rownum >= (#{page} -1) * #{rowNum} + 1
+		   and  rownum <= #{page} * #{rowNum}
+		   ]]> 
+ -->		     		 
+     </select>
+     
+</mapper>

@@ -292,56 +292,56 @@ public class SchController {
         			yearMonthDay = listSum( thisYear, thisMonth, tempList.get(i).getSun());
             		if(yearMonthDay.equals( schList.get(j).getScheDt() )) {
             			resultList.get(i).setSun( resultList.get(i).getSun() + "<br>"  
-            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='_blank' onClick='window.open(this.href, '', 'width=500, height=480'); return false;'>"
+            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='_blank' onClick=\"window.open(this.href, '', 'width=500, height=480'); return false;\">"
             					+ schList.get(j).getScheTitle() );
             		}
 
             		yearMonthDay = listSum( thisYear, thisMonth, tempList.get(i).getMon());
             		if(yearMonthDay.equals( schList.get(j).getScheDt() )) {
             			resultList.get(i).setMon( resultList.get(i).getMon() + "<br>" 
-            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='new' onClick='window.open(this.href, '', 'width=500, height=480'); return false;'>"          					
+            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='_blank' onClick=\"window.open(this.href, '', 'width=500, height=480'); return false;\">"          					
             					+ schList.get(j).getScheTitle() + "</a>"); 
             		}
             		
             		yearMonthDay = listSum( thisYear, thisMonth, tempList.get(i).getTue());
             		if(yearMonthDay.equals( schList.get(j).getScheDt() )) {
             			resultList.get(i).setTue( resultList.get(i).getTue() + "<br>"  
-            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='newwin' onClick='window.open(this.href, '', 'width=500, height=480'); return false;'>"
+            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='_blank' onClick=\"window.open(this.href, '', 'width=500, height=480'); return false;\">"
             					+ schList.get(j).getScheTitle() );
             		}
 
             		yearMonthDay = listSum( thisYear, thisMonth, tempList.get(i).getWed());
             		if(yearMonthDay.equals( schList.get(j).getScheDt() )) {
             			resultList.get(i).setWed( resultList.get(i).getWed() + "<br>"  
-            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='newWin' onClick='window.open(this.href, '', 'width=500, height=480'); return false;'>"
+            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='_blank' onClick=\"window.open(this.href, '', 'width=500, height=480'); return false;\">"
             					+ schList.get(j).getScheTitle() );
             		}
             		
             		yearMonthDay = listSum( thisYear, thisMonth, tempList.get(i).getThu());
             		if(yearMonthDay.equals( schList.get(j).getScheDt() )) {
             			resultList.get(i).setThu( resultList.get(i).getThu() + "<br>"  
-            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='_blank' onClick='window.open(this.href, '', 'width=500, height=480'); return false;'>"
+            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='_blank' onClick=\"window.open(this.href, '', 'width=500, height=480'); return false;\">"
             					+ schList.get(j).getScheTitle() );
             		}
             		
             		yearMonthDay = listSum( thisYear, thisMonth, tempList.get(i).getFri());
             		if(yearMonthDay.equals( schList.get(j).getScheDt() )) {
             			resultList.get(i).setFri( resultList.get(i).getFri() + "<br>"  
-            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='_blank' onClick='window.open(this.href, '', 'width=500, height=480'); return false;'>"
+            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='_blank' onClick=\"window.open(this.href, '', 'width=500, height=480'); return false;\">"
             					+ schList.get(j).getScheTitle() );
             		}
             		
             		yearMonthDay = listSum( thisYear, thisMonth, tempList.get(i).getSat());
             		if(yearMonthDay.equals( schList.get(j).getScheDt() )) {
             			resultList.get(i).setSat( resultList.get(i).getSat() + "<br>"  
-            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='_blank' onClick='window.open(this.href, '', 'width=500, height=480'); return false;'>"
+            					+ "<a href=/schInsertM.do?schId=" + schList.get(j).getScheNo() + " target='_blank' onClick=\"window.open(this.href, '', 'width=500, height=480'); return false;\">"
             					+ schList.get(j).getScheTitle() );
             		}
 
         		}
         	}
-    		
-    		
+
+        	
             resultMap.put("resultData", resultList);
             resultMap.put("resultCd", "1000");
             resultMap.put("resultMsg", "SUCCESS");
