@@ -34,9 +34,11 @@
                 'use strict';
                 this.data.init();
                 this.event.init();
-
+                
+                //SchShareApp.data.bookCount();
+                SchShareApp.data.bibleComboList();
                 $("#thisBook option:eq(0)").attr("selected", "selected");
-                SchShareApp.data.bookCount();
+                
                 SchShareApp.data.bibleSearchData();
             },
             
@@ -64,7 +66,40 @@
 								for(var i=1; i<=maxPage; i++ ) {
 									$('#thisPage').append("<option value='" + i + "'>" + i + "</option>");
 								}
+								$("#thisPage").prepend("<option value=''>== 선택 ==</option>");
           					}
+                  		  },
+                          onerr: function(res){
+                          	alert(res.resultMsg);
+                          }
+                      });
+                },
+                
+             	// 성경 Combo 리스트 가져오기
+            	bibleComboList: function() {
+					var url = '/bible/bookComboList.do';
+					
+	                var paramObj = {
+	                		paramBook : $('#thisBook').val()
+	                };
+ 
+                	SchShareObj.data.ajax(url, {pars: paramObj, async: false, 
+                    	onsucc: function(res) {
+                    		if(res.resultCd === "1000") {
+          						var bookComboList = res.resultData;
+          						var listSize = bookComboList.length;
+          						
+								for(var i=0; i<listSize; i++ ) {
+									$('#thisBook').append("<option value='" + bookComboList[i].bookNmKorAbr + "'>" + bookComboList[i].bookNmKor + "</option>");
+								}
+								$("#thisBook").prepend("<option value=''>== 선택 ==</option>");
+								
+								var maxPage = bookComboList[0].lastPage;
+								for(var i=1; i<=maxPage; i++ ) {
+									$('#thisPage').append("<option value='" + i + "'>" + i + "</option>");
+								}
+								$("#thisPage").prepend("<option value=''>== 선택 ==</option>");
+                    		}          						
                   		  },
                           onerr: function(res){
                           	alert(res.resultMsg);
@@ -101,13 +136,41 @@
           						}
           						
           						//alert(thisBook + ":" + thisPage);
-          						$('#thisBook').val(thisBook);
-          						$('#thisPage').val(thisPage);
+          						if($('#searchWord').val() != "") {
+	          						$('#thisBook').val("");
+	          						$('#thisPage').val("");
+          						} else {
+	          						$('#thisBook').val(thisBook);
+	          						$('#thisPage').val(thisPage);
+          						}
+          						
           						$('#duty_list').html(content);
           					}
                   		  },
                           onerr: function(res){
                           	alert(res.resultMsg);
+                          }
+                      });
+                },
+                
+                
+				// 성경읽기 저장
+            	bibleSaveData: function() {
+					var url = '/bible/bibleSaveData.do';
+
+	                var paramObj = {
+	                	paramBook : $('#thisBook').val(),
+	                	paramPage : $('#thisPage').val(),
+	                };
+ 
+                	SchShareObj.data.ajax(url, {pars: paramObj, async: false, 
+                    	onsucc: function(res) {
+                    		if(res.resultCd === "1000") {
+								alert("저장을 완료했습니다.");
+                    		}
+                  		  },
+                          onerr: function(res){
+                          	alert("저장에 실패했습니다.\n" + res.resultMsg);
                           }
                       });
                 },
@@ -198,6 +261,15 @@
                     $('#thisPage').on('change', function() {
                     	SchShareApp.data.bibleSearchData();
                     });
+                    
+                    // 읽기 저장
+                    $('#bibleSaveBtn').on('click', function() {
+                    	if( $('#thisBook').val() == "" || $('#thisPage').val() == "") {
+                    		alert("검색한 내용들은 저장 할 수 없습니다.");
+                    	} else {
+                      		SchShareApp.data.bibleSaveData();
+                    	}
+                    });
                 }
             },
             
@@ -222,74 +294,7 @@
 	<div id="condition">
 			<input type="button" id="beforBookBtn" value="◀◀"/>
 			<input type="button" id="beforPageBtn" value="◀"/>
-			<select id="thisBook">
-				<option value='창'>창세기</option>
-				<option value='출'>출애굽기</option>
-				<option value='레'>레위기</option>
-				<option value='민'>민수기</option>
-				<option value='신'>신명기</option>
-				<option value='수'>여호수아</option>
-				<option value='삿'>사사기</option>
-				<option value='룻'>룻기</option>
-				<option value='삼상'>사무엘상</option>
-				<option value='삼하'>사무엘하</option>
-				<option value='왕상'>열왕기상</option>
-				<option value='왕하'>열왕기하</option>
-				<option value='대상'>역대상</option>
-				<option value='대하'>역대하</option>
-				<option value='스'>에스라</option>
-				<option value='느'>느헤미야</option>
-				<option value='에'>에스더</option>
-				<option value='욥'>욥기</option>
-				<option value='시'>시편</option>
-				<option value='잠'>잠언</option>
-				<option value='전'>전도서</option>
-				<option value='아'>아가</option>
-				<option value='사'>이사야</option>
-				<option value='렘'>예레미야</option>
-				<option value='애'>예레미야 애가</option>
-				<option value='겔'>에스겔</option>
-				<option value='단'>다니엘</option>
-				<option value='호'>호세아</option>
-				<option value='욜'>요엘</option>
-				<option value='암'>아모스</option>
-				<option value='옵'>오바댜</option>
-				<option value='욘'>요나</option>
-				<option value='미'>미가</option>
-				<option value='나'>나훔</option>
-				<option value='합'>하박국</option>
-				<option value='습'>스바냐</option>
-				<option value='학'>학개</option>
-				<option value='슥'>스가랴</option>
-				<option value='말'>말라기</option>
-				<option value='마'>마태복음</option>
-				<option value='막'>마가복음</option>
-				<option value='눅'>누가복음</option>
-				<option value='요'>요한복음</option>
-				<option value='행'>사도행전</option>
-				<option value='롬'>로마서</option>
-				<option value='고전'>고린도전서</option>
-				<option value='고후'>고린도후서</option>
-				<option value='갈'>갈라디아서</option>
-				<option value='엡'>에베소서</option>
-				<option value='빌'>빌립보서</option>
-				<option value='골'>골로새서</option>
-				<option value='살전'>데살로니가전서</option>
-				<option value='살후'>데살로니가후서</option>
-				<option value='딤전'>디모데전서</option>
-				<option value='딤후'>디모데후서</option>
-				<option value='딛'>디도서</option>
-				<option value='몬'>빌레몬서</option>
-				<option value='히'>히브리서</option>
-				<option value='약'>야고보서</option>
-				<option value='벧전'>베드로전서</option>
-				<option value='벧후'>베드로후서</option>
-				<option value='요일'>요한1서</option>
-				<option value='요이'>요한2서</option>
-				<option value='요삼'>요한3서</option>
-				<option value='유'>유다서</option>
-				<option value='계'>요한계시록</option>
-			</select>
+			<select id="thisBook"></select>
 			<select id="thisPage"></select>
 			<input type="button" id="nextPageBtn" value="▶"/>
 			<input type="button" id="nextBookBtn" value="▶▶"/>
@@ -314,7 +319,11 @@
 	     </tbody>
 	    </table>
 	</div>
-
+	
+	<div id="saveData"> 
+	<table width="50%">
+		<tr><td align="center"><input type="button" id="bibleSaveBtn" value="읽기완료"/></td></tr>
+	</div>
 </div>
 
 </body>

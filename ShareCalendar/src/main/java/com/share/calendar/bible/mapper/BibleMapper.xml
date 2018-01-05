@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BibleMapper">    
+
+    <select id="selectBibleComboList" resultType="com.share.calendar.bible.Vo.bibleComboListVo">    
+		select
+	      BOOK_SEQ
+		  ,BOOK_NM_KOR
+		  ,BOOK_NM_KOR_ABR
+		  ,BOOK_NM_ENG
+	      ,BOOK_NM_ENG_ABR
+		  ,LAST_PAGE
+		from BIBLE_MASTER
+    order by BOOK_SEQ
+    </select>
+    
+    <select id="selectBibleReadSeqList" parameterType="com.share.calendar.bible.Dto.BibleReadSeqListDto" resultType="com.share.calendar.bible.Vo.bibleReadSeqListVo">    
+		select
+	      BOOK_SEQ
+		  ,BOOK_NM_KOR_ABR
+		  ,BOOK_PAGE
+		  ,to_char(READ_DATE, 'YYYY-MM-DD') as READ_DATE
+		  ,(select max(BOOK_SEQ) from BIBLE_READER) as MAX_SEQ
+		from BIBLE_READER
+		where BOOK_SEQ = #{bookSeq}
+		and USER_ID = #{userId}
+    </select>
+    
+    <insert id="insertBibleReadData" parameterType="com.share.calendar.bible.Dto.BibleReadDto">
+    	insert into BIBLE_READER (
+    		 USER_ID
+			,BOOK_SEQ
+			,BOOK_NM_KOR_ABR
+			,BOOK_PAGE
+			,READ_DATE
+    	) values (
+    		#{userId}
+    		,(select count(*) from BIBLE_READER where BOOK_NM_KOR_ABR = #{paramBook} and BOOK_PAGE = #{paramPage} ) + 1
+    		,#{paramBook}
+    		,#{paramPage}
+    		,sysdate
+    	)    	
+    </insert>
+    
+</mapper>

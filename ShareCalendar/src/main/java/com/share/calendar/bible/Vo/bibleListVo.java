@@ -1,7 +1,6 @@
 package com.share.calendar.bible.Vo;
 
 public class bibleListVo {    
-
     private int num;    
     private String bookIndex;
     private String bibleContent;
@@ -24,5 +23,5 @@ public class bibleListVo {
 	}
 	public void setBibleContent(String bibleContent) {
 		this.bibleContent = bibleContent;
-	}    
+	}   
 }
