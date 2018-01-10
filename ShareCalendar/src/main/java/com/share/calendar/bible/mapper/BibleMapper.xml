@@ -16,21 +16,21 @@
     </select>
     
     <select id="selectBibleReadSeqList" parameterType="com.share.calendar.bible.Dto.BibleReadSeqListDto" resultType="com.share.calendar.bible.Vo.bibleReadSeqListVo">    
-		select
-	      BOOK_SEQ
-		  ,BOOK_NM_KOR_ABR
-		  ,BOOK_PAGE
-		  ,to_char(READ_DATE, 'YYYY-MM-DD') as READ_DATE
-		  ,(select max(BOOK_SEQ) from BIBLE_READER) as MAX_SEQ
-		from BIBLE_READER
-		where BOOK_SEQ = #{bookSeq}
-		and USER_ID = #{userId}
+			select
+		       nvl(READ_SEQ, 1) as READ_SEQ
+			  ,nvl(BOOK_NM_KOR_ABR, '창') as BOOK_NM_KOR_ABR
+			  ,nvl(BOOK_PAGE, 1) as BOOK_PAGE
+			  ,to_char(READ_DATE, 'YYYY-MM-DD') as READ_DATE
+			  ,(select max(READ_SEQ) from BIBLE_READER) as MAX_SEQ
+			from BIBLE_READER
+			where READ_SEQ = #{readSeq}
+			and USER_ID = #{userId}
     </select>
     
     <insert id="insertBibleReadData" parameterType="com.share.calendar.bible.Dto.BibleReadDto">
     	insert into BIBLE_READER (
     		 USER_ID
-			,BOOK_SEQ
+			,READ_SEQ
 			,BOOK_NM_KOR_ABR
 			,BOOK_PAGE
 			,READ_DATE

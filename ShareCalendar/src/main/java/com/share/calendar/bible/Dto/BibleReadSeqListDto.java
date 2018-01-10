@@ -10,14 +10,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class BibleReadSeqListDto {
 	
-	private String bookSeq;
+	private String readSeq;
 	private String userId;
 	
-	public String getBookSeq() {
-		return bookSeq;
+	public String getReadSeq() {
+		return readSeq;
 	}
-	public void setBookSeq(String bookSeq) {
-		this.bookSeq = bookSeq;
+	public void setReadSeq(String readSeq) {
+		this.readSeq = readSeq;
 	}
 	public String getUserId() {
 		return userId;

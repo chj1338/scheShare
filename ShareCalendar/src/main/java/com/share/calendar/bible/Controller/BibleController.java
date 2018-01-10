@@ -38,7 +38,7 @@ public class BibleController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BibleController.class);	
 	
-	static String fileName = "C:/temp/bible.txt";	
+	static String fileName = "D:/DEV/workspace_git/scheShare/ShareCalendar/doc/bible.txt";	
 //	static String fileName = "C:/temp/KJV.txt";	
 	
     @Autowired
@@ -60,6 +60,14 @@ public class BibleController {
 		logger.info("===== SchController bibleReadM");
 		
 		return "/bible/bibleReadM";
+	}
+	
+	// 선택한 성경까지 저장하기
+	@RequestMapping(value = "/bible/bibleAdminM.do", method = RequestMethod.GET)
+	public String bibleAdminM(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
+		logger.info("===== SchController bibleAdminM");
+		
+		return "/bible/bibleAdminM";
 	}
 	
 	//////////////////////////////////  API 영역
@@ -323,6 +331,54 @@ public class BibleController {
         return resultMap;
 	}
 	
+	
+	
+	/*
+	 * 성경읽기 기록 저장
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/bible/bibleAllSaveData.do", method = RequestMethod.POST)
+	public Map<String, Object> bibleAllSaveData (HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.info("===== SchController bibleAllSaveData");
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+        try {
+        	HttpSession session = request.getSession();
+    		String registId = session.getAttribute("loginId").toString();
+    		
+        	String paramBook = new String(request.getParameter("paramBook").getBytes("ISO-8859-1"), "UTF-8");
+        	String paramStartPage = request.getParameter("paramStartPage");
+        	String paramPage = request.getParameter("paramPage");
+
+        	int startPage = Integer.parseInt(paramStartPage);
+        	int maxReadPage = Integer.parseInt(paramPage);
+        	
+        	BibleReadDto bibleReadDto = new BibleReadDto();
+        	
+        	for(int i=startPage; i<=maxReadPage; i++) {
+            	bibleReadDto.setParamBook(paramBook);
+            	bibleReadDto.setParamPage(i+"");
+            	bibleReadDto.setUserId(registId);
+            	
+        		sqlSession.insert("BibleMapper.insertBibleReadData", bibleReadDto);
+        	}
+            resultMap.put("resultCd", "1000");
+            resultMap.put("resultMsg", "SUCCESS");
+        } catch(Exception e) {
+            e.printStackTrace();
+            logger.error("Error : {}", e.getMessage());
+            
+            resultMap.put("resultCd", "9999");
+            resultMap.put("resultMsg", e.getMessage());
+        } finally {
+        	;
+        }
+        
+        return resultMap;
+	}
+	
+	
 	/*
 	 * 성경읽기표
 	 */
@@ -341,7 +397,7 @@ public class BibleController {
         	if(paramSeq==null || paramSeq.equals("")) paramSeq="1";
         	
         	BibleReadSeqListDto bibleReadSeqListDto = new BibleReadSeqListDto();        	
-        	bibleReadSeqListDto.setBookSeq(paramSeq);
+        	bibleReadSeqListDto.setReadSeq(paramSeq);
         	bibleReadSeqListDto.setUserId(userId);
         	
     		List<bibleComboListVo> list = sqlSession.selectList("BibleMapper.selectBibleComboList");

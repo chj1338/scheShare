@@ -29,7 +29,7 @@
  
     <script type="text/javascript">
     var SchShareApp = {
-            scrID : 'bibleViewM',
+            scrID : 'bibleReadM',
     
     		pageInit: function() {
                 'use strict';
@@ -49,18 +49,19 @@
 					var url = '/bible/bibleRead.do';
 					
 	                var paramObj = {
-	                		paramSeq : $('#thisSeq').val()
+	                		paramSeq : $('#thisReadSeq').val()
 	                };
  
                 	SchShareObj.data.ajax(url, {pars: paramObj, async: false, 
                     	onsucc: function(res) {
                     		if(res.resultCd === "1000") {
           						var bibleReadList = res.resultReadData;
-          						var maxSeq = bibleReadList[0].maxSeq;
+          						var maxSeq = 1;
+          						if(bibleReadList.length != 0) maxSeq = bibleReadList[0].maxSeq;
 	         					
           						// 읽기 차수 셋팅
           						for(var i=1; i<=maxSeq; i++ ) {
-									$('#thisSeq').append("<option value='" + i + "'>" + i + "</option>");
+									$('#thisReadSeq').append("<option value='" + i + "'>" + i + "</option>");
 								}
                     		}
                   		  },
@@ -75,7 +76,7 @@
 					var url = '/bible/bibleRead.do';
 
 	                var paramObj = {
-	                		paramSeq : $('#thisSeq').val()
+	                		paramSeq : $('#thisReadSeq').val()
 	                };
  
                 	SchShareObj.data.ajax(url, {pars: paramObj, async: false, 
@@ -150,19 +151,19 @@
 
                 // 이전 장
                 beforSeq: function() {
-                	var tempPage = $('#thisSeq').val();
+                	var tempPage = $('#thisReadSeq').val();
                 	tempPage = Number(tempPage) - 1;
-                	$('#thisSeq').val(tempPage);
+                	$('#thisReadSeq').val(tempPage);
                 	
                     SchShareApp.data.bibleRead();
                 },
                 
                 // 다음 장 
                 nextSeq: function() {
-                	var tempPage = $('#thisSeq').val();
+                	var tempPage = $('#thisReadSeq').val();
                 	tempPage = Number(tempPage) + 1;
-                	if(tempPage <= $("#thisSeq option").size()) {	// 최대 페이지를 넘어갈 경우 동작 안함
-	                	$('#thisSeq').val(tempPage);
+                	if(tempPage <= $("#thisReadSeq option").size()) {	// 최대 페이지를 넘어갈 경우 동작 안함
+	                	$('#thisReadSeq').val(tempPage);
 	                	
 	                    SchShareApp.data.bibleRead();
                 	}
@@ -187,7 +188,7 @@
                     });
                     
                     // 차수 변경
-                    $('#thisSeq').on('change', function() {
+                    $('#thisReadSeq').on('change', function() {
                     	SchShareApp.data.bibleRead();
                     });
 
@@ -214,7 +215,7 @@
 
 	<div id="condition">
 			<input type="button" id="beforSeqBtn" value="◀"/>
-			<select id="thisSeq"></select>
+			<select id="thisReadSeq"></select>
 			<input type="button" id="nextSeqBtn" value="▶"/>
 	</div>
 
