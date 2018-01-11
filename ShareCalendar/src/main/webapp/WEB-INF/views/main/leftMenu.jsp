@@ -102,6 +102,7 @@
 						<tr><td class="position" style="font-weight : normal"><a href="/etc/manCount" target="appbody" class="no-uline">사람찾기</a></td></tr>
 						<tr><td class="position" style="font-weight : normal"><a href="/bible/bibleViewM.do" target="appbody" class="no-uline">Bible</a></td></tr>
 						<tr><td class="position" style="font-weight : normal"><a href="/bible/bibleReadM.do" target="appbody" class="no-uline">Bible Read</a></td></tr>
+						<tr><td class="position" style="font-weight : normal"><a href="/bible/bibleAdminM.do" target="appbody" class="no-uline">Bible Admin</a></td></tr>
 					</table>
 				</div>
 		<tr><td>&nbsp;</td></tr>

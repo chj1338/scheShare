@@ -38,7 +38,7 @@ public class BibleController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BibleController.class);	
 	
-	static String fileName = "D:/DEV/workspace_git/scheShare/ShareCalendar/doc/bible.txt";	
+	static String fileName = "C:/DEV/Git/scheShare/ShareCalendar/doc/bible.txt";	
 //	static String fileName = "C:/temp/KJV.txt";	
 	
     @Autowired
