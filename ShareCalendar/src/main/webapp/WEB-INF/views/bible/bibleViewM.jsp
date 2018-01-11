@@ -254,12 +254,21 @@
                     $('#thisBook').on('change', function() {
                     	$('#thisPage').val("1");
                     	SchShareApp.data.bookCount();
+                    	$('#searchWord').val("");
                     	SchShareApp.data.bibleSearchData();
                     });
                     
                     // 장 변경
                     $('#thisPage').on('change', function() {
+                    	$('#searchWord').val("");
                     	SchShareApp.data.bibleSearchData();
+                    });
+                    
+                    // 검색어에서 Enter
+                    $("#searchWord").keypress(function(event) {
+						if( event.which == 13) {
+							SchShareApp.data.bibleSearchData();
+						}
                     });
                     
                     // 읽기 저장
