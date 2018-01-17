@@ -74,7 +74,7 @@
 								
 				                // 현재 책 index 
 								var pageIndex = $("#thisBook option").index($("#thisBook option:selected")) - 1;
-				                if(pageIndex <= 0) return;
+				                if(pageIndex < 0) return;
 				                
 				             	// 신규 page 옵션 셋팅
 				                var maxPage = bookComboList[pageIndex].lastPage;
