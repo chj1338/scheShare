@@ -1,6 +1,7 @@
 package com.share.calendar.bible.Controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -38,6 +39,7 @@ public class BibleController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BibleController.class);	
 	
+//	static String fileName = "C:/DEV/Git/scheShare/ShareCalendar/doc/kornkrv";
 	static String fileName = "C:/DEV/Git/scheShare/ShareCalendar/doc/bible.txt";	
 //	static String fileName = "C:/temp/KJV.txt";	
 	
@@ -256,6 +258,7 @@ public class BibleController {
 	public String maxPageCount(String thisBook) throws Exception {
     	logger.debug("================ 파일읽기 시작");
 
+    	File f = null;
 		FileInputStream fis = null;
 		BufferedReader br = null;
 
@@ -264,22 +267,26 @@ public class BibleController {
         
 	    // 파일 읽기
 	    try {
-	    	fis = new FileInputStream(fileName); 
-	        br = new BufferedReader(new InputStreamReader(fis, "EUC-KR"));
+    		f = new File(fileName );
 
-	        String line = new String();	        
-
-	        while( (line=br.readLine()) != null) {
-    			String rowData[] = line.split(" ");
-    			String colData[] = rowData[0].split(":");
-    			
-    			if(!maxPage.equals(colData[0]) && colData[0].indexOf(thisBook) > -1) {
-    				maxPage = colData[0];
-    			}
-	        }
-	        
-	        pageCnt = maxPage.replaceAll(thisBook, "");
-
+    		if( f.exists() ) {
+		    	fis = new FileInputStream(fileName); 
+		        br = new BufferedReader(new InputStreamReader(fis, "EUC-KR"));
+	
+		        String line = new String();	        
+	
+		        while( (line=br.readLine()) != null) {
+	    			String rowData[] = line.split(" ");
+	    			String colData[] = rowData[0].split(":");
+	    			
+	    			if(!maxPage.equals(colData[0]) && colData[0].indexOf(thisBook) > -1) {
+	    				maxPage = colData[0];
+	    			}
+		        }
+		        
+		        pageCnt = maxPage.replaceAll(thisBook, "");
+		        fis.close();
+    		}
 	        logger.debug("================ 정상종료");
 
 	    } catch (IOException e) { 
@@ -287,6 +294,7 @@ public class BibleController {
 	    	e.printStackTrace();
 	    } finally {
 	        br.close();
+	        fis.close();
 	    }
 	    
 	    return pageCnt;

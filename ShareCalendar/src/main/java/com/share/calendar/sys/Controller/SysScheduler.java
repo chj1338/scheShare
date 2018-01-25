@@ -46,7 +46,7 @@ public class SysScheduler {
 	 * 6. Day-of-week (1-7 or SUN-SAT) - * ? / L C #
 	 * 7. Year (optional, empty, 1970-2099) - * / 
 	 * */	
-	@Scheduled(cron = "0 0/30 * * * * ")
+	@Scheduled(cron = "0 0 0/1 * * * ")
 	public void cronTest1() {
 		try {
 			SimpleDateFormat sdf=new SimpleDateFormat("hh:mm:ss"); 
