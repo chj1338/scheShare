@@ -19,6 +19,11 @@
 	<id>mesir-repo</id>
 	<url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
 	</repository>
+
+	<repository>
+	<id>piblic</id>
+	<url>http://www.ebi.ac.uk/intact/maven/nexus/content/repositories/ebi-repo/</url>
+	</repository>	
 	</repositories>
 	
 	<dependencies>
@@ -148,9 +153,9 @@
 		  
 		  <!-- jdbc -->
 		  <dependency>
-		   <groupId>com.oracle</groupId>
-		   <artifactId>ojdbc14</artifactId>
-		   <version>10.2.0.4.0</version>
+		   <groupId>ojdbc</groupId>
+		   <artifactId>ojdbc</artifactId>
+		   <version>14</version>
 		  </dependency>
 		  <dependency>
 		   <groupId>org.lazyluke</groupId>
