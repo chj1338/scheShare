@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bible_old_name_kor_ac">
+        <item>창</item>
+        <item>출</item>
+        <item>레</item>
+        <item>민</item>
+        <item>신</item>
+        <item>수</item>
+        <item>삿</item>
+        <item>룻</item>
+        <item>삼상</item>
+        <item>삼하</item>
+        <item>왕상</item>
+        <item>왕하</item>
+        <item>대상</item>
+        <item>대하</item>
+        <item>스</item>
+        <item>느</item>
+        <item>에</item>
+        <item>욥</item>
+        <item>시</item>
+        <item>잠</item>
+        <item>전</item>
+        <item>아</item>
+        <item>사</item>
+        <item>렘</item>
+        <item>애</item>
+        <item>겔</item>
+        <item>단</item>
+        <item>호</item>
+        <item>욜</item>
+        <item>암</item>
+        <item>옵</item>
+        <item>욘</item>
+        <item>미</item>
+        <item>나</item>
+        <item>합</item>
+        <item>습</item>
+        <item>학</item>
+        <item>슥</item>
+        <item>말</item>
+    </string-array>
+</resources>

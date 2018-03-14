@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bible_new_name_kor_ac">
+        <item>마</item>
+        <item>막</item>
+        <item>눅</item>
+        <item>요</item>
+        <item>행</item>
+        <item>롬</item>
+        <item>고전</item>
+        <item>고후</item>
+        <item>갈</item>
+        <item>엡</item>
+        <item>빌</item>
+        <item>골</item>
+        <item>살전</item>
+        <item>살후</item>
+        <item>딤전</item>
+        <item>딤후</item>
+        <item>딛</item>
+        <item>몬</item>
+        <item>히</item>
+        <item>약</item>
+        <item>벧전</item>
+        <item>벧후</item>
+        <item>요일</item>
+        <item>요이</item>
+        <item>요삼</item>
+        <item>유</item>
+        <item>계</item>
+    </string-array>
+</resources>
