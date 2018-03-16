@@ -1,12 +1,17 @@
 package com.example.p048293.biblereader;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -20,11 +25,14 @@ public class OldTestamentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_testament);
+        setContentView(R.layout.activity_old_testament);
 
         final TextView textView = (TextView)findViewById(R.id.textView001);
         final Spinner spinner1 = (Spinner)findViewById(R.id.spinner1);    // 책 select
         final Spinner spinner2 = (Spinner)findViewById(R.id.spinner2);    // 장 select
+        final Button btnFontSize = (Button)findViewById(R.id.btnFontSize);
+        final Button btnPrePage = (Button)findViewById(R.id.btnPrePage);
+        final Button btnNextPage = (Button)findViewById(R.id.btnNextPage);
 
         // 책 combo item 셋팅
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.bible_old_name_kor, android.R.layout.simple_spinner_item);
@@ -35,11 +43,12 @@ public class OldTestamentActivity extends AppCompatActivity {
 
         // spinner1 리스너
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            // 장 combo item 셋팅
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // 장 combo item 셋팅
-                setLastPage(spinner1, spinner2);
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLUE);
 
+                setLastPage(spinner1, spinner2);
                 readBook(view, spinner1, spinner2, textView);
             }
 
@@ -59,6 +68,55 @@ public class OldTestamentActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        //폰트 사이즈 리스너
+        btnFontSize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float fontSize = textView.getTextSize();
+
+                if(fontSize > 50) {
+                    fontSize = 30;
+                } else {
+                    fontSize = fontSize + 5;
+                }
+
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
+            }
+        });
+
+        //이전 페이지
+        btnPrePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = spinner2.getSelectedItemPosition();
+
+                if(position > 0) {
+                    position--;
+                    spinner2.setSelection(position);
+                    readBook(v, spinner1, spinner2, textView);
+                } else {
+                    Toast.makeText(OldTestamentActivity.this, "맨 처음 입니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        //다음 페이지
+        btnNextPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = spinner2.getSelectedItemPosition();
+                int lastPosition = spinner2.getCount() - 1;
+
+                if(position < lastPosition) {
+                    position++;
+                    spinner2.setSelection(position);
+                    readBook(v, spinner1, spinner2, textView);
+                } else {
+                    Toast.makeText(OldTestamentActivity.this, "마지막 입니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -105,7 +163,7 @@ public class OldTestamentActivity extends AppCompatActivity {
                 String colData[] = rowData[0].split(":");
 
                 if(colData[0].equals(book + index)) {
-                    readStr += line + "\n";
+                    readStr += line + "\n\n";
                 }
             }
 
@@ -117,5 +175,8 @@ public class OldTestamentActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        ScrollView scrollView = (ScrollView)findViewById(R.id.scrollView3);
+        scrollView.setScrollY(0);
     }
 }

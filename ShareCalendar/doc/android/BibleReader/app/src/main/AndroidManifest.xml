@@ -17,7 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewTestamentActivity" />
-        <activity android:name=".OldTestamentActivity"></activity>
+        <activity android:name=".OldTestamentActivity" />
+        <activity android:name=".WordSearchActivity"
+                  android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ReadHistActivity" />
     </application>
 
 </manifest>

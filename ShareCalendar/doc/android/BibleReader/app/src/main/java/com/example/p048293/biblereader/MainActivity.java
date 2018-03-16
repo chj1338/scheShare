@@ -26,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent002);
     }
 
+    public void btnGoSearch(View v) {
+        Intent intent003 = new Intent(this, WordSearchActivity.class);
+        startActivity(intent003);
+    }
+
 /*
     // back 버튼을 클릭시 종료 할건지에 대해 묻는다
     public boolean onBackPressed(int keyCode, KeyEvent event){
