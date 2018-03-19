@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent003);
     }
 
+    public void btnGoSong(View v) {
+        Intent intent004 = new Intent(this, SongActivity.class);
+        startActivity(intent004);
+    }
 /*
     // back 버튼을 클릭시 종료 할건지에 대해 묻는다
     public boolean onBackPressed(int keyCode, KeyEvent event){

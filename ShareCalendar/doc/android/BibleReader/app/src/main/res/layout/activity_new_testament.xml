@@ -21,12 +21,9 @@
         android:id="@+id/spinner2"
         android:layout_width="80dp"
         android:layout_height="23dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:background="#BDBDBD"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
-        app:layout_constraintHorizontal_bias="0.277"
         app:layout_constraintStart_toEndOf="@+id/spinner1"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,14 +39,15 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="360dp"
-        android:layout_height="409dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginBottom="48dp"
+        android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner1">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/textView001"
@@ -70,12 +68,9 @@
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
         android:text="◀"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3"
-        app:layout_constraintVertical_bias="0.615" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnNextPage"
@@ -83,10 +78,8 @@
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="4dp"
         android:text="▶"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
