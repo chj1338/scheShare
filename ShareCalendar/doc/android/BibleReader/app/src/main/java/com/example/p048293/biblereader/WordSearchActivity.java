@@ -53,7 +53,7 @@ public class WordSearchActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editText.setFocusable(false);
+//                editText.setFocusable(false);
                 imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);  // 키보드 숨기기
                 readBook(textView, editText);
             }
@@ -63,9 +63,10 @@ public class WordSearchActivity extends AppCompatActivity {
         btnFontSize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);  // 키보드 숨기기
                 float fontSize = textView.getTextSize();
 
-                if(fontSize > 50) {
+                if(fontSize > 80) {
                     fontSize = 30;
                 } else {
                     fontSize = fontSize + 5;
@@ -82,6 +83,8 @@ public class WordSearchActivity extends AppCompatActivity {
         Toast.makeText(this, "검색시작", Toast.LENGTH_SHORT).show();
         String word = editText.getText().toString();
 
+        int wordCnt = 0;    // 구절 개수
+
         try {
             if(word == null || word.equals("") || word == "" || word.equals(null)) {
                 textView.setText("검색어가 없습니다.");
@@ -94,10 +97,10 @@ public class WordSearchActivity extends AppCompatActivity {
                 InputStream is1 = getResources().openRawResource(R.raw.bible_old);
                 BufferedReader br1 = new BufferedReader(new InputStreamReader(is1));
 
-                //구약
                 while ((line = br1.readLine()) != null) {
                     if (line.indexOf(word) != -1) {
                         readStr += line + "\n\n";
+                        wordCnt++;
                     }
                 }
 
@@ -107,13 +110,15 @@ public class WordSearchActivity extends AppCompatActivity {
                 InputStream is2 = getResources().openRawResource(R.raw.bible_new);
                 BufferedReader br2 = new BufferedReader(new InputStreamReader(is2));
 
-                //신약
                 while ((line = br2.readLine()) != null) {
                     if (line.indexOf(word) != -1) {
                         readStr += line + "\n\n";
+                        wordCnt++;
                     }
                 }
                 br2.close();
+
+                readStr += "\n\n\n\n\n";
 
                 textView.setText(readStr);
             }
@@ -127,6 +132,6 @@ public class WordSearchActivity extends AppCompatActivity {
         ScrollView scrollView = (ScrollView)findViewById(R.id.scrollView3);
         scrollView.setScrollY(0);
 
-        Toast.makeText(this, "검색 끝", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, wordCnt + "개의 구절이 검색되었습니다.", Toast.LENGTH_SHORT).show();
     }
 }

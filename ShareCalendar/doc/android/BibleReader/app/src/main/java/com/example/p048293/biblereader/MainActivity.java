@@ -1,6 +1,7 @@
 package com.example.p048293.biblereader;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -35,34 +36,31 @@ public class MainActivity extends AppCompatActivity {
         Intent intent004 = new Intent(this, SongActivity.class);
         startActivity(intent004);
     }
-/*
-    // back 버튼을 클릭시 종료 할건지에 대해 묻는다
-    public boolean onBackPressed(int keyCode, KeyEvent event){
-        switch(keyCode){
-            case KeyEvent.KEYCODE_BACK:
-                String alertTitle = getResources().getString(R.string.app_name);
-                String buttonMessage = getResources().getString(R.string.alert_msg_exit);
-                String buttonYes = getResources().getString(R.string.button_yes);
-                String buttonNo = getResources().getString(R.string.button_no);
 
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle(alertTitle)
-                        .setMessage(buttonMessage)
-                        .setPositiveButton(buttonYes, new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // TODO Auto-generated method stub
-                                moveTaskToBack(true);
-                                finish();
-                                android.os.Process.killProcess(android.os.Process.myPid());
-                            }
-                        })
-                        .setNegativeButton(buttonNo, null)
-                        .show();
-        }
-        return true;
+    public void btnGoReadHist(View v) {
+        Intent intent005 = new Intent(this, ReadHistActivity.class);
+        startActivity(intent005);
     }
-*/
 
+    // back 버튼을 클릭시 종료여부 확인
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        // super.onBackPressed(); //지워야 실행됨
+
+        AlertDialog.Builder d = new AlertDialog.Builder(this);
+        d.setMessage("종료하시겠습니까?");
+        d.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                finish();   // process전체 종료
+            }
+        });
+
+        d.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        d.show();
+    }
 }

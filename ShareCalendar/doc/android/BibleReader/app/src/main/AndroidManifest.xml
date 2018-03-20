@@ -21,8 +21,10 @@
         <activity
             android:name=".WordSearchActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".SongActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ReadHistActivity" />
-        <activity android:name=".SongActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,9 @@
 package com.example.p048293.biblereader;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,13 +18,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class NewTestamentActivity extends AppCompatActivity {
+    int nowPage = 0;    // spinner2 변경용
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +51,9 @@ public class NewTestamentActivity extends AppCompatActivity {
 
         // 장 combo item 셋팅
         setLastPage(spinner1, spinner2);
+
+        //config 파일을 읽어서 이전 정보 반영
+        readConfig(spinner1, spinner2, textView);
 
         // spinner1 리스너
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -79,7 +93,7 @@ public class NewTestamentActivity extends AppCompatActivity {
                 float fontSize = textView.getTextSize();
 //                Toast.makeText(NewTestamentActivity.this, "현재크기 : " + fontSize, Toast.LENGTH_LONG).show();
 
-                if(fontSize > 50) {
+                if(fontSize > 80) {
                     fontSize = 30;
                 } else {
                     fontSize = fontSize + 5;
@@ -141,6 +155,7 @@ public class NewTestamentActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, item2);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
+        spinner2.setSelection(nowPage);
     }
 
 
@@ -169,9 +184,11 @@ public class NewTestamentActivity extends AppCompatActivity {
                     readStr += line + "\n\n";
                 }
             }
+            br2.close();
+
+            readStr += "\n\n\n\n\n";
 
             textView.setText(readStr);
-            br2.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             textView.setText("파일을 찾을 수 없습니다.");
@@ -181,5 +198,60 @@ public class NewTestamentActivity extends AppCompatActivity {
 
         ScrollView scrollView = (ScrollView)findViewById(R.id.scrollView3);
         scrollView.setScrollY(0);
+    }
+
+    //config 파일 읽어서 반영
+    public void readConfig(Spinner spinner1, Spinner spinner2, TextView textView) {
+        try {
+            FileInputStream fis = openFileInput("configNew.txt");
+            BufferedReader br2 = new BufferedReader(new InputStreamReader(fis));
+            String line = "";
+            String newConfig2[] = null;
+
+            while((line=br2.readLine())!=null) {
+                String newConfig[] = line.split(":");
+
+                newConfig2 = newConfig;
+            }
+
+            // spinner2 변경용
+            // 아래 spinner1 변경 후 리스너 동작시 반영
+            nowPage = Integer.parseInt(newConfig2[2]);
+
+            spinner1.setSelection(Integer.parseInt(newConfig2[1]));
+            spinner1.refreshDrawableState();
+
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, Float.parseFloat(newConfig2[3]));
+
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // back 버튼을 클릭시
+    public void onBackPressed() {
+        Spinner spinner1 = (Spinner)findViewById(R.id.spinner1);    // 책 select
+        Spinner spinner2 = (Spinner)findViewById(R.id.spinner2);    // 장 select
+        TextView textView = (TextView)findViewById(R.id.textView001);
+
+        String bookSe = "NEW";
+        int book = spinner1.getSelectedItemPosition();
+        int page = spinner2.getSelectedItemPosition();
+        float fontSize = textView.getTextSize();
+
+        try {
+            FileOutputStream fos = openFileOutput("configNew.txt", Context.MODE_WORLD_WRITEABLE);
+            String str = bookSe + ":" + book + ":" +  page + ":" +  fontSize;
+            fos.write(str.getBytes());
+            fos.close();
+
+            Toast.makeText(NewTestamentActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Intent intentMain = new Intent(this, MainActivity.class);
+        startActivity(intentMain);
     }
 }

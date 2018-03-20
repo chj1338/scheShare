@@ -6,67 +6,79 @@
     android:layout_height="match_parent"
     android:background="#000000"
     tools:context="com.example.p048293.biblereader.MainActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="67dp"
-            android:layout_marginStart="67dp"
-            android:layout_marginTop="102dp"
+            android:layout_alignBaseline="@+id/button2"
+            android:layout_alignLeft="@+id/button3"
             android:onClick="btnGoOldBook"
             android:text="구약"
+            android:textSize="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/button"
-            android:layout_alignBottom="@+id/button"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="51dp"
-            android:layout_marginRight="51dp"
+            android:layout_alignEnd="@+id/button3"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/button3"
+            android:layout_marginTop="50dp"
             android:onClick="btnGoNewBook"
             android:text="신약"
+            android:textSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="wrap_content"
+            android:layout_width="275dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button2"
-            android:layout_marginTop="48dp"
-            android:layout_toLeftOf="@+id/button2"
-            android:layout_toStartOf="@+id/button2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
             android:onClick="btnGoSearch"
-            android:text="검색"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="구절찾기"
+            android:textSize="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="55dp" />
 
         <Button
             android:id="@+id/button4"
-            android:layout_width="wrap_content"
+            android:layout_width="275dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button3"
-            android:layout_marginTop="48dp"
-            android:layout_toLeftOf="@+id/button2"
-            android:layout_toStartOf="@+id/button2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:onClick="btnGoSong"
             android:text="찬송가"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="55dp" />
+<!--
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:onClick="btnGoReadHist"
+            android:text="읽기표"
+            android:textSize="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="55dp" />
+-->
 
     </RelativeLayout>
+
 </android.support.constraint.ConstraintLayout>
