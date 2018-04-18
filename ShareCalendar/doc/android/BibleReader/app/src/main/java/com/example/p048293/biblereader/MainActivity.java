@@ -8,8 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    private final long FINSH_INTERVAL_TIME = 2000; //2초
+    private long backPressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +45,24 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent005);
     }
 
-    // back 버튼을 클릭시 종료여부 확인
+    public void btnGoEngHanOld(View v) {
+        Intent intent006 = new Intent(this, EngHanOldActivity.class);
+        startActivity(intent006);
+    }
+
+
+    @Override
     public void onBackPressed() {
-        // TODO Auto-generated method stub
-        // super.onBackPressed(); //지워야 실행됨
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - backPressedTime;
 
-        AlertDialog.Builder d = new AlertDialog.Builder(this);
-        d.setMessage("종료하시겠습니까?");
-        d.setPositiveButton("예", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                finish();   // process전체 종료
-            }
-        });
-
-        d.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        d.show();
+        if (0 <= intervalTime && FINSH_INTERVAL_TIME >= intervalTime) {
+            moveTaskToBack(true);
+            finish();
+            android.os.Process.killProcess(android.os.Process.myPid());
+        } else {
+            backPressedTime = tempTime;
+            Toast.makeText(getApplicationContext(), "\'뒤로\' 버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

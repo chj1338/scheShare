@@ -91,4 +91,10 @@ public class SysController {
 		return "/main/mainBoard";
 	}
 	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test(Locale locale, Model model) {
+		logger.debug("SysController leftMenu");
+
+		return "/test";
+	}
 }

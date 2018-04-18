@@ -16,15 +16,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class OldTestamentActivity extends AppCompatActivity {
+    String configFile = "configOld.txt";
+
     int nowPage = 0;    // spinner2 변경용
 
     @Override
@@ -57,6 +63,7 @@ public class OldTestamentActivity extends AppCompatActivity {
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.BLUE);
 
                 setLastPage(spinner1, spinner2);
+                nowPage = 0;
                 readBook(view, spinner1, spinner2, textView);
             }
 
@@ -86,7 +93,7 @@ public class OldTestamentActivity extends AppCompatActivity {
                 float fontSize = textView.getTextSize();
 
                 if(fontSize > 80) {
-                    fontSize = 30;
+                    fontSize = 20;
                 } else {
                     fontSize = fontSize + 5;
                 }
@@ -195,27 +202,27 @@ public class OldTestamentActivity extends AppCompatActivity {
     //config 파일 읽어서 반영
     public void readConfig(Spinner spinner1, Spinner spinner2, TextView textView) {
         try {
-            FileInputStream fis = openFileInput("configOld.txt");
-            BufferedReader br2 = new BufferedReader(new InputStreamReader(fis));
             String line = "";
-            String newConfig2[] = null;
+            String oldConfig2[] = null;
 
-            while((line=br2.readLine())!=null) {
-                String newConfig[] = line.split(":");
+            BufferedReader br = new BufferedReader(new FileReader(getFilesDir() + configFile));
 
-                newConfig2 = newConfig;
+            while((line=br.readLine())!=null) {
+//                Toast.makeText(OldTestamentActivity.this, "2 : " + line, Toast.LENGTH_SHORT).show();
+
+                String oldConfig[] = line.split(":");
+                oldConfig2 = oldConfig;
             }
+            br.close();
 
             // spinner2 변경용
             // 아래 spinner1 변경 후 리스너 동작시 반영
-            nowPage = Integer.parseInt(newConfig2[2]);
+            nowPage = Integer.parseInt(oldConfig2[2]);
 
-            spinner1.setSelection(Integer.parseInt(newConfig2[1]));
+            spinner1.setSelection(Integer.parseInt(oldConfig2[1]));
             spinner1.refreshDrawableState();
 
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, Float.parseFloat(newConfig2[3]));
-
-            fis.close();
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, Float.parseFloat(oldConfig2[3]));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -233,10 +240,14 @@ public class OldTestamentActivity extends AppCompatActivity {
         float fontSize = textView.getTextSize();
 
         try {
-            FileOutputStream fos = openFileOutput("configOld.txt", Context.MODE_WORLD_WRITEABLE);
             String str = bookSe + ":" + book + ":" +  page + ":" +  fontSize;
-            fos.write(str.getBytes());
-            fos.close();
+
+            File file = new File(getFilesDir() + configFile);
+            file.delete();
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
+            bw.write(str);
+            bw.close();
 
             Toast.makeText(OldTestamentActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {

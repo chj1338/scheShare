@@ -120,7 +120,7 @@ public class SongActivity extends AppCompatActivity {
                     checkPoint = 0;
                     break;
                 } else if (checkPoint == 1) {
-                    readStr += line + "\n\n";
+                    readStr += line + "\n";
                 }
             }
             br2.close();

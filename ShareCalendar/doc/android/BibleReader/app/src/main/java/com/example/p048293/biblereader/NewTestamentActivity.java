@@ -1,8 +1,5 @@
 package com.example.p048293.biblereader;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -20,9 +17,7 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -31,6 +26,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class NewTestamentActivity extends AppCompatActivity {
+    String configFile = "configNew.txt";
+
     int nowPage = 0;    // spinner2 변경용
 
     @Override
@@ -63,6 +60,7 @@ public class NewTestamentActivity extends AppCompatActivity {
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.BLUE);
 
                 setLastPage(spinner1, spinner2);
+                nowPage = 0;
                 readBook(view, spinner1, spinner2, textView);
             }
 
@@ -94,7 +92,7 @@ public class NewTestamentActivity extends AppCompatActivity {
 //                Toast.makeText(NewTestamentActivity.this, "현재크기 : " + fontSize, Toast.LENGTH_LONG).show();
 
                 if(fontSize > 80) {
-                    fontSize = 30;
+                    fontSize = 20;
                 } else {
                     fontSize = fontSize + 5;
                 }
@@ -203,27 +201,29 @@ public class NewTestamentActivity extends AppCompatActivity {
     //config 파일 읽어서 반영
     public void readConfig(Spinner spinner1, Spinner spinner2, TextView textView) {
         try {
-            FileInputStream fis = openFileInput("configNew.txt");
-            BufferedReader br2 = new BufferedReader(new InputStreamReader(fis));
-            String line = "";
+            String line = null;
             String newConfig2[] = null;
 
-            while((line=br2.readLine())!=null) {
-                String newConfig[] = line.split(":");
+            BufferedReader br = new BufferedReader(new FileReader(getFilesDir() + configFile));
 
+            while((line=br.readLine())!=null) {
+                //Toast.makeText(NewTestamentActivity.this, "2 : " + line, Toast.LENGTH_SHORT).show();
+
+                String newConfig[] = line.split(":");
                 newConfig2 = newConfig;
             }
+            br.close();
 
             // spinner2 변경용
             // 아래 spinner1 변경 후 리스너 동작시 반영
+//            Toast.makeText(NewTestamentActivity.this, newConfig2[2] + " : " + newConfig2[2]+" : " + newConfig2[2], Toast.LENGTH_LONG).show();
+
             nowPage = Integer.parseInt(newConfig2[2]);
 
             spinner1.setSelection(Integer.parseInt(newConfig2[1]));
             spinner1.refreshDrawableState();
 
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, Float.parseFloat(newConfig2[3]));
-
-            fis.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -241,10 +241,14 @@ public class NewTestamentActivity extends AppCompatActivity {
         float fontSize = textView.getTextSize();
 
         try {
-            FileOutputStream fos = openFileOutput("configNew.txt", Context.MODE_WORLD_WRITEABLE);
             String str = bookSe + ":" + book + ":" +  page + ":" +  fontSize;
-            fos.write(str.getBytes());
-            fos.close();
+
+            File file = new File(getFilesDir() + configFile);
+            file.delete();
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
+            bw.write(str);
+            bw.close();
 
             Toast.makeText(NewTestamentActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
