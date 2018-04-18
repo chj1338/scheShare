@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bible_new_name_eng_ac">
+        <item>40Mt</item>
+        <item>41Mk</item>
+        <item>42Lk</item>
+        <item>43Jn</item>
+        <item>44Ac</item>
+        <item>45Rm</item>
+        <item>461Co</item>
+        <item>472Co</item>
+        <item>48Gl</item>
+        <item>49Eph</item>
+        <item>50Php</item>
+        <item>51Col</item>
+        <item>521Th</item>
+        <item>532Th</item>
+        <item>541Tm</item>
+        <item>552Tm</item>
+        <item>56Ti</item>
+        <item>57Phm</item>
+        <item>58Heb</item>
+        <item>59Jms</item>
+        <item>601Pt</item>
+        <item>612Pt</item>
+        <item>621Jn</item>
+        <item>632Jn</item>
+        <item>643Jn</item>
+        <item>65Jd</item>
+        <item>66Rv</item>
+    </string-array>
+</resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bible_old_name_eng_ac">
+        <item>01Gn</item>
+        <item>02Ex</item>
+        <item>03Lv</item>
+        <item>04Nm</item>
+        <item>05Dt</item>
+        <item>06Jos</item>
+        <item>07Jdg</item>
+        <item>08Ru</item>
+        <item>091Sm</item>
+        <item>102Sm</item>
+        <item>111Kg</item>
+        <item>122Kg</item>
+        <item>131Ch</item>
+        <item>142Ch</item>
+        <item>15Ezr</item>
+        <item>16Neh</item>
+        <item>17Est</item>
+        <item>18Jb</item>
+        <item>19Ps</item>
+        <item>20Pr</item>
+        <item>21Ec</item>
+        <item>22Sg</item>
+        <item>23Is</item>
+        <item>24Jr</item>
+        <item>25Lm</item>
+        <item>26Ezk</item>
+        <item>27Dn</item>
+        <item>28Hs</item>
+        <item>29Jl</item>
+        <item>30Am</item>
+        <item>31Ob</item>
+        <item>32Jnh</item>
+        <item>33Mc</item>
+        <item>34Nah</item>
+        <item>35Hab</item>
+        <item>36Zph</item>
+        <item>37Hg</item>
+        <item>38Zch</item>
+        <item>39Mal</item>
+    </string-array>
+</resources>
