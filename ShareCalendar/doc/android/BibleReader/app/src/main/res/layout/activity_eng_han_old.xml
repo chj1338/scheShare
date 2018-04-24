@@ -9,33 +9,36 @@
     android:orientation="vertical"
     tools:context="com.example.p048293.biblereader.EngHanOldActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/inner01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
 
         <Spinner
             android:id="@+id/spinner1"
-            android:layout_width="185dp"
+            android:layout_width="170dp"
             android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:background="@drawable/spinner_border_with_arrow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
             android:id="@+id/spinner2"
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/spinner1"
+            android:layout_toRightOf="@+id/spinner1"
             android:background="@drawable/spinner_border_with_arrow"
             app:layout_constraintStart_toEndOf="@+id/spinner1"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,61 +47,99 @@
             android:id="@+id/btnFontSize"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/round_rectangle_border"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/spinner2"
+            android:layout_toRightOf="@+id/spinner2"
+            android:background="@drawable/button_round_boder"
             android:text="+"
-            android:textSize="25dp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
+        <Button
+            android:id="@+id/btnAutoScroll"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/btnFontSize"
+            android:layout_toRightOf="@+id/btnFontSize"
+            android:background="@drawable/button_round_boder"
+            android:text="자동"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnStopScroll"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/btnFontSize"
+            android:layout_toRightOf="@+id/btnFontSize"
+            android:background="@drawable/button_round_boder"
+            android:text="중지"
+            android:textSize="20dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/inner02"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView001"
-                android:layout_width="fill_parent"
-                android:layout_height="200dp"
-                android:layout_weight="1"
-                android:background="#444444"
-                android:text="구약성서 한글"
-                android:textColor="#BDBDBD"
-                android:textSize="20dp" />
+            <ScrollView
+                android:id="@+id/scrollView1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
-                android:id="@+id/textView002"
-                android:layout_width="fill_parent"
-                android:layout_height="200dp"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="1"
-                android:background="#004444"
-                android:text="구약성서 영문"
-                android:textColor="#BDBDBD"
-                android:textSize="20dp" />
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tableLayout1"
+                    android:background="#000000">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:background="#FF0000"
+                            android:text="11" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:background="#FF00FF"
+                            android:text="21" />
+                    </TableRow>
+                </TableLayout>
+
+            </ScrollView>
 
         </LinearLayout>
-    </ScrollView>
 
     <LinearLayout
         android:id="@+id/inner03"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_margin="8dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -106,10 +147,8 @@
             android:id="@+id/btnPrePage"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/round_rectangle_border"
+            android:background="@drawable/button_round_boder"
             android:text="◀"
             android:textSize="25dp" />
 
@@ -118,6 +157,31 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:text=""
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/btnReadHist"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_round_boder"
+            android:textSize="20dp"
+            android:text="완독"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnNextPage"
+            app:layout_constraintStart_toEndOf="@+id/btnPrePage" />
+
+        <TextView
+            android:id="@+id/textView004"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_weight="1"
             android:text=""
             android:textSize="20dp" />
@@ -126,10 +190,8 @@
             android:id="@+id/btnNextPage"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginRight="8dp"
-            android:background="@drawable/round_rectangle_border"
+            android:background="@drawable/button_round_boder"
             android:text="▶"
             android:textSize="25dp" />
     </LinearLayout>

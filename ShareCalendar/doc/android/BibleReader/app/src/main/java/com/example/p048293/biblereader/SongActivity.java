@@ -1,10 +1,7 @@
 package com.example.p048293.biblereader;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -18,13 +15,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class SongActivity extends AppCompatActivity {
     InputMethodManager imm = null;
+
+    private String backColor = "-16777216";      // 배경색
+    private String fontColor = "-4342339";      // 글자색
+    private float fontSize = 20;         // 글자크기
+    private int scrollSpeed = 1;        // 스크롤 속도
+    int scrollDist = 7139;      // 스크롤 전체길이 7139
+    int scrollTime = 145000;    // 스크롤 시간  145000
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +48,10 @@ public class SongActivity extends AppCompatActivity {
 
         // 책 combo item 셋팅
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.song_list, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_item_left);
         spinner1.setAdapter(adapter);
+
+        readConfig(textView);
 
         // spinner1 리스너
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -50,8 +59,6 @@ public class SongActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 imm.hideSoftInputFromWindow(editText1.getWindowToken(), 0);  // 키보드 숨기기
-
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLUE);
 
                 if(spinner1.getSelectedItemPosition() != 0) {
                     editText1.setText("");
@@ -91,6 +98,41 @@ public class SongActivity extends AppCompatActivity {
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
             }
         });
+    }
+
+
+    //config 파일 읽어서 반영
+    public void readConfig(TextView textView) {
+        try {
+            String line = null;
+
+            // 화면설정 읽어서 반영
+            String lineDisp = "";
+            File fileDisp = new File(getFilesDir() + "/configDisp.txt");
+
+            if(fileDisp.exists()) {
+                BufferedReader brDisp = new BufferedReader(new FileReader(fileDisp));
+                while ((lineDisp = brDisp.readLine()) != null) {
+                    String dispConfig[] = lineDisp.split(":");
+                    if (dispConfig.length == 2 && dispConfig[0].equals("backColor") && dispConfig[1] != null) {
+                        backColor = dispConfig[1];
+                    } else if (dispConfig.length == 2 && dispConfig[0].equals("fontColor") && dispConfig[1] != null) {
+                        fontColor = dispConfig[1];
+                    } else if (dispConfig.length == 2 && dispConfig[0].equals("fontSize") && dispConfig[1] != null) {
+                        fontSize = Float.parseFloat(dispConfig[1]);
+                    } else if (dispConfig.length == 2 && dispConfig[0].equals("scrollSpeed") && dispConfig[1] != null) {
+                        scrollSpeed = Integer.parseInt(dispConfig[1]);
+                    }
+                }
+                brDisp.close();
+
+                textView.setBackgroundColor(Integer.parseInt(backColor));
+                textView.setTextColor(Integer.parseInt(fontColor));
+                textView.setTextSize(fontSize);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
