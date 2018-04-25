@@ -40,7 +40,6 @@ public class WordSearchActivity extends AppCompatActivity implements TextView.On
 
     private TextView textView;
     private EditText editText;
-    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

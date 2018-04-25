@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnGoSearch(View v) {
-        Intent intent003 = new Intent(this, WordSearchActivity.class);
+        Intent intent003 = new Intent(this, WordSearch2Activity.class);
         startActivity(intent003);
     }
 

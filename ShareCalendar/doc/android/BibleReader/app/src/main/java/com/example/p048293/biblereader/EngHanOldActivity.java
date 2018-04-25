@@ -1,6 +1,10 @@
 package com.example.p048293.biblereader;
 
 import android.animation.ObjectAnimator;
+import android.content.ClipData;
+import android.content.ClipDescription;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -9,9 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -390,14 +396,14 @@ public class EngHanOldActivity extends AppCompatActivity {
 
             // 그리드 생성
             TableRow row[] = new TableRow[trCt];            // 테이블 ROW 생성
-            TextView text[][] = new TextView[trCt][tdCt];   // 데이터
+            final EditText text[][] = new EditText[trCt][tdCt];   // 데이터
 
             for (int tr = 0; tr < trCt; tr++) {
                 row[tr] = new TableRow(this);
                 row[tr].setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
 
                 for(int td=0; td<tdCt; td++) {
-                    text[tr][td] = new TextView(this);
+                    text[tr][td] = new EditText(this);
 
                     String lineText = "";
                     if(td == 0) {
@@ -415,10 +421,22 @@ public class EngHanOldActivity extends AppCompatActivity {
                     text[tr][td].setTextSize(fontSize);                // 폰트사이즈
                     //text[tr][td].setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
                     text[tr][td].setGravity(Gravity.LEFT);    // 폰트정렬
-                    //text[tr][td].setBackgroundColor(Color.parseColor("#000000"));  // 배경색
                     text[tr][td].setBackgroundDrawable(new ColorDrawable(Integer.parseInt(backColor)));
-                    //text[tr][td].setTextColor(Color.parseColor("#BDBDBD"));     // 폰트컬러
                     text[tr][td].setTextColor(Integer.parseInt(fontColor));
+
+                    text[tr][td].setInputType(0);
+                    text[tr][td].setSingleLine(false);
+                    text[tr][td].setSelectAllOnFocus(true); // 클릭시 문장 전체 선택
+
+                    // 클립보드에 복사
+                    final int tempTR = tr;
+                    final int tempTD = td;
+                    text[tr][td].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            copyText(text[tempTR][tempTD]);
+                        }
+                    });
 
                     textParam.setMargins(5, 5, 5, 5);
                     textParam.weight = 1;
@@ -487,4 +505,42 @@ public class EngHanOldActivity extends AppCompatActivity {
         Intent intentMain = new Intent(this, MainActivity.class);
         startActivity(intentMain);
     }
+
+    // 클립보드 복사
+    void copyText(EditText copyEdit) {
+        String text = copyEdit.getText().toString();
+        if (text.length() != 0) {
+            // 클립데이터 생성(텍스트)
+            ClipData clip = ClipData.newPlainText("text", text);
+
+            // 클립매니져 객체 생성하고 클립데이터를 setPrimaryClip 메서드를 이용하여 클립보드에 복사
+            ClipboardManager cm = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
+            cm.setPrimaryClip(clip);
+            Toast.makeText(this, "복사되었습니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // 클립보드 붙여넣기
+    void pasteText(TextView pasteText) {
+        ClipboardManager cm = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
+
+        // 클리보드에 클립데이터가 있는지 체크
+        if (cm.hasPrimaryClip() == false) {
+            //Toast.makeText(this, "Clipboard Empty", 0).show();
+            return;
+        }
+
+        // 클립보드에 텍스트 형태의 MIME Type이 있는지 체크
+        if (cm.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) == false) {
+            //Toast.makeText(this, "Clip is not text", 0).show();
+            return;
+        }
+
+        ClipData clip = cm.getPrimaryClip(); // 클립데이터를 읽는다.
+        ClipData.Item item = clip.getItemAt(0);
+
+        pasteText.setText(item.getText());
+    }
+
+
 }
