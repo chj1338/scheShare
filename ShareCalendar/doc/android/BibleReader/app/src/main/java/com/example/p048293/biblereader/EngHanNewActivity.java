@@ -77,6 +77,9 @@ public class EngHanNewActivity extends AppCompatActivity {
         //config 파일을 읽어서 이전 정보 반영
         readConfig(spinner1, spinner2);
 
+        // 완독버튼 차수 확인
+        readChasuCheck(spinner1, spinner2, btnReadHist);
+
         tableLayout.setBackgroundDrawable(new ColorDrawable(Integer.parseInt(backColor)));
 
         // spinner1 리스너
@@ -93,6 +96,8 @@ public class EngHanNewActivity extends AppCompatActivity {
                 readBookHan(view, spinner1, spinner2, scrollView1, tableLayout);
 
                 btnReadHist.setEnabled(true);
+                // 완독버튼 차수 확인
+                readChasuCheck(spinner1, spinner2, btnReadHist);
             }
 
             @Override
@@ -110,6 +115,8 @@ public class EngHanNewActivity extends AppCompatActivity {
                 readBookHan(view, spinner1, spinner2, scrollView1, tableLayout);
 
                 btnReadHist.setEnabled(true);
+                // 완독버튼 차수 확인
+                readChasuCheck(spinner1, spinner2, btnReadHist);
             }
 
             @Override
@@ -178,7 +185,18 @@ public class EngHanNewActivity extends AppCompatActivity {
                     spinner2.setSelection(position);
                     readBookHan(v, spinner1, spinner2, scrollView1, tableLayout);
                 } else {
-                    Toast.makeText(EngHanNewActivity.this, "맨 처음 입니다.", Toast.LENGTH_SHORT).show();
+                    if(spinner1.getSelectedItemPosition() == 0) {
+                        Toast.makeText(EngHanNewActivity.this, "맨 처음 입니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        int sp1Position = spinner1.getSelectedItemPosition() - 1;
+
+                        // last page item
+                        ArrayAdapter adapter_page = ArrayAdapter.createFromResource (EngHanNewActivity.this, R.array.bible_new_page, android.R.layout.simple_spinner_item);
+                        int lastPage = Integer.parseInt((String)adapter_page.getItem(sp1Position));
+                        nowPage = lastPage - 1;
+
+                        spinner1.setSelection(sp1Position);
+                    }
                 }
 
                 btnReadHist.setEnabled(true);
@@ -199,7 +217,11 @@ public class EngHanNewActivity extends AppCompatActivity {
                     spinner2.setSelection(position);
                     readBookHan(v, spinner1, spinner2, scrollView1, tableLayout);
                 } else {
-                    Toast.makeText(EngHanNewActivity.this, "마지막 입니다.", Toast.LENGTH_SHORT).show();
+                    if(spinner1.getSelectedItemPosition() == 38) {
+                        Toast.makeText(EngHanNewActivity.this, "마지막 입니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        spinner1.setSelection(spinner1.getSelectedItemPosition() + 1);
+                    }
                 }
 
                 btnReadHist.setEnabled(true);
@@ -268,6 +290,9 @@ public class EngHanNewActivity extends AppCompatActivity {
                     Toast.makeText(EngHanNewActivity.this, chaSu + "차 완독 저장했습니다.", Toast.LENGTH_SHORT).show();
 
                     btnReadHist.setEnabled(false);
+
+                    // 완독버튼 차수 확인
+                    readChasuCheck(spinner1, spinner2, btnReadHist);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -539,5 +564,56 @@ public class EngHanNewActivity extends AppCompatActivity {
         ClipData.Item item = clip.getItemAt(0);
 
         pasteText.setText(item.getText());
+    }
+
+    // 완독버튼 차수 변경
+    public void readChasuCheck(Spinner spinner1, Spinner spinner2, Button btnReadHist) {
+
+        String bookSe = "NEW";
+        int bookIndex = spinner1.getSelectedItemPosition();
+        int page = spinner2.getSelectedItemPosition() + 1;
+
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(EngHanNewActivity.this, R.array.bible_new_name_kor_ac, android.R.layout.simple_spinner_item);
+        String book = (String)adapter.getItem(bookIndex);
+
+        String strHist = bookSe + ":" + book + ":" +  page;
+
+        try {
+            File fileList = new File(getFilesDir() + "/readHist" + bookSe + "List.txt");
+            if( !fileList.exists() ) {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(fileList, true));
+                bw.write("");
+                bw.close();
+            }
+
+            // 몇 차수 까지 존재하는지 확인 (한번 읽으면 1차, 두번 읽으면 2차)
+            int chaSu = 1;  // 몇차에 저장해야 하는지 확인용
+            int chaSuCnt = 0;   // 전체 몇차까지 있는지 확인용
+
+            String line = null;
+            BufferedReader br = new BufferedReader(new FileReader(fileList));
+            while((line=br.readLine())!=null) {
+                chaSuCnt++;
+            }
+            br.close();
+
+            // 현재의 strHist 내용이 몇차까지 기록되었는지 확인
+            for(int i=1; i<=chaSuCnt; i++) {
+                line = "";
+                BufferedReader br2 = new BufferedReader(new FileReader(getFilesDir() + "/readHist" + bookSe + "_" + i + ".txt"));
+                while((line=br2.readLine())!=null) {
+                    if(line.indexOf(strHist) != -1 ) {
+                        chaSu++;
+                        break;
+                    }
+                }
+                br2.close();
+            }
+
+            btnReadHist.setText(chaSu + "차 완독");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

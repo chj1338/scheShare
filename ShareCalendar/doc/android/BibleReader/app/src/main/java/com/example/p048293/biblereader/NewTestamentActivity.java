@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -67,6 +68,9 @@ public class NewTestamentActivity extends AppCompatActivity {
         //config 파일을 읽어서 이전 정보 반영
         readConfig(spinner1, spinner2, textView);
 
+        // 완독버튼 차수 확인
+        readChasuCheck(spinner1, spinner2, btnReadHist);
+
         // 자동 스크롤 시작
         btnAutoScroll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +111,9 @@ public class NewTestamentActivity extends AppCompatActivity {
                 readBook(view, spinner1, spinner2, textView);
 
                 btnReadHist.setEnabled(true);
+
+                // 완독버튼 차수 확인
+                readChasuCheck(spinner1, spinner2, btnReadHist);
             }
 
             @Override
@@ -125,6 +132,9 @@ public class NewTestamentActivity extends AppCompatActivity {
 
                 readBook(view, spinner1, spinner2, textView);
                 btnReadHist.setEnabled(true);
+
+                // 완독버튼 차수 확인
+                readChasuCheck(spinner1, spinner2, btnReadHist);
             }
 
             @Override
@@ -164,7 +174,18 @@ public class NewTestamentActivity extends AppCompatActivity {
                     spinner2.setSelection(position);
                     readBook(v, spinner1, spinner2, textView);
                 } else {
-                    Toast.makeText(NewTestamentActivity.this, "맨 처음 입니다.", Toast.LENGTH_SHORT).show();
+                    if(spinner1.getSelectedItemPosition() == 0) {
+                        Toast.makeText(NewTestamentActivity.this, "맨 처음 입니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        int sp1Position = spinner1.getSelectedItemPosition() - 1;
+
+                        // last page item
+                        ArrayAdapter adapter_page = ArrayAdapter.createFromResource (NewTestamentActivity.this, R.array.bible_new_page, android.R.layout.simple_spinner_item);
+                        int lastPage = Integer.parseInt((String)adapter_page.getItem(sp1Position));
+                        nowPage = lastPage - 1;
+
+                        spinner1.setSelection(sp1Position);
+                    }
                 }
 
                 btnReadHist.setEnabled(true);
@@ -185,7 +206,11 @@ public class NewTestamentActivity extends AppCompatActivity {
                     spinner2.setSelection(position);
                     readBook(v, spinner1, spinner2, textView);
                 } else {
-                    Toast.makeText(NewTestamentActivity.this, "마지막 입니다.", Toast.LENGTH_SHORT).show();
+                    if(spinner1.getSelectedItemPosition() == 38) {
+                        Toast.makeText(NewTestamentActivity.this, "마지막 입니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        spinner1.setSelection(spinner1.getSelectedItemPosition() + 1);
+                    }
                 }
 
                 btnReadHist.setEnabled(true);
@@ -254,6 +279,9 @@ public class NewTestamentActivity extends AppCompatActivity {
                     Toast.makeText(NewTestamentActivity.this, chaSu + "차 완독 저장했습니다.", Toast.LENGTH_SHORT).show();
 
                     btnReadHist.setEnabled(false);
+
+                    // 완독버튼 차수 확인
+                    readChasuCheck(spinner1, spinner2, btnReadHist);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -405,4 +433,56 @@ public class NewTestamentActivity extends AppCompatActivity {
         Intent intentMain = new Intent(this, MainActivity.class);
         startActivity(intentMain);
     }
+
+    // 완독버튼 차수 변경
+    public void readChasuCheck(Spinner spinner1, Spinner spinner2, Button btnReadHist) {
+
+        String bookSe = "NEW";
+        int bookIndex = spinner1.getSelectedItemPosition();
+        int page = spinner2.getSelectedItemPosition() + 1;
+
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(NewTestamentActivity.this, R.array.bible_new_name_kor_ac, android.R.layout.simple_spinner_item);
+        String book = (String)adapter.getItem(bookIndex);
+
+        String strHist = bookSe + ":" + book + ":" +  page;
+
+        try {
+            File fileList = new File(getFilesDir() + "/readHist" + bookSe + "List.txt");
+            if( !fileList.exists() ) {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(fileList, true));
+                bw.write("");
+                bw.close();
+            }
+
+            // 몇 차수 까지 존재하는지 확인 (한번 읽으면 1차, 두번 읽으면 2차)
+            int chaSu = 1;  // 몇차에 저장해야 하는지 확인용
+            int chaSuCnt = 0;   // 전체 몇차까지 있는지 확인용
+
+            String line = null;
+            BufferedReader br = new BufferedReader(new FileReader(fileList));
+            while((line=br.readLine())!=null) {
+                chaSuCnt++;
+            }
+            br.close();
+
+            // 현재의 strHist 내용이 몇차까지 기록되었는지 확인
+            for(int i=1; i<=chaSuCnt; i++) {
+                line = "";
+                BufferedReader br2 = new BufferedReader(new FileReader(getFilesDir() + "/readHist" + bookSe + "_" + i + ".txt"));
+                while((line=br2.readLine())!=null) {
+                    if(line.indexOf(strHist) != -1 ) {
+                        chaSu++;
+                        break;
+                    }
+                }
+                br2.close();
+            }
+
+            btnReadHist.setText(chaSu + "차 완독");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

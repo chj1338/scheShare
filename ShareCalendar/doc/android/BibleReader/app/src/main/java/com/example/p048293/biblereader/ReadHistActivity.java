@@ -1,5 +1,6 @@
 package com.example.p048293.biblereader;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +14,13 @@ import android.widget.SpinnerAdapter;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class ReadHistActivity extends AppCompatActivity {
@@ -181,12 +186,6 @@ public class ReadHistActivity extends AppCompatActivity {
                     text[tr][td] = new TextView(this);
 
                     String tempPage = (nowPage + td) + "";
-/*
-                    // 자리수 맞추기
-                    for(int kk = tempPage.getBytes().length; kk<=5; kk++) {
-                        tempPage = " " + tempPage;
-                    }
-*/
 
                     if (tr == 0 && td == 0) {   // 첫째줄 첫째칸
                         text[tr][td].setText(nowBook);
@@ -225,6 +224,42 @@ public class ReadHistActivity extends AppCompatActivity {
                             text[tr][td].setBackgroundColor(Color.CYAN);
                         }
                     }
+
+                    // 클릭하면 해당 페이지로 이동
+                    int bookPosition = adapter_ac_name.getPosition(nowBook);
+                    final String nowStr = bookSe + ":" + bookPosition + ":" + (Integer.parseInt(tempPage) - 1);
+                    text[tr][td].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(ReadHistActivity.this, nowStr, Toast.LENGTH_SHORT).show();
+
+                            try {
+                                String configFile = "";
+                                if(bookSe.equals("OLD")) {
+                                    configFile = "/configOld.txt";
+                                } else {
+                                    configFile = "/configNew.txt";
+                                }
+
+                                File file = new File(getFilesDir() + configFile);
+                                file.delete();
+
+                                BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
+                                bw.write(nowStr);
+                                bw.close();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                            Intent intent = null;
+                            if(bookSe.equals("OLD")) {
+                                intent = new Intent(ReadHistActivity.this, OldTestamentActivity.class);
+                            } else {
+                                intent = new Intent(ReadHistActivity.this, NewTestamentActivity.class);
+                            }
+                            startActivity(intent);
+                        }
+                    });
 
                     text[tr][td].setLayoutParams(trParams);
                     row[tr].addView(text[tr][td]);
