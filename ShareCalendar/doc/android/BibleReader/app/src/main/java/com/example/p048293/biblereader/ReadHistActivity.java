@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ScrollView;
@@ -30,6 +31,7 @@ public class ReadHistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_hist);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   // 화면꺼짐 방지
 
         final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
         final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
@@ -147,7 +149,7 @@ public class ReadHistActivity extends AppCompatActivity {
 
         tableLayout1.removeAllViewsInLayout();
 
-        //읽은 페이지가 기록 파일
+        //읽은 페이지 기록 파일
         int chaSu = spinner2.getSelectedItemPosition() + 1;
         ArrayList<String> readStr = new ArrayList<String>();
         try {
@@ -231,7 +233,7 @@ public class ReadHistActivity extends AppCompatActivity {
                     text[tr][td].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(ReadHistActivity.this, nowStr, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(ReadHistActivity.this, nowStr, Toast.LENGTH_SHORT).show();
 
                             try {
                                 String configFile = "";

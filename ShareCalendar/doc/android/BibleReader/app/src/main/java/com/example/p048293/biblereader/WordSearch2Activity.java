@@ -56,6 +56,7 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_search2);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   // 화면꺼짐 방지
 
         searchWord = (EditText)findViewById(R.id.editText);
         final Button button3 = (Button)findViewById(R.id.button3);

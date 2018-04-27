@@ -35,7 +35,9 @@
         <activity android:name=".EngHanNewActivity" />
         <activity android:name=".DispalySettingActivity" />
         <activity android:name=".KinderReadActivity" />
-        <activity android:name=".ChildReadActivity"></activity>
+        <activity android:name=".ChildReadActivity" />
+        <activity android:name=".ChildTestamemtActivity" />
+        <activity android:name=".KinderTestamemtActivity"></activity>
     </application>
 
 </manifest>

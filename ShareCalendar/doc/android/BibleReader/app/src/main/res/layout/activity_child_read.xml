@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context="com.example.p048293.biblereader.ChildReadActivity">
 
     <LinearLayout
@@ -22,6 +23,7 @@
             android:background="@drawable/button_round_boder"
             android:textSize="30dp"
             android:text="◁"
+            android:layout_gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -35,6 +37,7 @@
             android:background="@drawable/button_round_boder"
             android:textSize="30dp"
             android:text="◀"
+            android:layout_gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -45,8 +48,10 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:textSize="30dp"
-            android:text="2018-12"
-            android:textColor="#BDBDBD"
+            android:text="2018-01"
+            android:layout_gravity="center_vertical"
+            android:textColor="#000000"
+            android:background="#BDBDBD"
             android:textAlignment="center" />
 
         <Button
@@ -59,6 +64,7 @@
             android:background="@drawable/button_round_boder"
             android:textSize="30dp"
             android:text="▶"
+            android:layout_gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -72,6 +78,7 @@
             android:background="@drawable/button_round_boder"
             android:textSize="30dp"
             android:text="▷"
+            android:layout_gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
