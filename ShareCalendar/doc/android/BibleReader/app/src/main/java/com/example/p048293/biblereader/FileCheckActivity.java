@@ -3,6 +3,7 @@ package com.example.p048293.biblereader;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -171,31 +172,58 @@ public class FileCheckActivity extends AppCompatActivity {
             }
             br.close();
 
+            String externalPath = getExternalPath() + "/Download";
+//            File downloadDir = new File(externalPath + "/BibleReader");  // Download/BibleReader 폴더
+
             // 리스트파일에서 선택한 차수 빼고 나머지 다시 기록
             File fileList = new File(getFilesDir() + "/readHist" + bookSe + "List.txt");
+  //          File fileListDown = new File(downloadDir + "/readHist" + bookSe + "List.txt");  // /Download/ 몰더 백업파일
+
             if (fileList.exists()) {
                 fileList.delete();
-
                 BufferedWriter bw = new BufferedWriter(new FileWriter(fileList, true));
                 bw.write(newList);
                 bw.close();
+
+/*
+                fileListDown.delete();
+                BufferedWriter bwDown = new BufferedWriter(new FileWriter(fileListDown, true));
+                bwDown.write(newList);
+                bwDown.close();
+*/
+
             }
 
             // 선택한 차수 읽기 기록 삭제
             File file = new File(getFilesDir() + "/readHist" + bookSe + "_" + spinner2Pos + ".txt");
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
-            bw.write("");
-            bw.close();
-
             if (file.exists()) {
                 file.delete();
             }
+/*
+            File fileDown = new File(downloadDir + "/readHist" + bookSe + "_" + spinner2Pos + ".txt");
+            if (fileDown.exists()) {
+                fileDown.delete();
+            }
+*/
 
             readHistList(textView001, spinner2);
             readHist(textView002, nowPosition);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getExternalPath(){
+        String sdPath = "";
+        String ext = Environment.getExternalStorageState();
+        if(ext.equals(Environment.MEDIA_MOUNTED)){
+            sdPath = Environment.getExternalStorageDirectory().getAbsolutePath()+
+                    "/";
+            //sdPath = "/mnt/sdcard/";
+        }
+        else
+            sdPath = getFilesDir() + "";
+//        Toast.makeText(this,sdPath,Toast.LENGTH_SHORT).show();
+        return sdPath;
     }
 }

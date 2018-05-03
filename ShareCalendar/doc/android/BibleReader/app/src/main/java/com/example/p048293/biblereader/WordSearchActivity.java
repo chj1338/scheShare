@@ -1,8 +1,10 @@
 package com.example.p048293.biblereader;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -76,7 +78,7 @@ public class WordSearchActivity extends AppCompatActivity implements TextView.On
             public void onClick(View v) {
                 textView.setText("검색중.....");
                 imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);  // 키보드 숨기기
-                readBook(textView, editText);
+                readBook();
             }
         });
 
@@ -134,8 +136,46 @@ public class WordSearchActivity extends AppCompatActivity implements TextView.On
     }
 
     // book index 조합으로 찾기
-    public void readBook(TextView textView, EditText editText) {
-        String word = editText.getText().toString();
+    // ProgressDialog 사용을 위해 Thread 사용
+    private ProgressDialog loagindDialog;
+    private void readBook() {
+        loagindDialog = ProgressDialog.show(this, null, "Loading...");
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                // 1. 필요한 작업
+                // Thread에서는 UI 컨트롤이 불가하다. 필요시 runOnUiThread 사용
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String word = editText.getText().toString();
+                        SpannableStringBuilder sb = wordSearch(word);
+
+                        textView.setText(sb);
+
+                        ScrollView scrollView = (ScrollView)findViewById(R.id.scrollView3);
+                        scrollView.setScrollY(0);
+
+                        handler.sendEmptyMessage(0);
+                    }
+                });
+            }
+        });
+        thread.start();
+    }
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            loagindDialog.dismiss(); // 다이얼로그 삭제
+            // 2. 이후 처리
+        }
+    };
+
+
+
+
+    public SpannableStringBuilder wordSearch(String word) {
+        String readStr = "";
+
         int wordCnt = 0;    // 구절 개수
 
         try {
@@ -146,7 +186,6 @@ public class WordSearchActivity extends AppCompatActivity implements TextView.On
                 textView.setText("두글자 이상 검색 가능합니다.");
                 editText.requestFocus();
             } else {
-                String readStr = "";
                 String line = "";
 
                 //구약
@@ -172,24 +211,6 @@ public class WordSearchActivity extends AppCompatActivity implements TextView.On
                 }
                 br2.close();
                 readStr += "\n\n\n\n\n";
-
-                // word 에 해당되는 단어마다 색칠하기
-                SpannableStringBuilder sb = new SpannableStringBuilder(readStr);
-                String tempReadStr = readStr;
-
-                int startIndex = tempReadStr.indexOf(word);
-                int nowIndex = startIndex;
-                while ( tempReadStr.contains(word) ) {
-                    sb.setSpan(new ForegroundColorSpan(Color.RED), nowIndex, nowIndex + word.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-
-                    tempReadStr = tempReadStr.substring(startIndex + word.length());
-                    startIndex = tempReadStr.indexOf(word);
-                    nowIndex = startIndex + (readStr.length() - tempReadStr.length());
-                }
-
-                textView.setText(sb);
-
-                Toast.makeText(this, wordCnt + "개의 구절이 검색되었습니다.", Toast.LENGTH_SHORT).show();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -198,15 +219,30 @@ public class WordSearchActivity extends AppCompatActivity implements TextView.On
             e.printStackTrace();
         }
 
-        ScrollView scrollView = (ScrollView)findViewById(R.id.scrollView3);
-        scrollView.setScrollY(0);
+        // word 에 해당되는 단어마다 색칠하기
+        SpannableStringBuilder sb = new SpannableStringBuilder(readStr);
+        String tempReadStr = readStr;
+
+        int startIndex = tempReadStr.indexOf(word);
+        int nowIndex = startIndex;
+        while ( tempReadStr.contains(word) ) {
+            sb.setSpan(new ForegroundColorSpan(Color.RED), nowIndex, nowIndex + word.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+
+            tempReadStr = tempReadStr.substring(startIndex + word.length());
+            startIndex = tempReadStr.indexOf(word);
+            nowIndex = startIndex + (readStr.length() - tempReadStr.length());
+        }
+
+        //Toast.makeText(this, wordCnt + "개의 구절이 검색되었습니다.", Toast.LENGTH_SHORT).show();
+
+        return sb;
     }
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         //오버라이드한 onEditorAction() 메소드
         if(v.getId() == R.id.editText && actionId == EditorInfo.IME_ACTION_DONE){ // 뷰의 id를 식별, 키보드의 완료 키 입력 검출
-            readBook(textView, editText);
+            readBook();
         }
         return false;
     }

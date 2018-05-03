@@ -17,7 +17,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:background="@drawable/button_round_boder"
-            android:onClick="btnRestoreBackup"
             android:text="백업파일 복구"
             android:textSize="25dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -47,6 +46,34 @@
             android:background="@drawable/button_round_boder"
             android:onClick="btnGoDisplay"
             android:text="보기설정"
+            android:textSize="25dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="55dp" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_round_boder"
+            android:onClick="btnGoHelp"
+            android:text="심플성경이란?"
+            android:textSize="25dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="55dp" />
+
+        <Button
+            android:id="@+id/button90"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_round_boder"
+            android:onClick="btnGoDaekwang"
+            android:text="대광교회 소식"
             android:textSize="25dp"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="55dp" />

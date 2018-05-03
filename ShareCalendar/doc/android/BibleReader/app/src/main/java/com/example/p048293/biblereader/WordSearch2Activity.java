@@ -1,5 +1,6 @@
 package com.example.p048293.biblereader;
 
+import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
@@ -8,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -44,13 +46,14 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
     InputMethodManager imm;
 
     private String backColor = "-16777216";      // 배경색
-    private String fontColor = "-4342339";      // 글자색
-    private float fontSize = 20;         // 글자크기
-    private int scrollSpeed = 1;        // 스크롤 속도
-    int scrollDist = 7139;      // 스크롤 전체길이 7139
-    int scrollTime = 145000;    // 스크롤 시간  145000
+    private String fontColor = "-4342339";       // 글자색
+    private float fontSize = 20;                  // 글자크기
+    private int scrollSpeed = 1;                  // 스크롤 속도
+    int scrollDist = 7139;                         // 스크롤 전체길이 7139
+    int scrollTime = 145000;                       // 스크롤 시간  145000
 
     private EditText searchWord;
+    TableLayout tableLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +65,14 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
         final Button button3 = (Button)findViewById(R.id.button3);
         final Button btnFontSize = (Button)findViewById(R.id.btnFontSize);
 
-        final TableLayout tableLayout = (TableLayout)findViewById(R.id.tableLayout1);
+        tableLayout = (TableLayout)findViewById(R.id.tableLayout1);
         tableLayout.removeAllViewsInLayout();
         tableLayout.setStretchAllColumns(true);
 
         imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
 
         searchWord.setOnEditorActionListener(this); //mEditText와 onEditorActionListener를 연결
+        imm.hideSoftInputFromWindow(searchWord.getWindowToken(), 0);  // 키보드 숨기기
 
         // 화면 포커스를 강제로 맨 위로
         WindowManager.LayoutParams wp = getWindow().getAttributes();
@@ -99,7 +103,8 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
             @Override
             public void onClick(View v) {
                 imm.hideSoftInputFromWindow(searchWord.getWindowToken(), 0);  // 키보드 숨기기
-                readBook(tableLayout, searchWord);
+                //readBook(tableLayout, searchWord);
+                readBook2();
             }
         });
 
@@ -115,7 +120,8 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
                     fontSize = fontSize + 5;
                 }
 
-                readBook(tableLayout, searchWord);
+                //readBook(tableLayout, searchWord);
+                readBook2();
             }
         });
     }
@@ -124,7 +130,7 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
     //config 파일 읽어서 반영
     public void readConfig(TableLayout tableLayout) {
         try {
-            String line = null;
+            String line = "";
 
             // 화면설정 읽어서 반영
             String lineDisp = "";
@@ -151,9 +157,41 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
         }
     }
 
+
+    // ProgressDialog 사용을 위해 Thread 사용
+    private ProgressDialog loagindDialog;
+    private void readBook2() {
+        loagindDialog = ProgressDialog.show(this, null, "Loading...");
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                // 1. 필요한 작업
+                // Thread에서는 UI 컨트롤이 불가하다. 필요시 runOnUiThread 사용
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        readBook(tableLayout, searchWord);
+
+                        handler.sendEmptyMessage(0);
+                    }
+                });
+            }
+        });
+        thread.start();
+    }
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            loagindDialog.dismiss(); // 다이얼로그 삭제
+            // 2. 이후 처리
+        }
+    };
+
+
     // searchWord 찾기
     public void readBook(final TableLayout tableLayout, EditText searchWord) {
         tableLayout.removeAllViewsInLayout();
+
+        imm.hideSoftInputFromWindow(searchWord.getWindowToken(), 0);  // 키보드 숨기기
 
         String word = searchWord.getText().toString();
         int wordCnt = 0;    // 구절 개수
@@ -164,10 +202,12 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
         try {
             if(word == null || word.equals("") || word == "" || word.equals(null)) {
                 searchWord.requestFocus();
-                setTextStr(tableLayout, row, text, "검색어가 없습니다.", word);
+                //setTextStr(tableLayout, row, text, "검색어가 없습니다.", word);
+                Toast.makeText(this, "검색어가 없습니다.", Toast.LENGTH_SHORT).show();
             } else if(word.length() <= 1) {
                 searchWord.requestFocus();
-                setTextStr(tableLayout, row, text, "두 글자 이상 검색 가능합니다.", word);
+                //setTextStr(tableLayout, row, text, "두 글자 이상 검색 가능합니다.", word);
+                Toast.makeText(this, "두 글자 이상 검색 가능합니다.", Toast.LENGTH_SHORT).show();
             } else {
                 String line = "";
 
@@ -263,14 +303,14 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
     }
 
 
-
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         TableLayout tableLayout = (TableLayout)findViewById(R.id.tableLayout1);
 
         //오버라이드한 onEditorAction() 메소드
         if(v.getId() == R.id.editText && actionId == EditorInfo.IME_ACTION_DONE){ // 뷰의 id를 식별, 키보드의 완료 키 입력 검출
-            readBook(tableLayout, searchWord);
+            //readBook(tableLayout, searchWord);
+            readBook2();
         }
         return false;
     }
@@ -311,5 +351,3 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
         pasteText.setText(item.getText());
     }
 }
-
-

@@ -1,10 +1,14 @@
 package com.example.p048293.biblereader;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -25,7 +29,14 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class ReadHistActivity extends AppCompatActivity {
+    CommonActivity commonActivity = new CommonActivity();
+
     String bookSe = "OLD";
+    int status = 1;
+
+    Spinner spinner1;
+    Spinner spinner2;
+    TableLayout tableLayout1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +44,34 @@ public class ReadHistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_read_hist);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   // 화면꺼짐 방지
 
-        final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
-        final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
         final ScrollView scrollView3 = (ScrollView) findViewById(R.id.scrollView3);
 
-        final TableLayout tableLayout1 = (TableLayout)findViewById(R.id.tableLayout1);
+        tableLayout1 = (TableLayout)findViewById(R.id.tableLayout1);
         tableLayout1.removeAllViewsInLayout();
         tableLayout1.setStretchAllColumns(true);
 
+        String nowDate = commonActivity.toDate();
+        Toast.makeText(this, nowDate, Toast.LENGTH_SHORT).show();
+
         initSpinner(spinner1, spinner2);
-        setGrid(spinner2, tableLayout1);
+
+        spinner1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                status = 1;
+                return false;
+            }
+        });
+
+        spinner2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                status = 1;
+                return false;
+            }
+        });
 
         // spinner1 리스너
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -76,7 +105,12 @@ public class ReadHistActivity extends AppCompatActivity {
                 }
 
                 spinner2.setSelection(0);
-                setGrid(spinner2, tableLayout1);
+
+                if(status == 1) {
+                    //setGrid(spinner2, tableLayout1);
+                    setGridThread();
+                    status = 0;
+                }
             }
 
             @Override
@@ -90,8 +124,12 @@ public class ReadHistActivity extends AppCompatActivity {
             // 장 combo item 셋팅
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                setGrid(spinner2, tableLayout1);
-                scrollView3.setScrollY(0);
+                if(status == 1) {
+                    //setGrid(spinner2, tableLayout1);
+                    setGridThread();
+                    //scrollView3.setScrollY(0);
+                    status = 0;
+                }
             }
 
             @Override
@@ -134,6 +172,64 @@ public class ReadHistActivity extends AppCompatActivity {
         }
     }
 
+
+    // book index 조합으로 찾기
+    // ProgressDialog 사용을 위해 Thread 사용
+    private ProgressDialog loagindDialog;
+    private void setGridThread() {
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                // 1. 필요한 작업
+                // Thread에서는 UI 컨트롤이 불가하다. 필요시 runOnUiThread 사용
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //setGrid(spinner2, tableLayout1);
+                        loagindDialog = ProgressDialog.show(ReadHistActivity.this, null, "0진행중...");
+                    }
+                });
+
+                handler.sendEmptyMessage(0);
+            }
+        });
+        thread.start();
+    }
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            setGrid(spinner2, tableLayout1);
+
+            loagindDialog.dismiss(); // 다이얼로그 삭제
+            // 2. 이후 처리
+        }
+    };
+
+
+    // book index 조합으로 찾기
+    // ProgressDialog 사용을 위해 Thread 사용
+    private void setGridThread2() {
+        loagindDialog = ProgressDialog.show(this, null, "Loading...");
+
+        try {
+            Thread.sleep(3000);
+
+            // 1. 필요한 작업
+            // Thread에서는 UI 컨트롤이 불가하다. 필요시 runOnUiThread 사용
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setGrid(spinner2, tableLayout1);
+
+                    handler.sendEmptyMessage(0);
+                }
+            });
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     // 읽기 표 생성
     public void setGrid(Spinner spinner2, TableLayout tableLayout1) {
         ArrayAdapter adapter_ac_name;
@@ -155,6 +251,7 @@ public class ReadHistActivity extends AppCompatActivity {
         try {
             String line = "";
             BufferedReader br = new BufferedReader(new FileReader(getFilesDir() + "/readHist" + bookSe + "_" + chaSu + ".txt"));
+
             while ((line = br.readLine()) != null) {
                 readStr.add(line);
             }
@@ -184,6 +281,7 @@ public class ReadHistActivity extends AppCompatActivity {
                 row[tr].setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
 
                 int nowPage = tr * 10;
+
                 for (int td = 0; td < tdCt; td++) {              // for문을 이용한 칸수 (TD)
                     text[tr][td] = new TextView(this);
 
@@ -220,10 +318,16 @@ public class ReadHistActivity extends AppCompatActivity {
                     for(int readHist=0; readHist<readStr.size(); readHist++) {
                         String[] readStrTemp = readStr.get(readHist).split(":");
 
-                        if(td == 0) {
-                            ;
-                        } else if (nowBook.equals(readStrTemp[1]) && (nowPage + td) == Integer.parseInt(readStrTemp[2]) && (nowPage + td) != 0) {
-                            text[tr][td].setBackgroundColor(Color.CYAN);
+                        try {
+                            if (td == 0 || (nowPage + td) == 0) {
+                                ;
+                            } else if (nowBook.equals(readStrTemp[1]) && (nowPage + td) == Integer.parseInt(readStrTemp[2]) ) {
+                                text[tr][td].setBackgroundColor(Color.CYAN);
+
+                                readHist = readStr.size(); // 찾았으면 종료
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
 

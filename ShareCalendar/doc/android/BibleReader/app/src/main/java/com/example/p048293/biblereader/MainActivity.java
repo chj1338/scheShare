@@ -10,14 +10,15 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 
@@ -35,6 +36,28 @@ public class MainActivity extends AppCompatActivity {
 
         configBackup(); // 시작하면 주요파일 백업
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.quick_action:
+                Toast.makeText(this, "Quick Action", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_settings:
+                Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     void checkPermission() {
         int permissioninfo = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -65,128 +88,45 @@ public class MainActivity extends AppCompatActivity {
         String sdPath = "";
         String ext = Environment.getExternalStorageState();
         if(ext.equals(Environment.MEDIA_MOUNTED)){
-            sdPath = Environment.getExternalStorageDirectory().getAbsolutePath()+
-                    "/";
+            sdPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
             //sdPath = "/mnt/sdcard/";
-        }
-        else
+        } else {
             sdPath = getFilesDir() + "";
-//        Toast.makeText(this,sdPath,Toast.LENGTH_SHORT).show();
+        }
+
+        //        Toast.makeText(this,sdPath,Toast.LENGTH_SHORT).show();
         return sdPath;
     }
 
-    // config, Hist 파일 백업
+    // config, Hist 파일 복원
     public void configBackup() {
+        //String downloadName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
+        String externalPath = getExternalPath() + "/Download";
+        File downloadDir = new File(externalPath + "/BibleReader");  // Download/BibleReader 폴더
+
+        // Download/BibleReader 폴더가 없으면 생성
+        if(!downloadDir.exists()){
+            downloadDir.mkdir();
+        }
+
+        // 우선 없는 파일 복원
         try {
-            //String downloadName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
-            String externalPath = getExternalPath() + "/Download";
-            File downloadDir = new File(externalPath + "/BibleReader");  // Download/BibleReader 폴더
+            // 초기 복원
+            File[] tempRestor = new File(downloadDir.toString()).listFiles();
 
-            //new java.io.File(downloadDir.getPath()).setReadable(true, false);
+            for(int j=0; j<tempRestor.length; j++) {
+                String tempFileName = tempRestor[j].getName();
+                File fileNameOrg = new File(getFilesDir() + "/" + tempFileName); // 원본파일
+                File fileNameDown = new File(downloadDir + "/" + tempFileName);  // Download/BibleReader 내 파일
 
-            // Download/BibleReader 폴더가 없으면 생성
-            if(!downloadDir.exists()){
-                downloadDir.mkdir();
-                //Log.d("===== <backup>", downloadDir + " 생성 !!!");
-            }
+//                Log.d("1=====Restore", fileNameOrg.getPath());
+//                Log.d("2=====Restore", fileNameDown.getPath());
 
-            ArrayList<String> fileArray = new ArrayList<String>();
-            fileArray.add("configDisp.txt");
-            fileArray.add("configOld.txt");
-            fileArray.add("configNew.txt");
-            fileArray.add("readHistOLDList.txt");
-            fileArray.add("readHistNEWList.txt");
-
-            String line = "";
-            // 구약
-            if(new File(getFilesDir() + "/readHistOLDList.txt").exists()) { // 신버젼 파일 존재여부
-                BufferedReader br = new BufferedReader(new FileReader(getFilesDir() + "/readHistOLDList.txt"));
-                while ((line = br.readLine()) != null) {
-                    fileArray.add(line);
-                }
-                br.close();
-            } else if(new File(getFilesDir() + "readHistOLDList.txt").exists()) { // 구버젼 파일 존재여부
-                BufferedReader br = new BufferedReader(new FileReader(getFilesDir() + "readHistOLDList.txt"));
-                while ((line = br.readLine()) != null) {
-                    fileArray.add(line);
-                }
-                br.close();
-            }
-
-            // 신약
-            if(new File(getFilesDir() + "/readHistNEWList.txt").exists()) { // 신버젼 파일 존재여부
-                BufferedReader br = new BufferedReader(new FileReader(getFilesDir() + "/readHistNEWList.txt"));
-                while ((line = br.readLine()) != null) {
-                    fileArray.add(line);
-                }
-                br.close();
-            } else if(new File(getFilesDir() + "readHistNEWList.txt").exists()) { // 구버젼 파일 존재여부
-                BufferedReader br = new BufferedReader(new FileReader(getFilesDir() + "readHistNEWList.txt"));
-                while ((line = br.readLine()) != null) {
-                    fileArray.add(line);
-                }
-                br.close();
-            }
-
-            // 신버젼용
-            //Log.d("===== <backup>", " 신버젼 백업");
-            for(int i=0; i<fileArray.size(); i++) {
-                File fileNameOrg = new File(getFilesDir() + "/" + fileArray.get(i).toString()); // 원본파일
-                File fileNameDown = new File(downloadDir + "/" + fileArray.get(i).toString());  // Download/BibleReader 내 파일
-
-                // 파일 백업
-                if (fileNameOrg.exists()) {
-                    if (fileNameDown.exists()) {
-                        fileNameDown.delete();                    // Download/BibleReader 폴더내 파일이 있으면 삭제
-                    }
-
-                    try {
-                        filecopy(fileNameOrg, fileNameDown);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                if(!fileNameOrg.exists()) { // 없으면 기존파일로 복원
+                    filecopy(fileNameDown, fileNameOrg);
                 }
             }
-
-            // 구버젼용
-            //Log.d("===== <backup>", " 구버젼 백업");
-            for(int i=0; i<fileArray.size(); i++) {
-                File fileNameOrg = new File(getFilesDir() + fileArray.get(i).toString());       // 원본파일
-                File fileNameDown = new File(downloadDir + "/" + fileArray.get(i).toString());  // Download/BibleReader 내 파일
-
-                // 구버젼이 존재하고 백업이 없으면.
-                if(fileNameOrg.exists() && !fileNameDown.exists()) {
-                    try {
-                        filecopy(fileNameOrg, fileNameDown);
-                        fileNameOrg.delete();                    // 구버젼은 삭제
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-
-            // 복원용
-            //Log.d("===== <backup>", " 복원");
-            for(int i=0; i<fileArray.size(); i++) {
-                File fileNameOrg = new File(getFilesDir() + "/" + fileArray.get(i).toString()); // 원본파일
-                File fileNameDown = new File(downloadDir + "/" + fileArray.get(i).toString());  // Download/BibleReader 내 파일
-
-                // 초기 복원
-                if(!fileNameOrg.exists() && fileNameDown.exists()) {
-                //if(fileNameDown.exists()) {
-                    try {
-                        filecopy(fileNameDown, fileNameOrg);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            //Toast.makeText(this, "주요 파일을 백업했습니다.", Toast.LENGTH_SHORT).show();
-
         } catch (Exception e) {
-            Log.d("Exception", e.toString());
             e.printStackTrace();
         }
     }
@@ -197,8 +137,6 @@ public class MainActivity extends AppCompatActivity {
         FileOutputStream fos = null;
         FileChannel in = null;
         FileChannel out = null;
-
-        //Log.d("===== <filecopy>", from + " ==> " + to);
 
         try {
             fis = new FileInputStream(from);
@@ -223,7 +161,39 @@ public class MainActivity extends AppCompatActivity {
         long tempTime = System.currentTimeMillis();
         long intervalTime = tempTime - backPressedTime;
 
+        String externalPath = getExternalPath() + "/Download";
+        File downloadDir = new File(externalPath + "/BibleReader");  // Download/BibleReader 폴더
+
         if (0 <= intervalTime && FINSH_INTERVAL_TIME >= intervalTime) {
+            // 백업
+            try {
+                // 파일목록 추출
+                File[] tempDir = new File(getFilesDir().toString()).listFiles();
+
+                for(int i=0; i<tempDir.length; i++) {
+                    String tempFileName = tempDir[i].getName();
+                    File fileNameOrg = new File(getFilesDir() + "/" + tempFileName); // 원본파일
+                    File fileNameDown = new File(downloadDir + "/" + tempFileName);  // Download/BibleReader 내 파일
+
+//                Log.d("1=====Backup", fileNameOrg.getPath());
+//                Log.d("2=====Backup", fileNameDown.getPath());
+
+                    // 파일 백업
+                    if (fileNameDown.exists()) {
+                        fileNameDown.delete();                    // Download/BibleReader 폴더내 파일이 있으면 삭제
+                    }
+
+                    filecopy(fileNameOrg, fileNameDown);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            // 직전 마지막 화면은 살아있기 때문에 강제로 메인화면 호출 후 종료해준다.
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
             moveTaskToBack(true);
             finish();
             android.os.Process.killProcess(android.os.Process.myPid());
@@ -260,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnGoSearch2(View v) {
-        Intent intent0032 = new Intent(this, WordSearch2Activity.class);
+        Intent intent0032 = new Intent(this, WordSearchActivity.class);
         startActivity(intent0032);
     }
 
@@ -287,6 +257,16 @@ public class MainActivity extends AppCompatActivity {
     public void btnGoChildRead(View v) {
         Intent intent008 = new Intent(this, ChildReadActivity.class);
         startActivity(intent008);
+    }
+
+    public void btnGoAdult6(View v) {
+        Intent intent009 = new Intent(this, Adult6ReadActivity.class);
+        startActivity(intent009);
+    }
+
+    public void btnGoAdultTotal(View v) {
+        Intent intent010 = new Intent(this, AdultTotalReadActivity.class);
+        startActivity(intent010);
     }
 
 }

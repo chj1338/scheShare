@@ -15,20 +15,19 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:orientation="horizontal"
-        android:layout_gravity="center_vertical">
+        android:gravity="right" >
 
         <TextView
             android:id="@+id/calText"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:textSize="30dp"
-            android:text="2018-01"
-            android:layout_gravity="center_vertical"
+            android:textSize="20dp"
+            android:gravity="center"
             android:textColor="#000000"
             android:background="#BDBDBD"
+            android:text="2018-01-01"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,13 +48,9 @@
 
         <Button
             android:id="@+id/btnAutoScroll"
-            android:layout_width="40dp"
+            android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/btnFontSize"
             android:layout_toRightOf="@+id/btnFontSize"
             android:background="@drawable/button_round_boder"
@@ -66,13 +61,9 @@
 
         <Button
             android:id="@+id/btnStopScroll"
-            android:layout_width="40dp"
+            android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/btnFontSize"
             android:layout_toRightOf="@+id/btnFontSize"
             android:background="@drawable/button_round_boder"
@@ -87,26 +78,36 @@
         android:id="@+id/inner02"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
+        android:layout_marginTop="48dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:orientation="horizontal"
-        android:layout_gravity="center_vertical">
+        android:gravity="right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
 
         <TextView
             android:id="@+id/sentence"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
             android:layout_marginRight="8dp"
-            android:textSize="30dp"
-            android:text="2018-01"
-            android:layout_gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:textSize="20dp"
+            android:gravity="center"
             android:textColor="#000000"
             android:background="#BDBDBD"
+            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnReadHist"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_round_boder"
+            android:textSize="20dp"
+            android:text="완독" />
 
     </LinearLayout>
 
@@ -116,8 +117,8 @@
         android:layout_height="match_parent"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginBottom="8dp"
         android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -135,23 +136,5 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent" >
-
-    <Button
-        android:id="@+id/btnReadHist"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/button_round_boder"
-        android:textSize="20dp"
-        android:text="완독" />
-    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

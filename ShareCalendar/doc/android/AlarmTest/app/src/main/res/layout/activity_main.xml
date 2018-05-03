@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:background="#BDBDBD"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="horizontal"
+            android:background="@drawable/bldc_top11">
+            <LinearLayout
+                android:layout_width="240px" android:layout_height="match_parent"
+                android:orientation="vertical" >
+                <TextView
+                    android:id="@+id/textTitle"
+                    android:text="BLDC"
+                    android:layout_width="240px" android:layout_height="wrap_content"
+                    android:layout_marginTop="2px" android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center_vertical|center_horizontal" />
+            </LinearLayout>
+        </LinearLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TableLayout
+            android:layout_width="fill_parent" android:layout_height="wrap_content" >
+            <TableRow
+                    android:layout_width="match_parent" android:layout_height="match_parent" >
+                <LinearLayout
+                    android:id="@+id/layout01"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout02"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout03"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+            </TableRow>
+            <TableRow
+                    android:layout_width="match_parent" android:layout_height="match_parent" >
+                <LinearLayout
+                    android:id="@+id/layout04"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout05"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout06"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+            </TableRow>
+            <TableRow
+                    android:layout_width="match_parent" android:layout_height="match_parent" >
+                <LinearLayout
+                    android:id="@+id/layout07"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout08"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout09"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+            </TableRow>
+            <TableRow
+                    android:layout_width="match_parent" android:layout_height="match_parent" >
+                <LinearLayout
+                    android:id="@+id/layout10"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout11"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout12"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:background="@drawable/alarm_off">
+                </LinearLayout>
+             </TableRow>
+            <TableRow
+                android:layout_width="match_parent" android:layout_height="match_parent" >
+                <LinearLayout
+                    android:id="@+id/layout13"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout14"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout15"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+            </TableRow>
+            <TableRow
+                    android:layout_width="match_parent" android:layout_height="match_parent" >
+                <LinearLayout
+                    android:id="@+id/layout16"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:background="@drawable/alarm_off">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout17"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout18"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content">
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+
+    </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="horizontal"
+            android:background="@drawable/bldc_top11" >
+
+            <LinearLayout
+                android:layout_width="240px" android:layout_height="match_parent"
+                android:orientation="vertical" >
+                <TextView
+                    android:text="  BLDC \u0026 FFU Group"
+                    android:layout_width="240px" android:layout_height="wrap_content"
+                    android:layout_marginTop="2px" android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center_vertical|center_horizontal" />
+                <TextView
+                    android:text="     sungMi serial"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:textSize="14sp" android:textColor="#FFFF00" android:gravity="left"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+

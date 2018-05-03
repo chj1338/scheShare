@@ -65,6 +65,18 @@ public class SettingMenuActivity extends AppCompatActivity {
         startActivity(intent001);
     }
 
+    // 대광교회
+    public void btnGoDaekwang(View v) {
+        Intent intent001 = new Intent(this, DaekwangNoticeActivity.class);
+        startActivity(intent001);
+    }
+
+    // 도움말
+    public void btnGoHelp(View v) {
+        Intent intent001 = new Intent(this, HelpActivity.class);
+        startActivity(intent001);
+    }
+
     // 파일복원
     public void restoreFile() {
         String externalPath = getExternalPath() + "/Download";
@@ -73,8 +85,10 @@ public class SettingMenuActivity extends AppCompatActivity {
         File[] fileArray = downloadDir.listFiles();
 
         for(int i=0; i<fileArray.length; i++) {
-            File fileNameOrg = new File(getFilesDir() + "/" + fileArray[i].toString()); // 원본파일
-            File fileNameDown = new File(downloadDir + "/" + fileArray[i].toString());  // Download/BibleReader 내 파일
+            File fileNameOrg = new File(getFilesDir() + "/" + fileArray[i].getName().toString()); // 원본파일
+            File fileNameDown = new File(downloadDir + "/" + fileArray[i].getName().toString());  // Download/BibleReader 내 파일
+
+//            Log.d("=======", fileNameOrg.getPath() + " : " + fileNameDown.getName());
 
             // 초기 복원
             try {
@@ -97,7 +111,7 @@ public class SettingMenuActivity extends AppCompatActivity {
         }
         else
             sdPath = getFilesDir() + "";
-        Toast.makeText(this,sdPath,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,sdPath,Toast.LENGTH_SHORT).show();
         return sdPath;
     }
 
@@ -107,8 +121,6 @@ public class SettingMenuActivity extends AppCompatActivity {
         FileOutputStream fos = null;
         FileChannel in = null;
         FileChannel out = null;
-
-        Log.d("===== <filecopy>", from + " ==> " + to);
 
         try {
             fis = new FileInputStream(from);

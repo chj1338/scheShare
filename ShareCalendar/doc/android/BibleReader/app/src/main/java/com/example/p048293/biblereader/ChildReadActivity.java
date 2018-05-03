@@ -2,19 +2,15 @@ package com.example.p048293.biblereader;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.view.ViewParentCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,9 +20,7 @@ import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class ChildReadActivity extends AppCompatActivity {
     int nowYear = 0;    // 올해
@@ -171,21 +165,37 @@ public class ChildReadActivity extends AppCompatActivity {
         int tempDay = 1;    // 달력에 표시할 날짜
         int tempColumn = 0; // 전체 칸수
 
+
+        //읽은 페이지 기록 파일
+        ArrayList<String> childReadStr = new ArrayList<String>();
+        try {
+            String line = "";
+            BufferedReader br = new BufferedReader(new FileReader(getFilesDir() + "/childReadHist_" + nowYear + ".txt"));
+            while ((line = br.readLine()) != null) {
+                childReadStr.add(line);
+            }
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         for(int tr=0; tr<trCt; tr++) {
             row[tr] = new TableRow(this);
-            row[tr].setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT, 1));
+            row[tr].setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT, 1));
 
             for(int td = 0; td < tdCt; td++) {
                 dayTtext[tr][td] = new TextView(this);
-                TableRow.LayoutParams tdParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+                TableRow.LayoutParams tdParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1);
                 tdParams.setMargins(1, 1, 1, 1);
 
-                if(tr == 0) {
+                if(tr == 0) {   // 요일 셋팅
+                    dayTtext[tr][td].setHeight(50);
                     dayTtext[tr][td].setText(dayName[td]);
                     dayTtext[tr][td].setTextColor(dayColor[td]);     // 폰트컬러
                     dayTtext[tr][td].setTextSize(20);                // 폰트사이즈
                     dayTtext[tr][td].setGravity(Gravity.CENTER);    // 폰트정렬
-                    dayTtext[tr][td].setBackgroundColor(Color.GRAY);  // 배경색
+                    dayTtext[tr][td].setBackgroundColor(Color.DKGRAY);  // 배경색
 
                     dayTtext[tr][td].setLayoutParams(tdParams);
                     row[tr].addView(dayTtext[tr][td]);
@@ -196,13 +206,22 @@ public class ChildReadActivity extends AppCompatActivity {
                     // 오늘 읽을 구절
                     String readStr = "";
                     String tempDate = "";
-                    if(tempColumn < 10) {
-                        tempDate = "" + nowMon;
-                        tempDate += "0";
-                        tempDate += tempColumn;
-                    } else  {
-                        tempDate = nowMon + "" + tempColumn;
+
+                    // 달이 1자리 이면 앞에 0 붙이기
+                    if(nowMon < 10) {
+                        tempDate += "0" + nowMon;
+                    } else {
+                        tempDate += "" + nowMon;
                     }
+
+                    // 날짜가 1자리 이면 앞에 0 붙이기
+                    if(tempColumn < 10) {
+                        tempDate += "0" + tempColumn;
+                    } else  {
+                        tempDate += "" + tempColumn;
+                    }
+
+                    String readStrTemp = ""; // 성경읽기 화면으로 넘겨줄 내용
 
                     try {
                         String line = "";
@@ -210,8 +229,12 @@ public class ChildReadActivity extends AppCompatActivity {
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
                         while ((line = br.readLine()) != null) {
                             if(line.indexOf(tempDate) > -1) {
-                                //readStr += "\n" + line.replace(tempDate+":", "");
-                                readStr += "\n" + line.substring(9).replace("~", " ~");
+                                readStrTemp += line + "\n"; // 완독 기록용
+
+                                String[] tempDayStr = line.split(":");
+
+                                readStr += "\n" + tempDayStr[2] + "\n";
+                                readStr += tempDayStr[3];
                             }
                         }
                         br.close();
@@ -230,22 +253,35 @@ public class ChildReadActivity extends AppCompatActivity {
                     }
 
                     // 속성 지정
-                    dayTtext[tr][td].setMaxWidth(95);
-                    dayTtext[tr][td].setHeight(150);
+//                    dayTtext[tr][td].setMaxWidth(95);
+//                    dayTtext[tr][td].setMinHeight(280);
                     dayTtext[tr][td].setTextSize(15);                // 폰트사이즈
                     dayTtext[tr][td].setGravity(Gravity.RIGHT|Gravity.TOP);       // 폰트정렬
                     dayTtext[tr][td].setBackgroundColor(Color.GRAY); // 배경색
                     dayTtext[tr][td].setTextColor(dayColor[td]);     // 폰트컬러
                     dayTtext[tr][td].setPadding(1,1,1,1);
 
-                    final String testaStr= readStr;
+                    //읽은 페이지가 존재할 경우 색칠
+                    for(int z=0; z<childReadStr.size(); z++) {
+                        String[] childReadStrTemp = childReadStr.get(z).split(":");
+                        String today = nowYear + tempDate;
+
+                        if (today.equals(childReadStrTemp[0]) || today == childReadStrTemp[0]) {
+                            dayTtext[tr][td].setBackgroundColor(Color.CYAN);
+                        }
+                    }
+
+                    // 읽기 페이지로 이동
+                    final String testaStr= readStrTemp;
                     dayTtext[tr][td].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             try {
                                 String configFile = "/childRead.txt";
                                 File file = new File(getFilesDir() + configFile);
-                                file.delete();
+                                if(file.exists()) {
+                                    file.delete();
+                                }
 
                                 BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
                                 bw.write(testaStr);
@@ -268,4 +304,9 @@ public class ChildReadActivity extends AppCompatActivity {
 
     }
 
+    // back 버튼을 클릭시
+    public void onBackPressed() {
+        Intent intentMain = new Intent(this, MainActivity.class);
+        startActivity(intentMain);
+    }
 }

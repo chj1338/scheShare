@@ -29,7 +29,7 @@ public class DispalySettingActivity extends AppCompatActivity {
     private String backColor = "-16777216";      // 배경색
     private String fontColor = "-4342339";      // 글자색
     private float fontSize = 20;         // 글자크기
-    private int scrollSpeed = 1;        // 스크롤 속도
+    private int scrollSpeed = 5;        // 스크롤 속도
     int scrollDist = 7139;      // 스크롤 전체길이 7139
     int scrollTime = 145000;    // 스크롤 시간  145000
 
@@ -302,13 +302,13 @@ public class DispalySettingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 현재 내용 전체길이
                 scrollDist = textView001.getMeasuredHeight();
-                scrollTime = 7139 / textView001.getMeasuredHeight() * 145000;   // 최초 기준값 - 길이:3719, 시간:145000
+                scrollTime =  textView001.getMeasuredHeight() / 7139 * 145000;   // 최초 기준값 - 길이:3719, 시간:145000
                 //Toast.makeText(DispalySettingActivity.this, textView001.getMeasuredHeight() + " : " + textView001.getBottom() + " : " + textView001.getHeight(), Toast.LENGTH_LONG).show();
 
                 scrollText.setText(scrollSpeed + "");
 
                 objectAnimator.setIntValues(scrollDist); // 전체수행길이
-                objectAnimator.setDuration(scrollTime * scrollSpeed);    // 전체수행시간
+                objectAnimator.setDuration(scrollTime * (6 - scrollSpeed));    // 전체수행시간
                 objectAnimator.setInterpolator(new LinearInterpolator());   // 일정속도로
                 objectAnimator.start();
             }
@@ -317,18 +317,14 @@ public class DispalySettingActivity extends AppCompatActivity {
         btnScrollUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                objectAnimator.cancel();
+                btnScrollStop.callOnClick();
 
-                scrollDist = scrollDist - textView001.getBottom();
-
-                scrollSpeed--;
-                if(scrollSpeed == 0 ) {
-                    scrollSpeed = 1;
-                    Toast.makeText(DispalySettingActivity.this, "최고 속도입니다.", Toast.LENGTH_SHORT).show();
+                //scrollDist = scrollDist - textView001.getBottom();
+                scrollSpeed++;
+                if(scrollSpeed > 5 ) {
+                    scrollSpeed = 5;
+                    Toast.makeText(DispalySettingActivity.this, "최저 속도입니다.", Toast.LENGTH_SHORT).show();
                 }
-
-                objectAnimator.setIntValues(scrollDist); // 전체수행길이
-                objectAnimator.setDuration(scrollTime);    // 전체수행시간
 
                 btnScrollStart.callOnClick();
             }
@@ -337,17 +333,15 @@ public class DispalySettingActivity extends AppCompatActivity {
         btnScrollDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                objectAnimator.cancel();
+                btnScrollStop.callOnClick();
 
-                scrollDist = scrollDist - textView001.getBottom();
-                scrollSpeed++;
-                if(scrollSpeed > 5 ) {
-                    scrollSpeed = 5;
-                    Toast.makeText(DispalySettingActivity.this, "최저 속도입니다.", Toast.LENGTH_SHORT).show();
+                //scrollDist = scrollDist - textView001.getBottom();
+
+                scrollSpeed--;
+                if(scrollSpeed == 0 ) {
+                    scrollSpeed = 1;
+                    Toast.makeText(DispalySettingActivity.this, "최고 속도입니다.", Toast.LENGTH_SHORT).show();
                 }
-
-                objectAnimator.setIntValues(scrollDist); // 전체수행길이
-                objectAnimator.setDuration(scrollTime);    // 전체수행시간
 
                 btnScrollStart.callOnClick();
             }

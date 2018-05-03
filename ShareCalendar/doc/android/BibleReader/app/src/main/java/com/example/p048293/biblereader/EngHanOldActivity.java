@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -43,9 +42,9 @@ public class EngHanOldActivity extends AppCompatActivity {
     private String backColor = "-16777216";      // 배경색
     private String fontColor = "-4342339";      // 글자색
     private float fontSize = 20;         // 글자크기
-    private int scrollSpeed = 1;        // 스크롤 속도
-    int scrollDist = 7139;      // 스크롤 전체길이 7139
-    int scrollTime = 145000;    // 스크롤 시간  145000
+    private int scrollSpeed = 5;        // 스크롤 속도
+    int scrollDist = 7139;                        // 스크롤 전체길이 7139
+    int scrollTime = 145000;                    // 스크롤 시간  145000
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,11 +150,14 @@ public class EngHanOldActivity extends AppCompatActivity {
         btnAutoScroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int maxHeight = tableLayout.getMeasuredHeight();
-                int maxTime = 1000 * (scrollView1.getHeight() / 5);
+                int totalScrollSize = tableLayout.getMeasuredHeight(); // 전체 스크롤 크기
+                int nowScrollY = scrollView1.getScrollY();          // 현재 스크롤 위치
 
-                objectAnimator.setIntValues(maxHeight);
-                objectAnimator.setDuration(maxTime);    // 전체수행시간
+                scrollDist = totalScrollSize;
+                scrollTime = (totalScrollSize - nowScrollY) * 145000 / 7139;   // 최초 기준값 - 길이:3719, 시간:145000
+
+                objectAnimator.setIntValues(scrollDist); // 전체수행길이
+                objectAnimator.setDuration(scrollTime * (6 - scrollSpeed));    // 전체수행시간
                 objectAnimator.setInterpolator(new LinearInterpolator());   // 일정속도로
                 objectAnimator.start();
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context="com.example.p048293.biblereader.KinderReadActivity">
 
     <LinearLayout
@@ -50,6 +51,7 @@
             android:text="2018-01"
             android:layout_gravity="center_vertical"
             android:textColor="#000000"
+            android:background="#BDBDBD"
             android:textAlignment="center" />
 
         <Button

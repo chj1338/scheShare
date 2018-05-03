@@ -1,10 +1,10 @@
 package com.example.p048293.biblereader;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
@@ -29,15 +29,24 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class NewTestamentActivity extends AppCompatActivity {
+    /* NEW OLD 구분용 */
+    String bookSe = "NEW";
     String configFile = "/configNew.txt";
-    int nowPage = 0;    // spinner2 변경용
+    int bible_name_kor = R.array.bible_new_name_kor_ac;
+    int bible_name_kor_ac = R.array.bible_new_name_kor_ac;
+    int bible_page = R.array.bible_new_page;
+    int bible = R.raw.bible_new;
+    Context thisContext = NewTestamentActivity.this;
 
-    private String backColor = "-16777216";      // 배경색
+    /* 화면설정용 */
+    private String backColor = "-16777216";     // 배경색
     private String fontColor = "-4342339";      // 글자색
-    private float fontSize = 20;         // 글자크기
-    private int scrollSpeed = 1;        // 스크롤 속도
-    int scrollDist = 7139;      // 스크롤 전체길이 7139
-    int scrollTime = 145000;    // 스크롤 시간  145000
+    private float fontSize = 20;                // 글자크기
+    private int scrollSpeed = 5;                // 스크롤 속도
+    int scrollDist = 7139;                      // 스크롤 전체길이 7139
+    int scrollTime = 145000;                    // 스크롤 시간  145000
+
+    int nowPage = 0;    // spinner2 변경용
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +68,8 @@ public class NewTestamentActivity extends AppCompatActivity {
         final ObjectAnimator objectAnimator = ObjectAnimator.ofInt(scrollView3, "scrollY", 0);
 
         // 책 combo item 셋팅
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.bible_new_name_kor, android.R.layout.simple_spinner_item);
-        //ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.bible_new_name_kor, R.layout.spinner_item_left);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, bible_name_kor, android.R.layout.simple_spinner_item);
+        //ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.bible_name_kor, R.layout.spinner_item_left);
         adapter.setDropDownViewResource(R.layout.spinner_item_left);
         spinner1.setAdapter(adapter);
 
@@ -77,11 +86,14 @@ public class NewTestamentActivity extends AppCompatActivity {
         btnAutoScroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int maxHeight = textView.getMeasuredHeight();
-                int maxTime = 1000 * (scrollView3.getHeight() / 5);
+                int totalScrollSize = textView.getMeasuredHeight(); // 전체 스크롤 크기
+                int nowScrollY = scrollView3.getScrollY();          // 현재 스크롤 위치
 
-                objectAnimator.setIntValues(maxHeight);
-                objectAnimator.setDuration(maxTime);    // 전체수행시간
+                scrollDist = totalScrollSize;
+                scrollTime = (totalScrollSize - nowScrollY) * 145000 / 7139;   // 최초 기준값 - 길이:3719, 시간:145000
+
+                objectAnimator.setIntValues(scrollDist); // 전체수행길이
+                objectAnimator.setDuration(scrollTime * (6 - scrollSpeed));    // 전체수행시간
                 objectAnimator.setInterpolator(new LinearInterpolator());   // 일정속도로
                 objectAnimator.start();
 
@@ -102,12 +114,10 @@ public class NewTestamentActivity extends AppCompatActivity {
         });
 
         // spinner1 리스너
+        // 장 combo item 셋팅
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            // 장 combo item 셋팅
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLUE);
-
                 setLastPage(spinner1, spinner2);
                 nowPage = 0;
                 readBook(view, spinner1, spinner2, textView);
@@ -116,6 +126,8 @@ public class NewTestamentActivity extends AppCompatActivity {
 
                 // 완독버튼 차수 확인
                 readChasuCheck(spinner1, spinner2, btnReadHist);
+
+                //((TextView) parent.getChildAt(0)).setTextColor(Color.BLUE);
             }
 
             @Override
@@ -134,7 +146,6 @@ public class NewTestamentActivity extends AppCompatActivity {
 
                 readBook(view, spinner1, spinner2, textView);
                 btnReadHist.setEnabled(true);
-
                 // 완독버튼 차수 확인
                 readChasuCheck(spinner1, spinner2, btnReadHist);
             }
@@ -150,7 +161,6 @@ public class NewTestamentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 float fontSize = textView.getTextSize();
-//                Toast.makeText(NewTestamentActivity.this, "현재크기 : " + fontSize, Toast.LENGTH_LONG).show();
 
                 if(fontSize > 80) {
                     fontSize = 20;
@@ -158,8 +168,8 @@ public class NewTestamentActivity extends AppCompatActivity {
                     fontSize = fontSize + 5;
                 }
 
-//                Toast.makeText(NewTestamentActivity.this, "변경크기 : " + fontSize, Toast.LENGTH_LONG).show();
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
+                //textView.setTextSize(fontSize);
             }
         });
 
@@ -177,12 +187,12 @@ public class NewTestamentActivity extends AppCompatActivity {
                     readBook(v, spinner1, spinner2, textView);
                 } else {
                     if(spinner1.getSelectedItemPosition() == 0) {
-                        Toast.makeText(NewTestamentActivity.this, "맨 처음 입니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(thisContext, "맨 처음 입니다.", Toast.LENGTH_SHORT).show();
                     } else {
                         int sp1Position = spinner1.getSelectedItemPosition() - 1;
 
                         // last page item
-                        ArrayAdapter adapter_page = ArrayAdapter.createFromResource (NewTestamentActivity.this, R.array.bible_new_page, android.R.layout.simple_spinner_item);
+                        ArrayAdapter adapter_page = ArrayAdapter.createFromResource (thisContext, bible_page, android.R.layout.simple_spinner_item);
                         int lastPage = Integer.parseInt((String)adapter_page.getItem(sp1Position));
                         nowPage = lastPage - 1;
 
@@ -209,7 +219,7 @@ public class NewTestamentActivity extends AppCompatActivity {
                     readBook(v, spinner1, spinner2, textView);
                 } else {
                     if(spinner1.getSelectedItemPosition() == 38) {
-                        Toast.makeText(NewTestamentActivity.this, "마지막 입니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(thisContext, "마지막 입니다.", Toast.LENGTH_SHORT).show();
                     } else {
                         spinner1.setSelection(spinner1.getSelectedItemPosition() + 1);
                     }
@@ -225,11 +235,10 @@ public class NewTestamentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 btnStopScroll.callOnClick();    // 자동스크롤 중지
 
-                String bookSe = "NEW";
                 int bookIndex = spinner1.getSelectedItemPosition();
                 int page = spinner2.getSelectedItemPosition() + 1;
 
-                ArrayAdapter adapter = ArrayAdapter.createFromResource(NewTestamentActivity.this, R.array.bible_new_name_kor_ac, android.R.layout.simple_spinner_item);
+                ArrayAdapter adapter = ArrayAdapter.createFromResource(thisContext, bible_name_kor_ac, android.R.layout.simple_spinner_item);
                 String book = (String)adapter.getItem(bookIndex);
 
                 String strHist = bookSe + ":" + book + ":" +  page;
@@ -278,7 +287,7 @@ public class NewTestamentActivity extends AppCompatActivity {
                     bw2.write(strHist + "\n");
                     bw2.close();
 
-                    Toast.makeText(NewTestamentActivity.this, chaSu + "차 완독 저장했습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(thisContext, chaSu + "차 완독 저장했습니다.", Toast.LENGTH_SHORT).show();
 
                     btnReadHist.setEnabled(false);
 
@@ -295,7 +304,7 @@ public class NewTestamentActivity extends AppCompatActivity {
     // 장 combo item 셋팅
     public void setLastPage(Spinner spinner1, Spinner spinner2) {
         // last page item
-        ArrayAdapter adapter_page = ArrayAdapter.createFromResource (this, R.array.bible_new_page, android.R.layout.simple_spinner_item);
+        ArrayAdapter adapter_page = ArrayAdapter.createFromResource (this, bible_page, android.R.layout.simple_spinner_item);
 
         int sp1Position = spinner1.getSelectedItemPosition();
         int lastPage = Integer.parseInt((String)adapter_page.getItem(sp1Position));
@@ -316,19 +325,33 @@ public class NewTestamentActivity extends AppCompatActivity {
     // book index 조합으로 찾기
     public void readBook(View v, Spinner spinner1, Spinner spinner2, TextView textView) {
         // last page item
-        ArrayAdapter adapter_ac_name = ArrayAdapter.createFromResource (this, R.array.bible_new_name_kor_ac, android.R.layout.simple_spinner_item);
+        ArrayAdapter adapter_ac_name = ArrayAdapter.createFromResource (this, bible_name_kor_ac, android.R.layout.simple_spinner_item);
         int sp1Position = spinner1.getSelectedItemPosition();
 
         String book = (String)adapter_ac_name.getItem(sp1Position);
         String index = (String)spinner2.getSelectedItem();
 
         try {
-            //raw 폴더 읽기
-            InputStream is = getResources().openRawResource(R.raw.bible_new);
-            BufferedReader br2 = new BufferedReader(new InputStreamReader(is));
-
             String readStr ="";
             String line = "";
+
+            //raw 폴더 장별 주제 읽기
+            InputStream is_sub = getResources().openRawResource(R.raw.subject);
+            BufferedReader br_sub = new BufferedReader(new InputStreamReader(is_sub));
+
+            while((line=br_sub.readLine())!=null) {
+                String rowData[] = line.split(":");
+
+                if(rowData[0].equals(book + " " + index)) {
+                    readStr += "<" + rowData[1] + ">\n\n";
+                }
+            }
+            br_sub.close();
+
+
+            //raw 폴더 읽기
+            InputStream is = getResources().openRawResource(bible);
+            BufferedReader br2 = new BufferedReader(new InputStreamReader(is));
 
             while((line=br2.readLine())!=null) {
                 String rowData[] = line.split(":");
@@ -353,28 +376,27 @@ public class NewTestamentActivity extends AppCompatActivity {
         scrollView.setScrollY(0);
     }
 
+
     //config 파일 읽어서 반영
     public void readConfig(Spinner spinner1, Spinner spinner2, TextView textView) {
         try {
-            String line = null;
-            String newConfig2[] = null;
+            String line = "";
+            String tempConfig2[] = null;
 
             BufferedReader br = new BufferedReader(new FileReader(getFilesDir() + configFile));
             while((line=br.readLine())!=null) {
-                //Toast.makeText(NewTestamentActivity.this, "2 : " + line, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(thisContext, "2 : " + line, Toast.LENGTH_SHORT).show();
 
-                String newConfig[] = line.split(":");
-                newConfig2 = newConfig;
+                String tempConfig[] = line.split(":");
+                tempConfig2 = tempConfig;
             }
             br.close();
 
             // spinner2 변경용
             // 아래 spinner1 변경 후 리스너 동작시 반영
-//            Toast.makeText(NewTestamentActivity.this, newConfig2[2] + " : " + newConfig2[2]+" : " + newConfig2[2], Toast.LENGTH_LONG).show();
+            nowPage = Integer.parseInt(tempConfig2[2]);
 
-            nowPage = Integer.parseInt(newConfig2[2]);
-
-            spinner1.setSelection(Integer.parseInt(newConfig2[1]));
+            spinner1.setSelection(Integer.parseInt(tempConfig2[1]));
             spinner1.refreshDrawableState();
 
             // 화면설정 읽어서 반영
@@ -412,7 +434,6 @@ public class NewTestamentActivity extends AppCompatActivity {
         Spinner spinner2 = (Spinner)findViewById(R.id.spinner2);    // 장 select
         TextView textView = (TextView)findViewById(R.id.textView001);
 
-        String bookSe = "NEW";
         int book = spinner1.getSelectedItemPosition();
         int page = spinner2.getSelectedItemPosition();
         float fontSize = textView.getTextSize();
@@ -427,7 +448,7 @@ public class NewTestamentActivity extends AppCompatActivity {
             bw.write(str);
             bw.close();
 
-            Toast.makeText(NewTestamentActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(thisContext, "저장되었습니다.", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -438,12 +459,10 @@ public class NewTestamentActivity extends AppCompatActivity {
 
     // 완독버튼 차수 변경
     public void readChasuCheck(Spinner spinner1, Spinner spinner2, Button btnReadHist) {
-
-        String bookSe = "NEW";
         int bookIndex = spinner1.getSelectedItemPosition();
         int page = spinner2.getSelectedItemPosition() + 1;
 
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(NewTestamentActivity.this, R.array.bible_new_name_kor_ac, android.R.layout.simple_spinner_item);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(thisContext, bible_name_kor_ac, android.R.layout.simple_spinner_item);
         String book = (String)adapter.getItem(bookIndex);
 
         String strHist = bookSe + ":" + book + ":" +  page;
@@ -486,5 +505,4 @@ public class NewTestamentActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 }
