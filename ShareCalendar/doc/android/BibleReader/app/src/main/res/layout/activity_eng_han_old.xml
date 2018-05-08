@@ -19,6 +19,58 @@
         android:orientation="horizontal"
         android:layout_gravity="center_vertical">
 
+        <RelativeLayout
+            android:id="@+id/spinner11"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp">
+
+            <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/background"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_arrow_drop_down"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/spinner22"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_toEndOf="@+id/spinner11"
+            android:layout_toRightOf="@+id/spinner11"
+            app:layout_constraintStart_toEndOf="@+id/spinner11">
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/background"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_arrow_drop_down" />
+
+        </RelativeLayout>
+
+<!--
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="170dp"
@@ -27,9 +79,10 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/spinner_border_with_arrow"
+            android:background="@drawable/spinner_border_with_arrow_2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <Spinner
             android:id="@+id/spinner2"
@@ -37,11 +90,12 @@
             android:layout_height="40dp"
             android:layout_marginRight="8dp"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/spinner1"
-            android:layout_toRightOf="@+id/spinner1"
-            android:background="@drawable/spinner_border_with_arrow"
-            app:layout_constraintStart_toEndOf="@+id/spinner1"
+            android:layout_toEndOf="@+id/spinner11"
+            android:layout_toRightOf="@+id/spinner11"
+            android:background="@drawable/spinner_border_with_arrow_2"
+            app:layout_constraintStart_toEndOf="@+id/spinner11"
             app:layout_constraintTop_toTopOf="parent" />
+-->
 
         <Button
             android:id="@+id/btnFontSize"
@@ -49,8 +103,8 @@
             android:layout_height="40dp"
             android:layout_marginRight="8dp"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/spinner2"
-            android:layout_toRightOf="@+id/spinner2"
+            android:layout_toEndOf="@+id/spinner22"
+            android:layout_toRightOf="@+id/spinner22"
             android:background="@drawable/button_round_boder"
             android:text="+"
             android:textSize="20dp"

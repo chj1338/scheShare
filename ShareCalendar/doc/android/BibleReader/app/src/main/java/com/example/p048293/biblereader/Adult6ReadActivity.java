@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -170,7 +171,7 @@ public class Adult6ReadActivity extends AppCompatActivity {
         ArrayList<String> childReadStr = new ArrayList<String>();
         try {
             String line = "";
-            BufferedReader br = new BufferedReader(new FileReader(getFilesDir() + "/childReadHist_" + nowYear + ".txt"));
+            BufferedReader br = new BufferedReader(new FileReader(getFilesDir() + "/adult6ReadHist_" + nowYear + ".txt"));
             while ((line = br.readLine()) != null) {
                 childReadStr.add(line);
             }
@@ -200,12 +201,10 @@ public class Adult6ReadActivity extends AppCompatActivity {
                     dayTtext[tr][td].setLayoutParams(tdParams);
                     row[tr].addView(dayTtext[tr][td]);
                 } else {
-                    // 셋팅할 날짜 증가
-                    tempColumn++;
+                    tempColumn++;            // 셋팅할 컬럼 체크 증가
 
-                    // 오늘 읽을 구절
-                    String readStr = "";
-                    String tempDate = "";
+                    String readStr = "";    // 오늘 읽을 구절
+                    String tempDate = "";   // 오늘 읽을 구절 찾을 날짜
 
                     // 달이 1자리 이면 앞에 0 붙이기
                     if(nowMon < 10) {
@@ -215,41 +214,32 @@ public class Adult6ReadActivity extends AppCompatActivity {
                     }
 
                     // 날짜가 1자리 이면 앞에 0 붙이기
-                    if(tempColumn < 10) {
-                        tempDate += "0" + tempColumn;
+                    if(tempDay < 10) {
+                        tempDate += "0" + tempDay;
                     } else  {
-                        tempDate += "" + tempColumn;
+                        tempDate += "" + tempDay;
                     }
 
                     String readStrTemp = ""; // 성경읽기 화면으로 넘겨줄 내용
 
+                    // 날짜와 읽을 성경을 기록
                     try {
                         String line = "";
-                        InputStream is = getResources().openRawResource(R.raw.child_read_list);
+                        InputStream is = getResources().openRawResource(R.raw.adult_6_read_list);
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
                         while ((line = br.readLine()) != null) {
                             if(line.indexOf(tempDate) > -1) {
                                 readStrTemp += line + "\n"; // 완독 기록용
 
                                 String[] tempDayStr = line.split(":");
 
-                                readStr += "\n" + tempDayStr[2] + "\n";
-                                readStr += tempDayStr[3];
+                                readStr += "\n" + tempDayStr[2];
                             }
                         }
                         br.close();
                     } catch (Exception e) {
                         e.printStackTrace();
-                    }
-
-                    // 날짜 셋팅
-                    if(firstWeek != 0 && tempColumn < firstWeek) {       // 앞쪽 빈칸 셋팅
-                        dayTtext[tr][td].setText("");
-                    } else if(tempDay <= lastDay) {                     // 날짜 셋팅
-                        dayTtext[tr][td].setText(tempDay + readStr);
-                        tempDay++;
-                    } else {                                            // 마지막 빈칸 셋팅
-                        dayTtext[tr][td].setText("");
                     }
 
                     // 속성 지정
@@ -261,14 +251,24 @@ public class Adult6ReadActivity extends AppCompatActivity {
                     dayTtext[tr][td].setTextColor(dayColor[td]);     // 폰트컬러
                     dayTtext[tr][td].setPadding(1,1,1,1);
 
-                    //읽은 페이지가 존재할 경우 색칠
-                    for(int z=0; z<childReadStr.size(); z++) {
-                        String[] childReadStrTemp = childReadStr.get(z).split(":");
-                        String today = nowYear + tempDate;
+                    // 날짜 셋팅 및 성경내용 셋팅
+                    if(firstWeek != 0 && tempColumn < firstWeek) {       // 앞쪽 빈칸 셋팅
+                        dayTtext[tr][td].setText("");
+                    } else if(tempDay <= lastDay) {                     // 날짜 셋팅
+                        dayTtext[tr][td].setText(tempDay + readStr);
+                        tempDay++;
 
-                        if (today.equals(childReadStrTemp[0]) || today == childReadStrTemp[0]) {
-                            dayTtext[tr][td].setBackgroundColor(Color.CYAN);
+                        //읽은 페이지가 존재할 경우 색칠
+                        for(int z=0; z<childReadStr.size(); z++) {
+                            String[] childReadStrTemp = childReadStr.get(z).split(":");
+                            String today = nowYear + tempDate;
+
+                            if (today.equals(childReadStrTemp[0]) || today == childReadStrTemp[0]) {
+                                dayTtext[tr][td].setBackgroundColor(Color.CYAN);
+                            }
                         }
+                    } else {                                            // 마지막 빈칸 셋팅
+                        dayTtext[tr][td].setText("");
                     }
 
                     // 읽기 페이지로 이동
@@ -277,7 +277,7 @@ public class Adult6ReadActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             try {
-                                String configFile = "/adultRead.txt";
+                                String configFile = "/adult6Read.txt";
                                 File file = new File(getFilesDir() + configFile);
                                 if(file.exists()) {
                                     file.delete();

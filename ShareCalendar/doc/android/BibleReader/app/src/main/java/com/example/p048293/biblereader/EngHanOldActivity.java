@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
@@ -23,6 +24,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,12 +42,12 @@ public class EngHanOldActivity extends AppCompatActivity {
     String configFile = "/configOld.txt";
     int nowPage = 0;    // spinner2 변경용
 
-    private String backColor = "-16777216";      // 배경색
-    private String fontColor = "-4342339";      // 글자색
-    private float fontSize = 20;         // 글자크기
-    private int scrollSpeed = 5;        // 스크롤 속도
+    private String backColor = "-16777216";    // 배경색
+    private String fontColor = "-4342339";     // 글자색
+    private float fontSize = 20;                // 글자크기
+    private int scrollSpeed = 5;                // 스크롤 속도
     int scrollDist = 7139;                        // 스크롤 전체길이 7139
-    int scrollTime = 145000;                    // 스크롤 시간  145000
+    int scrollTime = 145000;                      // 스크롤 시간  145000
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,11 +153,8 @@ public class EngHanOldActivity extends AppCompatActivity {
         btnAutoScroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int totalScrollSize = tableLayout.getMeasuredHeight(); // 전체 스크롤 크기
-                int nowScrollY = scrollView1.getScrollY();          // 현재 스크롤 위치
-
-                scrollDist = totalScrollSize;
-                scrollTime = (totalScrollSize - nowScrollY) * 145000 / 7139;   // 최초 기준값 - 길이:3719, 시간:145000
+                scrollDist = scrollView1.getMeasuredHeight();
+                scrollTime =  scrollView1.getMeasuredHeight() * 145000 / 7139;   // 최초 기준값 - 길이:3719, 시간:145000
 
                 objectAnimator.setIntValues(scrollDist); // 전체수행길이
                 objectAnimator.setDuration(scrollTime * (6 - scrollSpeed));    // 전체수행시간
@@ -263,7 +263,11 @@ public class EngHanOldActivity extends AppCompatActivity {
                     String line = null;
                     BufferedReader br = new BufferedReader(new FileReader(fileList));
                     while((line=br.readLine())!=null) {
-                        chaSuCnt++;
+                        int temp = Integer.parseInt(line.replaceAll("readHist", "").replaceAll(bookSe, "").replaceAll("_", "").replaceAll(".txt", ""));
+
+                        if(chaSuCnt < temp) {
+                            chaSuCnt = temp;
+                        }
                     }
                     br.close();
 
@@ -452,16 +456,32 @@ public class EngHanOldActivity extends AppCompatActivity {
                     text[tr][td].setTextColor(Integer.parseInt(fontColor));
 
                     text[tr][td].setInputType(0);
-                    text[tr][td].setSingleLine(false);
+                    text[tr][td].setSingleLine(false);      // 한줄로만 표시 여부
+                    text[tr][td].setTextIsSelectable(true); // 텍스트 선택 가능여부
                     text[tr][td].setSelectAllOnFocus(true); // 클릭시 문장 전체 선택
 
                     // 클립보드에 복사
                     final int tempTR = tr;
                     final int tempTD = td;
+
                     text[tr][td].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            copyText(text[tempTR][tempTD]);
+                            onButtonClickEvent(v);
+
+//                            registerForContextMenu(v);
+//                            openContextMenu(v);
+//                            unregisterForContextMenu(v);
+/*
+                            if(text[tempTR][tempTD].isSelected()) {
+//                                Toast.makeText(EngHanOldActivity.this, "선택되어 있음", Toast.LENGTH_LONG).show();
+                                text[tempTR][tempTD].setSelected(false);
+                            } else {
+//                                Toast.makeText(EngHanOldActivity.this, "선택 안됨", Toast.LENGTH_LONG).show();
+                                text[tempTR][tempTD].setSelected(true);
+
+//                                copyText(text[tempTR][tempTD]);
+                            }*/
                         }
                     });
 
@@ -534,7 +554,7 @@ public class EngHanOldActivity extends AppCompatActivity {
     }
 
     // 클립보드 복사
-    void copyText(EditText copyEdit) {
+    void copyText(TextView copyEdit) {
         String text = copyEdit.getText().toString();
         if (text.length() != 0) {
             // 클립데이터 생성(텍스트)
@@ -618,5 +638,13 @@ public class EngHanOldActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // 컨텍스트 메뉴 호출
+    public void onButtonClickEvent(View sender)
+    {
+        registerForContextMenu(sender);
+        openContextMenu(sender);
+        unregisterForContextMenu(sender);
     }
 }

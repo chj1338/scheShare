@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -167,12 +168,12 @@ public class AdultTotalReadActivity extends AppCompatActivity {
 
 
         //읽은 페이지 기록 파일
-        ArrayList<String> childReadStr = new ArrayList<String>();
+        ArrayList<String> readReadHistStr = new ArrayList<String>();
         try {
             String line = "";
-            BufferedReader br = new BufferedReader(new FileReader(getFilesDir() + "/childReadHist_" + nowYear + ".txt"));
+            BufferedReader br = new BufferedReader(new FileReader(getFilesDir() + "/adultTotalReadHist_" + nowYear + ".txt"));
             while ((line = br.readLine()) != null) {
-                childReadStr.add(line);
+                readReadHistStr.add(line);
             }
             br.close();
         } catch (Exception e) {
@@ -215,17 +216,17 @@ public class AdultTotalReadActivity extends AppCompatActivity {
                     }
 
                     // 날짜가 1자리 이면 앞에 0 붙이기
-                    if(tempColumn < 10) {
-                        tempDate += "0" + tempColumn;
+                    if(tempDay < 10) {
+                        tempDate += "0" + tempDay;
                     } else  {
-                        tempDate += "" + tempColumn;
+                        tempDate += "" + tempDay;
                     }
 
                     String readStrTemp = ""; // 성경읽기 화면으로 넘겨줄 내용
 
                     try {
                         String line = "";
-                        InputStream is = getResources().openRawResource(R.raw.child_read_list);
+                        InputStream is = getResources().openRawResource(R.raw.adult_total_read_list);
                         BufferedReader br = new BufferedReader(new InputStreamReader(is));
                         while ((line = br.readLine()) != null) {
                             if(line.indexOf(tempDate) > -1) {
@@ -233,8 +234,7 @@ public class AdultTotalReadActivity extends AppCompatActivity {
 
                                 String[] tempDayStr = line.split(":");
 
-                                readStr += "\n" + tempDayStr[2] + "\n";
-                                readStr += tempDayStr[3];
+                                readStr += "\n" + tempDayStr[2];
                             }
                         }
                         br.close();
@@ -242,33 +242,33 @@ public class AdultTotalReadActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
+                    // 속성 지정
+//                    dayTtext[tr][td].setMaxWidth(95);
+//                    dayTtext[tr][td].setMinHeight(280);
+                    dayTtext[tr][td].setTextSize(15);                // 폰트사이즈
+                    dayTtext[tr][td].setGravity(Gravity.RIGHT|Gravity.TOP);       // 폰트정렬
+                    dayTtext[tr][td].setTextColor(dayColor[td]);     // 폰트컬러
+                    dayTtext[tr][td].setBackgroundColor(Color.GRAY); // 배경색
+                    dayTtext[tr][td].setPadding(1,1,1,1);
+
                     // 날짜 셋팅
                     if(firstWeek != 0 && tempColumn < firstWeek) {       // 앞쪽 빈칸 셋팅
                         dayTtext[tr][td].setText("");
                     } else if(tempDay <= lastDay) {                     // 날짜 셋팅
                         dayTtext[tr][td].setText(tempDay + readStr);
                         tempDay++;
+
+                        //읽은 페이지가 존재할 경우 색칠
+                        for(int z=0; z<readReadHistStr.size(); z++) {
+                            String[] readHistStrTemp = readReadHistStr.get(z).split(":");
+                            String today = nowYear + tempDate;
+
+                            if (today.equals(readHistStrTemp[0]) || today == readHistStrTemp[0]) {
+                                dayTtext[tr][td].setBackgroundColor(Color.CYAN);
+                            }
+                        }
                     } else {                                            // 마지막 빈칸 셋팅
                         dayTtext[tr][td].setText("");
-                    }
-
-                    // 속성 지정
-//                    dayTtext[tr][td].setMaxWidth(95);
-//                    dayTtext[tr][td].setMinHeight(280);
-                    dayTtext[tr][td].setTextSize(15);                // 폰트사이즈
-                    dayTtext[tr][td].setGravity(Gravity.RIGHT|Gravity.TOP);       // 폰트정렬
-                    dayTtext[tr][td].setBackgroundColor(Color.GRAY); // 배경색
-                    dayTtext[tr][td].setTextColor(dayColor[td]);     // 폰트컬러
-                    dayTtext[tr][td].setPadding(1,1,1,1);
-
-                    //읽은 페이지가 존재할 경우 색칠
-                    for(int z=0; z<childReadStr.size(); z++) {
-                        String[] childReadStrTemp = childReadStr.get(z).split(":");
-                        String today = nowYear + tempDate;
-
-                        if (today.equals(childReadStrTemp[0]) || today == childReadStrTemp[0]) {
-                            dayTtext[tr][td].setBackgroundColor(Color.CYAN);
-                        }
                     }
 
                     // 읽기 페이지로 이동
@@ -277,7 +277,7 @@ public class AdultTotalReadActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             try {
-                                String configFile = "/childRead.txt";
+                                String configFile = "/adultTotalRead.txt";
                                 File file = new File(getFilesDir() + configFile);
                                 if(file.exists()) {
                                     file.delete();

@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -149,13 +148,8 @@ public class EngHanNewActivity extends AppCompatActivity {
         btnAutoScroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int totalScrollSize = tableLayout.getMeasuredHeight(); // 전체 스크롤 크기
-                int nowScrollY = scrollView1.getScrollY();          // 현재 스크롤 위치
-
-                //Log.d("=====", totalScrollSize + " : " + nowScrollY);
-
-                scrollDist = totalScrollSize;
-                scrollTime = (totalScrollSize - nowScrollY) * 145000 / 7139;   // 최초 기준값 - 길이:3719, 시간:145000
+                scrollDist = scrollView1.getMeasuredHeight();
+                scrollTime =  scrollView1.getMeasuredHeight() * 145000 / 7139;   // 최초 기준값 - 길이:3719, 시간:145000
 
                 objectAnimator.setIntValues(scrollDist); // 전체수행길이
                 objectAnimator.setDuration(scrollTime * (6 - scrollSpeed));    // 전체수행시간
@@ -264,7 +258,11 @@ public class EngHanNewActivity extends AppCompatActivity {
                     String line = null;
                     BufferedReader br = new BufferedReader(new FileReader(fileList));
                     while((line=br.readLine())!=null) {
-                        chaSuCnt++;
+                        int temp = Integer.parseInt(line.replaceAll("readHist", "").replaceAll(bookSe, "").replaceAll("_", "").replaceAll(".txt", ""));
+
+                        if(chaSuCnt < temp) {
+                            chaSuCnt = temp;
+                        }
                     }
                     br.close();
 

@@ -213,10 +213,10 @@ public class KinderReadActivity extends AppCompatActivity {
                     }
 
                     // 날짜가 1자리 이면 앞에 0 붙이기
-                    if(tempColumn < 10) {
-                        tempDate += "0" + tempColumn;
+                    if(tempDay < 10) {
+                        tempDate += "0" + tempDay;
                     } else  {
-                        tempDate += "" + tempColumn;
+                        tempDate += "" + tempDay;
                     }
 
                     String readStrTemp = ""; // 성경읽기 화면으로 넘겨줄 내용
@@ -240,16 +240,6 @@ public class KinderReadActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    // 날짜 셋팅
-                    if(firstWeek != 0 && tempColumn < firstWeek) {       // 앞쪽 빈칸 셋팅
-                        dayTtext[tr][td].setText("");
-                    } else if(tempDay <= lastDay) {                     // 날짜 셋팅
-                        dayTtext[tr][td].setText(tempDay + readStr);
-                        tempDay++;
-                    } else {                                            // 마지막 빈칸 셋팅
-                        dayTtext[tr][td].setText("");
-                    }
-
                     // 속성 지정
 //                    dayTtext[tr][td].setMaxWidth(95);
 //                    dayTtext[tr][td].setMinHeight(280);
@@ -259,14 +249,24 @@ public class KinderReadActivity extends AppCompatActivity {
                     dayTtext[tr][td].setTextColor(dayColor[td]);     // 폰트컬러
                     dayTtext[tr][td].setPadding(1,1,1,1);
 
-                    //읽은 페이지가 존재할 경우 색칠
-                    for(int z=0; z<childReadStr.size(); z++) {
-                        String[] childReadStrTemp = childReadStr.get(z).split(":");
-                        String today = nowYear + tempDate;
+                    // 날짜 셋팅
+                    if(firstWeek != 0 && tempColumn < firstWeek) {       // 앞쪽 빈칸 셋팅
+                        dayTtext[tr][td].setText("");
+                    } else if(tempDay <= lastDay) {                     // 날짜 셋팅
+                        dayTtext[tr][td].setText(tempDay + readStr);
+                        tempDay++;
 
-                        if (today.equals(childReadStrTemp[0]) || today == childReadStrTemp[0]) {
-                            dayTtext[tr][td].setBackgroundColor(Color.CYAN);
+                        //읽은 페이지가 존재할 경우 색칠
+                        for(int z=0; z<childReadStr.size(); z++) {
+                            String[] childReadStrTemp = childReadStr.get(z).split(":");
+                            String today = nowYear + tempDate;
+
+                            if (today.equals(childReadStrTemp[0]) || today == childReadStrTemp[0]) {
+                                dayTtext[tr][td].setBackgroundColor(Color.CYAN);
+                            }
                         }
+                    } else {                                            // 마지막 빈칸 셋팅
+                        dayTtext[tr][td].setText("");
                     }
 
                     final String testaStr= readStrTemp;

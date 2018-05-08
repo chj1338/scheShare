@@ -1,12 +1,10 @@
 package com.example.p048293.biblereader;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,7 +17,6 @@ import android.widget.SpinnerAdapter;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -29,14 +26,8 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class ReadHistActivity extends AppCompatActivity {
-    CommonActivity commonActivity = new CommonActivity();
-
     String bookSe = "OLD";
     int status = 1;
-
-    Spinner spinner1;
-    Spinner spinner2;
-    TableLayout tableLayout1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +35,13 @@ public class ReadHistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_read_hist);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   // 화면꺼짐 방지
 
-        spinner1 = (Spinner) findViewById(R.id.spinner1);
-        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+        final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
         final ScrollView scrollView3 = (ScrollView) findViewById(R.id.scrollView3);
 
-        tableLayout1 = (TableLayout)findViewById(R.id.tableLayout1);
+        final TableLayout tableLayout1 = (TableLayout)findViewById(R.id.tableLayout1);
         tableLayout1.removeAllViewsInLayout();
         tableLayout1.setStretchAllColumns(true);
-
-        String nowDate = commonActivity.toDate();
-        Toast.makeText(this, nowDate, Toast.LENGTH_SHORT).show();
 
         initSpinner(spinner1, spinner2);
 
@@ -107,8 +95,7 @@ public class ReadHistActivity extends AppCompatActivity {
                 spinner2.setSelection(0);
 
                 if(status == 1) {
-                    //setGrid(spinner2, tableLayout1);
-                    setGridThread();
+                    setGrid(spinner2, tableLayout1);
                     status = 0;
                 }
             }
@@ -125,9 +112,8 @@ public class ReadHistActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(status == 1) {
-                    //setGrid(spinner2, tableLayout1);
-                    setGridThread();
-                    //scrollView3.setScrollY(0);
+                    setGrid(spinner2, tableLayout1);
+                    scrollView3.setScrollY(0);
                     status = 0;
                 }
             }
@@ -171,64 +157,6 @@ public class ReadHistActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
-    // book index 조합으로 찾기
-    // ProgressDialog 사용을 위해 Thread 사용
-    private ProgressDialog loagindDialog;
-    private void setGridThread() {
-        Thread thread = new Thread(new Runnable() {
-            public void run() {
-                // 1. 필요한 작업
-                // Thread에서는 UI 컨트롤이 불가하다. 필요시 runOnUiThread 사용
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //setGrid(spinner2, tableLayout1);
-                        loagindDialog = ProgressDialog.show(ReadHistActivity.this, null, "0진행중...");
-                    }
-                });
-
-                handler.sendEmptyMessage(0);
-            }
-        });
-        thread.start();
-    }
-    private Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-            setGrid(spinner2, tableLayout1);
-
-            loagindDialog.dismiss(); // 다이얼로그 삭제
-            // 2. 이후 처리
-        }
-    };
-
-
-    // book index 조합으로 찾기
-    // ProgressDialog 사용을 위해 Thread 사용
-    private void setGridThread2() {
-        loagindDialog = ProgressDialog.show(this, null, "Loading...");
-
-        try {
-            Thread.sleep(3000);
-
-            // 1. 필요한 작업
-            // Thread에서는 UI 컨트롤이 불가하다. 필요시 runOnUiThread 사용
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    setGrid(spinner2, tableLayout1);
-
-                    handler.sendEmptyMessage(0);
-                }
-            });
-
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
 
     // 읽기 표 생성
     public void setGrid(Spinner spinner2, TableLayout tableLayout1) {

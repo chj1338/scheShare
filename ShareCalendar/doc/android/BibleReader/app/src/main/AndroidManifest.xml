@@ -4,23 +4,38 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
     <application
         android:allowBackup="true"
-        android:hardwareAccelerated="true"
         android:icon="@mipmap/main_icon"
-        android:label="심플성경"
+        android:label="심플성경 (free)"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".OldTestamentActivity" />
+        <activity android:name=".NewTestamentActivity" />
+        <activity android:name=".EngHanOldActivity" />
+        <activity android:name=".EngHanNewActivity" />
+        <activity android:name=".ReadHistActivity" />
+        <activity android:name=".Adult6ReadActivity" />
+        <activity android:name=".Adult6TestamemtActivity" />
+        <activity android:name=".AdultTotalReadActivity" />
+        <activity android:name=".AdultTotalTestamemtActivity" />
+        <activity android:name=".KinderReadActivity" />
+        <activity android:name=".KinderTestamemtActivity" />
+        <activity android:name=".ChildReadActivity" />
+        <activity android:name=".ChildTestamemtActivity" />
+        <activity android:name=".SettingMenuActivity" />
+        <activity android:name=".DispalySettingActivity" />
+        <activity android:name=".FileCheckActivity" />
+        <activity android:name=".HelpActivity" />
         <activity
             android:name=".WordSearchActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -31,26 +46,8 @@
             android:name=".SongActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".NewTestamentActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".OldTestamentActivity" />
-        <activity android:name=".ReadHistActivity" />
-        <activity android:name=".FileCheckActivity" />
-        <activity android:name=".SettingMenuActivity" />
-        <activity android:name=".EngHanOldActivity" />
-        <activity android:name=".EngHanNewActivity" />
-        <activity android:name=".DispalySettingActivity" />
-        <activity android:name=".KinderReadActivity" />
-        <activity android:name=".KinderTestamemtActivity" />
-        <activity android:name=".ChildReadActivity" />
-        <activity android:name=".ChildTestamemtActivity" />
-        <activity android:name=".DaekwangNoticeActivity"
+            android:name=".DaekwangNoticeActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".CommonActivity" />
-        <activity android:name=".Adult6ReadActivity" />
-        <activity android:name=".Adult6TestamemtActivity" />
-        <activity android:name=".AdultTotalReadActivity" />
-        <activity android:name=".AdultTotalTestamemtActivity"></activity>
     </application>
 
 </manifest>

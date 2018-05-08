@@ -15,7 +15,7 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="이스라엘"
+        android:text=""
         android:hint="검색어"
         android:textSize="10pt"
         android:background="#BDBDBD"

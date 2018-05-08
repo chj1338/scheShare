@@ -1,6 +1,7 @@
 package com.example.p048293.biblereader;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         configBackup(); // 시작하면 주요파일 백업
     }
 
+    // 액션바 메뉴
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -48,17 +50,22 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.quick_action:
-                Toast.makeText(this, "Quick Action", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Quick Action", Toast.LENGTH_SHORT).show();
+                Intent intent006 = new Intent(this, SettingMenuActivity.class);
+                startActivity(intent006);
                 return true;
+/*
             case R.id.action_settings:
-                Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
                 return true;
+*/
             default:
         }
         return super.onOptionsItemSelected(item);
     }
 
 
+    // 권한 체크
     void checkPermission() {
         int permissioninfo = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if(permissioninfo == PackageManager.PERMISSION_GRANTED) {
@@ -84,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // 외장메모리 경로 확인
     public String getExternalPath(){
         String sdPath = "";
         String ext = Environment.getExternalStorageState();
@@ -118,9 +126,6 @@ public class MainActivity extends AppCompatActivity {
                 String tempFileName = tempRestor[j].getName();
                 File fileNameOrg = new File(getFilesDir() + "/" + tempFileName); // 원본파일
                 File fileNameDown = new File(downloadDir + "/" + tempFileName);  // Download/BibleReader 내 파일
-
-//                Log.d("1=====Restore", fileNameOrg.getPath());
-//                Log.d("2=====Restore", fileNameDown.getPath());
 
                 if(!fileNameOrg.exists()) { // 없으면 기존파일로 복원
                     filecopy(fileNameDown, fileNameOrg);
@@ -174,9 +179,6 @@ public class MainActivity extends AppCompatActivity {
                     String tempFileName = tempDir[i].getName();
                     File fileNameOrg = new File(getFilesDir() + "/" + tempFileName); // 원본파일
                     File fileNameDown = new File(downloadDir + "/" + tempFileName);  // Download/BibleReader 내 파일
-
-//                Log.d("1=====Backup", fileNameOrg.getPath());
-//                Log.d("2=====Backup", fileNameDown.getPath());
 
                     // 파일 백업
                     if (fileNameDown.exists()) {

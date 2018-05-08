@@ -4,9 +4,11 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Adult6TestamemtActivity extends AppCompatActivity {
@@ -37,11 +40,16 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
     int nowDate = 0;    // 오늘
     int nowDay = 0;     // 오늘 요일
 
-    String childReadHist = "";
+    String readHist6 = "";       // 6장반 완독 저장용
+    ArrayList<String> readHist = new ArrayList<String>();       // 성경읽기표 완독 저장용
+
     String bookSe = "";         // 신구약 구분
-    String nowBookPage = "";    // 책 장
+    String nowBook = "";        // 책 장
     String minSentence = "";    // 절 : ~ 부터
     String maxSentence = "";    // 절 : ~ 까지
+
+    Button btnAutoScroll;
+    Button btnStopScroll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +62,8 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
         final Button btnFontSize = (Button)findViewById(R.id.btnFontSize);
         final Button btnReadHist = (Button)findViewById(R.id.btnReadHist);
         final ScrollView scrollView3 = (ScrollView)findViewById(R.id.scrollView3);
-        final Button btnAutoScroll = (Button)findViewById(R.id.btnAutoScroll);
-        final Button btnStopScroll = (Button)findViewById(R.id.btnStopScroll);
+        btnAutoScroll = (Button)findViewById(R.id.btnAutoScroll);
+        btnStopScroll = (Button)findViewById(R.id.btnStopScroll);
 
         final ObjectAnimator objectAnimator = ObjectAnimator.ofInt(scrollView3, "scrollY", 0);
 
@@ -120,10 +128,14 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
                 int nowYear = date.getYear() + 1900;
 
                 try {
-                    File fileList = new File(getFilesDir() + "/childReadHist_" + nowYear + ".txt");
+                    // 6장반 표시용 완독
+                    File fileList = new File(getFilesDir() + "/adult6ReadHist_" + nowYear + ".txt");
                     BufferedWriter bw = new BufferedWriter(new FileWriter(fileList, true));
-                    bw.write(nowYear + childReadHist + "\n\n");
+                    bw.write(nowYear + readHist6 + "\n");
                     bw.close();
+
+                    // 성경읽기표 용 완독
+                    saveReadHist();
 
                     Toast.makeText(Adult6TestamemtActivity.this, "완독 저장했습니다.", Toast.LENGTH_SHORT).show();
 
@@ -173,23 +185,34 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
             String line = "";
             String readStr ="";
 
-            FileReader fr = new FileReader(getFilesDir() + "/childRead.txt");
+            FileReader fr = new FileReader(getFilesDir() + "/adult6Read.txt");
             BufferedReader br = new BufferedReader(fr);
             while((line=br.readLine())!=null) {
+                readHist6 = line;   // 6장반 완독 저장용
+
                 String newConfig[] = line.split(":");
-                String sectence[] = newConfig[3].split("~");
 
-                childReadHist = line;
-                bookSe = newConfig[1];
-                nowBookPage = newConfig[2];
-                minSentence = sectence[0];
-                maxSentence = sectence[1];
+                // 시작 ~ 끝 형식으로 되어있을 경우
+                if(newConfig[2].indexOf("~") > -1) {
+                    String sectence[] = newConfig[2].split("~");
+                    String pageTemp[] = sectence[0].split(" ");
 
-                nowMon = Integer.parseInt(newConfig[0].substring(0, 2));
-                nowDate = Integer.parseInt(newConfig[0].substring(2, 4));
+                    nowBook = pageTemp[0];      // 페이지 뺀 책 약어 (창, 출)
+                    minSentence = pageTemp[1];  // 시작페이지
+                    maxSentence = sectence[1];    // 종료페이지가 있을 때
+                } else {                            // 단독 페이지일 경우
+                    String pageTemp[] = newConfig[2].split(" ");
+                    nowBook = pageTemp[0];      // 페이지 뺀 책 약어 (창, 출)
+                    minSentence = pageTemp[1];
+                    maxSentence = pageTemp[1];
+                }
+
+                bookSe = newConfig[1];      // NEW, OLD
 
                 Date date = new Date();
                 nowYear = date.getYear() + 1900;
+                nowMon = Integer.parseInt(newConfig[0].substring(0, 2));
+                nowDate = Integer.parseInt(newConfig[0].substring(2, 4));
 
                 if(newConfig.length > 4) {
                     calText.setText("<" + newConfig[4] + ">  " + nowYear + "-" + nowMon + "-" + nowDate);
@@ -199,33 +222,66 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
 
                 String tempStentence = sentence.getText().toString();
                 if(tempStentence.equals("") || tempStentence == null || tempStentence == "") {
-                    sentence.setText(nowBookPage + ":" + minSentence + "~" + maxSentence);
+                    if(minSentence.equals(maxSentence)) {
+                        sentence.setText(nowBook + " " + minSentence);
+                    } else {
+                        sentence.setText(nowBook + " " + minSentence + "~" + maxSentence);
+                    }
                 } else {
                     sentence.setTextSize(15);
-                    sentence.setText(tempStentence + ", " + nowBookPage + ":" + minSentence + "~" + maxSentence);
+                    if(minSentence.equals(maxSentence)) {
+                        sentence.setText(tempStentence + ", " + nowBook + " " + minSentence);
+                    } else {
+                        sentence.setText(tempStentence + ", " + nowBook + " " + minSentence + "~" + maxSentence);
+                    }
                 }
 
-                //raw 폴더 읽기
-                InputStream is = null;
+                // 책 full name 찾기 ---  내용 첫줄에 표시할 책이름, 장 찾기
+                ArrayAdapter adapter;
+                ArrayAdapter adapter2;
+                String bookLastName;
+
                 if(bookSe.equals("OLD")) {
-                    is = getResources().openRawResource(R.raw.bible_old);
+                    adapter = ArrayAdapter.createFromResource(Adult6TestamemtActivity.this, R.array.bible_old_name_kor_ac, android.R.layout.simple_spinner_item);
+                    adapter2 = ArrayAdapter.createFromResource(Adult6TestamemtActivity.this, R.array.bible_old_name_kor, android.R.layout.simple_spinner_item);
                 } else {
-                    is = getResources().openRawResource(R.raw.bible_new);
+                    adapter = ArrayAdapter.createFromResource(Adult6TestamemtActivity.this, R.array.bible_new_name_kor_ac, android.R.layout.simple_spinner_item);
+                    adapter2 = ArrayAdapter.createFromResource(Adult6TestamemtActivity.this, R.array.bible_new_name_kor, android.R.layout.simple_spinner_item);
                 }
-                BufferedReader br2 = new BufferedReader(new InputStreamReader(is));
+
+                int bookIndex = adapter.getPosition(nowBook);
+                String bookFullName = (String)adapter2.getItem(bookIndex);
+
+                if(nowBook.equals("시")) {
+                    bookLastName = "편";
+                } else {
+                    bookLastName = "장";
+                }
+
 
                 String line2 = "";
 
-                while((line2=br2.readLine())!=null) {
-                    for(int i=Integer.parseInt(minSentence); i<=Integer.parseInt(maxSentence); i++) {
-                        String findStr = nowBookPage + ":" + i + " ";
+                for(int i=Integer.parseInt(minSentence); i<=Integer.parseInt(maxSentence); i++) {
+                    readHist.add(bookSe + ":" + nowBook + ":" + i); // 성경읽기표 저장용
 
+                    readStr += "\n" + "<" + bookFullName + " " + i + bookLastName + ">" + "\n"; // 내용 첫줄에 표시할 책이름, 장
+                    String findStr = nowBook + " " + i + ":";
+
+                    //raw 폴더 읽기
+                    InputStream is = null;
+                    if(bookSe.equals("OLD")) {
+                        is = getResources().openRawResource(R.raw.bible_old);
+                    } else {
+                        is = getResources().openRawResource(R.raw.bible_new);
+                    }
+                    BufferedReader br2 = new BufferedReader(new InputStreamReader(is));
+                    while((line2=br2.readLine()) != null) {
                         if(line2.indexOf(findStr) > -1) {
                             readStr += line2 + "\n\n";
                         }
                     }
+                    br2.close();
                 }
-                br2.close();
 
             }
             br.close();
@@ -242,6 +298,76 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
         ScrollView scrollView = (ScrollView)findViewById(R.id.scrollView3);
         scrollView.setScrollY(0);
     }
+
+
+    // 읽기표 완독 저장
+    public void saveReadHist() {
+        btnStopScroll.callOnClick();    // 자동스크롤 중지
+
+        try {
+            for(int i=0;i<readHist.size(); i++) {
+                // 리스트 파일이 없을 경우 생성
+                File fileList = new File(getFilesDir() + "/readHist" + bookSe + "List.txt");
+                if( !fileList.exists() ) {
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(fileList, true));
+                    bw.write("");
+                    bw.close();
+                }
+
+                // 몇 차수 까지 존재하는지 확인 (한번 읽으면 1차, 두번 읽으면 2차)
+                int chaSu = 1;  // 몇차에 저장해야 하는지 확인용
+                int chaSuCnt = 0;   // 전체 몇차까지 있는지 확인용
+
+                String line = null;
+                BufferedReader br = new BufferedReader(new FileReader(fileList));
+                while((line=br.readLine())!=null) {
+                    int temp = Integer.parseInt(line.replaceAll("readHist", "").replaceAll(bookSe, "").replaceAll("_", "").replaceAll(".txt", ""));
+
+                    if(chaSuCnt < temp) {
+                        chaSuCnt = temp;
+                    }
+                }
+                br.close();
+
+                // 현재의 strHist 내용이 몇차까지 기록되었는지 확인
+                for(int j=1; j<=chaSuCnt; j++) {
+                    try {
+                        File histFile = new File(getFilesDir() + "/readHist" + bookSe + "_" + j + ".txt");
+                        if (histFile.exists()) {
+                            line = "";
+
+                            BufferedReader br2 = new BufferedReader(new FileReader(histFile));
+                            while ((line = br2.readLine()) != null) {
+                                if (line.indexOf(readHist.get(i)) != -1) {
+                                    chaSu++;
+                                    break;
+                                }
+                            }
+                            br2.close();
+                        }
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                // 현재 차수 리스트에 있는 읽기차수 보다 초과하면 그다음 파일명 저장
+                if(chaSu > chaSuCnt) {
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(fileList, true));
+                    bw.write("readHist" + bookSe + "_" + chaSu + ".txt" + "\n");
+                    bw.close();
+                }
+
+                // 읽기 리스트에 읽은 책:장 저장
+                BufferedWriter bw2 = new BufferedWriter(new FileWriter(getFilesDir() + "/readHist" + bookSe + "_" + chaSu + ".txt", true));
+                bw2.write(readHist.get(i) + "\n");
+                bw2.close();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     // back 버튼을 클릭시
     public void onBackPressed() {

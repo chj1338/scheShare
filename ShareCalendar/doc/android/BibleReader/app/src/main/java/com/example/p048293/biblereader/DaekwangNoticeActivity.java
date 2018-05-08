@@ -9,13 +9,16 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DaekwangNoticeActivity extends AppCompatActivity implements TextView.OnEditorActionListener  {
     InputMethodManager imm;
     private EditText txtURL;
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,9 @@ public class DaekwangNoticeActivity extends AppCompatActivity implements TextVie
         setContentView(R.layout.activity_daekwang_notice);
 
         txtURL = (EditText)findViewById(R.id.txtURL);
-        WebView webView = (WebView)findViewById(R.id.webView);
+        webView = (WebView)findViewById(R.id.webView);
+
+        Button btnGo = (Button)findViewById(R.id.btnGo);
 
         imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         txtURL.setOnEditorActionListener(this); //mEditText와 onEditorActionListener를 연결
@@ -32,7 +37,15 @@ public class DaekwangNoticeActivity extends AppCompatActivity implements TextVie
         txtURL.clearFocus();
         goURL();
 
-        webView.scrollTo(478, 557);
+        webView.scrollTo(1300, 1120);
+
+        btnGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                txtURL.clearFocus();
+                goURL();
+            }
+        });
     }
 
     @Override
@@ -45,12 +58,10 @@ public class DaekwangNoticeActivity extends AppCompatActivity implements TextVie
     }
 
     public void goURL(){
-        TextView tvURL = (TextView)findViewById(R.id.txtURL);
-        String url = tvURL.getText().toString();
+        String url = txtURL.getText().toString();
         //Log.i("URL", "Opening URL with WebView :" + url);
 
         final long startTime = System.currentTimeMillis();
-        WebView webView = (WebView)findViewById(R.id.webView);
 
         // 하드웨어 가속
         // 캐쉬 끄기
@@ -66,6 +77,5 @@ public class DaekwangNoticeActivity extends AppCompatActivity implements TextVie
             }
         });
         webView.loadUrl(url);
-
     }
 }

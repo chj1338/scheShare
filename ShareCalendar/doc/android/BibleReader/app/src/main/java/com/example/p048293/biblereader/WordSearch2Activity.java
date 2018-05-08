@@ -1,5 +1,6 @@
 package com.example.p048293.biblereader;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipDescription;
@@ -160,8 +161,9 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
 
     // ProgressDialog 사용을 위해 Thread 사용
     private ProgressDialog loagindDialog;
+    private int wordCnt;
     private void readBook2() {
-        loagindDialog = ProgressDialog.show(this, null, "Loading...");
+        loagindDialog = new ProgressDialog(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT).show(this, null, "Loading...");;
 
         Thread thread = new Thread(new Runnable() {
             public void run() {
@@ -170,8 +172,7 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        readBook(tableLayout, searchWord);
-
+                        wordCnt = readBook(tableLayout, searchWord);
                         handler.sendEmptyMessage(0);
                     }
                 });
@@ -183,12 +184,13 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
         public void handleMessage(Message msg) {
             loagindDialog.dismiss(); // 다이얼로그 삭제
             // 2. 이후 처리
+            Toast.makeText(WordSearch2Activity.this, wordCnt + "개의 구절이 검색되었습니다.", Toast.LENGTH_SHORT).show();
         }
     };
 
 
     // searchWord 찾기
-    public void readBook(final TableLayout tableLayout, EditText searchWord) {
+    public int readBook(final TableLayout tableLayout, EditText searchWord) {
         tableLayout.removeAllViewsInLayout();
 
         imm.hideSoftInputFromWindow(searchWord.getWindowToken(), 0);  // 키보드 숨기기
@@ -236,8 +238,6 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
                 for(int i=0; i<5; i++) {
                     setTextStr(tableLayout, row, text, "", word);
                 }
-
-                Toast.makeText(this, wordCnt + "개의 구절이 검색되었습니다.", Toast.LENGTH_SHORT).show();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -248,6 +248,8 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
 
         ScrollView scrollView = (ScrollView)findViewById(R.id.scrollView1);
         scrollView.setScrollY(0);
+
+        return wordCnt;
     }
 
 
