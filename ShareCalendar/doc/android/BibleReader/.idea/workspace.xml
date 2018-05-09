@@ -7,8 +7,7 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
-    <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a0721fa-ba07-499b-932b-4b09d56ef7a9" name="Default" comment="" />
@@ -35,43 +34,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="activity_file_check.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_file_check.xml">
-          <provider editor-type-id="android-designer2">
+      <file leaf-file-name="DaekwangNoticeActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/DaekwangNoticeActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-817">
+              <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5643">
-              <caret line="297" column="0" lean-forward="false" selection-start-line="297" selection-start-column="0" selection-end-line="297" selection-end-column="0" />
+            <state relative-caret-position="-261">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileCheckActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/FileCheckActivity.java">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="338" column="34" lean-forward="true" selection-start-line="338" selection-start-column="34" selection-end-line="338" selection-end-column="34" />
-              <folding>
-                <element signature="e#3542#4708#0" expanded="true" />
-                <element signature="e#3893#4248#0" expanded="true" />
-                <element signature="e#4247#4248#0" expanded="true" />
-                <element signature="e#4707#4708#0" expanded="true" />
-                <element signature="e#12570#12578#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NewTestamentActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/NewTestamentActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3515">
-              <caret line="306" column="40" lean-forward="false" selection-start-line="306" selection-start-column="40" selection-end-line="306" selection-end-column="40" />
-              <folding>
-                <element signature="e#12540#12548#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="209">
+              <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -82,7 +75,6 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
-        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -90,25 +82,24 @@
     <findStrings>
       <find>readBook</find>
       <find>scoll</find>
-      <find>readConfig</find>
-      <find>onEditorAction</find>
-      <find>textView</find>
-      <find>select</find>
-      <find>spann</find>
-      <find>setLastPage</find>
-      <find>old</find>
-      <find>NEW</find>
-      <find>bible_new_name_kor_ac</find>
-      <find>NewTestamentActivity</find>
-      <find>new</find>
-      <find>\&lt;\?xml version\=\&quot;1\.0\&quot; encoding\=\&quot;utf\-8\&quot;\?\&gt;\n\&lt;android\.support\.constraint\.ConstraintLayout xmlns\:android\=\&quot;http\:\/\/schemas\.android\.com\/apk\/res\/android\&quot;\n    xmlns\:app\=\&quot;http\:\/\/schemas\.android\.com\/apk\/res\-auto\&quot;\n    xmlns\:tools\=\&quot;http\:\/\/schemas\.android\.com\/tools\&quot;\n    android\:layout_width\=\&quot;match_parent\&quot;\n    android\:layout_height\=\&quot;match_parent\&quot;\n    android\:background\=\&quot;\#000000\&quot;\n    tools\:context\=\&quot;com\.example\.p048293\.biblereader\.Adult6TestamemtActivity\&quot;\&gt;\n\n    \&lt;RelativeLayout\n        android\:id\=\&quot;\@\+id\/inner01\&quot;\n        android\:layout_width\=\&quot;match_parent\&quot;\n        android\:layout_height\=\&quot;wrap_content\&quot;\n        android\:layout_marginTop\=\&quot;8dp\&quot;\n        android\:layout_marginLeft\=\&quot;8dp\&quot;\n        android\:layout_marginRight\=\&quot;8dp\&quot;\n        android\:orientation\=\&quot;horizontal\&quot;\n        android\:gravity\=\&quot;right\&quot; \&gt;\n\n        \&lt;TextView\n            android\:id\=\&quot;\@\+id\/calText\&quot;\n            android\:layout_width\=\&quot;230dp\&quot;\n            android\:layout_height\=\&quot;40dp\&quot;\n            android\:layout_marginTop\=\&quot;8dp\&quot;\n            android\:layout_marginRight\=\&quot;8dp\&quot;\n            android\:textSize\=\&quot;20dp\&quot;\n            android\:gravity\=\&quot;center\&quot;\n            android\:textColor\=\&quot;\#000000\&quot;\n            android\:background\=\&quot;\#BDBDBD\&quot;\n            android\:text\=\&quot;2018\-01\-01\&quot;\n            app\:layout_constraintEnd_toEndOf\=\&quot;parent\&quot;\n            app\:layout_constraintTop_toTopOf\=\&quot;parent\&quot; \/\&gt;\n\n        \&lt;Button\n            android\:id\=\&quot;\@\+id\/btnFontSize\&quot;\n            android\:layout_width\=\&quot;40dp\&quot;\n            android\:layout_height\=\&quot;40dp\&quot;\n            android\:layout_marginTop\=\&quot;8dp\&quot;\n            android\:layout_marginRight\=\&quot;8dp\&quot;\n            android\:layout_alignParentTop\=\&quot;true\&quot;\n            android\:layout_toEndOf\=\&quot;\@\+id\/calText\&quot;\n            android\:layout_toRightOf\=\&quot;\@\+id\/calText\&quot;\n            android\:background\=\&quot;\@drawable\/button_round_boder\&quot;\n            android\:text\=\&quot;\+\&quot;\n            android\:textSize\=\&quot;20dp\&quot;\n            app\:layout_constraintEnd_toEndOf\=\&quot;parent\&quot;\n            app\:layout_constraintTop_toTopOf\=\&quot;parent\&quot; \/\&gt;\n\n        \&lt;Button\n            android\:id\=\&quot;\@\+id\/btnAutoScroll\&quot;\n            android\:layout_width\=\&quot;80dp\&quot;\n            android\:layout_height\=\&quot;40dp\&quot;\n            android\:layout_marginTop\=\&quot;8dp\&quot;\n            android\:layout_toEndOf\=\&quot;\@\+id\/btnFontSize\&quot;\n            android\:layout_toRightOf\=\&quot;\@\+id\/btnFontSize\&quot;\n            android\:background\=\&quot;\@drawable\/button_round_boder\&quot;\n            android\:text\=\&quot;자동\&quot;\n            android\:textSize\=\&quot;20dp\&quot;\n            app\:layout_constraintEnd_toEndOf\=\&quot;parent\&quot;\n            app\:layout_constraintTop_toTopOf\=\&quot;parent\&quot; \/\&gt;\n\n        \&lt;Button\n            android\:id\=\&quot;\@\+id\/btnStopScroll\&quot;\n            android\:layout_width\=\&quot;80dp\&quot;\n            android\:layout_height\=\&quot;40dp\&quot;\n            android\:layout_marginTop\=\&quot;8dp\&quot;\n            android\:layout_toEndOf\=\&quot;\@\+id\/btnFontSize\&quot;\n            android\:layout_toRightOf\=\&quot;\@\+id\/btnFontSize\&quot;\n            android\:background\=\&quot;\@drawable\/button_round_boder\&quot;\n            android\:text\=\&quot;중지\&quot;\n            android\:textSize\=\&quot;20dp\&quot;\n            android\:visibility\=\&quot;invisible\&quot;\n            app\:layout_constraintEnd_toEndOf\=\&quot;parent\&quot;\n            app\:layout_constraintTop_toTopOf\=\&quot;parent\&quot; \/\&gt;\n    \&lt;\/RelativeLayout\&gt;\n\n    \&lt;LinearLayout\n        android\:id\=\&quot;\@\+id\/inner02\&quot;\n        android\:layout_width\=\&quot;match_parent\&quot;\n        android\:layout_height\=\&quot;wrap_content\&quot;\n        android\:layout_marginTop\=\&quot;48dp\&quot;\n        android\:layout_marginLeft\=\&quot;8dp\&quot;\n        android\:layout_marginRight\=\&quot;8dp\&quot;\n        android\:orientation\=\&quot;horizontal\&quot;\n        android\:gravity\=\&quot;right\&quot;\n        app\:layout_constraintEnd_toEndOf\=\&quot;parent\&quot;\n        app\:layout_constraintTop_toTopOf\=\&quot;parent\&quot; \&gt;\n\n        \&lt;TextView\n            android\:id\=\&quot;\@\+id\/sentence\&quot;\n            android\:layout_width\=\&quot;280dp\&quot;\n            android\:layout_height\=\&quot;40dp\&quot;\n            android\:layout_marginRight\=\&quot;8dp\&quot;\n            android\:layout_marginTop\=\&quot;8dp\&quot;\n            android\:textSize\=\&quot;20dp\&quot;\n            android\:gravity\=\&quot;center\&quot;\n            android\:textColor\=\&quot;\#000000\&quot;\n            android\:background\=\&quot;\#BDBDBD\&quot;\n            android\:text\=\&quot;\&quot;\n            app\:layout_constraintEnd_toEndOf\=\&quot;parent\&quot;\n            app\:layout_constraintTop_toTopOf\=\&quot;parent\&quot; \/\&gt;\n\n        \&lt;Button\n            android\:id\=\&quot;\@\+id\/btnReadHist\&quot;\n            android\:layout_width\=\&quot;80dp\&quot;\n            android\:layout_height\=\&quot;40dp\&quot;\n            android\:layout_marginTop\=\&quot;8dp\&quot;\n            android\:background\=\&quot;\@drawable\/button_round_boder\&quot;\n            android\:textSize\=\&quot;20dp\&quot;\n            android\:text\=\&quot;완독\&quot; \/\&gt;\n\n    \&lt;\/LinearLayout\&gt;\n\n    \&lt;ScrollView\n        android\:id\=\&quot;\@\+id\/scrollView3\&quot;\n        android\:layout_width\=\&quot;match_parent\&quot;\n        android\:layout_height\=\&quot;match_parent\&quot;\n        android\:layout_marginEnd\=\&quot;8dp\&quot;\n        android\:layout_marginStart\=\&quot;8dp\&quot;\n        android\:layout_marginTop\=\&quot;104dp\&quot;\n        android\:layout_marginBottom\=\&quot;8dp\&quot;\n        android\:fillViewport\=\&quot;true\&quot;\n        app\:layout_constraintEnd_toEndOf\=\&quot;parent\&quot;\n        app\:layout_constraintStart_toStartOf\=\&quot;parent\&quot;\&gt;\n\n        \&lt;TextView\n            android\:id\=\&quot;\@\+id\/textView001\&quot;\n            android\:layout_width\=\&quot;match_parent\&quot;\n            android\:layout_height\=\&quot;match_parent\&quot;\n            android\:text\=\&quot;6장반\&quot;\n            android\:textColor\=\&quot;\#BDBDBD\&quot;\n            android\:textSize\=\&quot;20dp\&quot;\n            android\:textIsSelectable\=\&quot;true\&quot;\n            app\:layout_constraintBottom_toBottomOf\=\&quot;parent\&quot;\n            app\:layout_constraintLeft_toLeftOf\=\&quot;parent\&quot;\n            app\:layout_constraintRight_toRightOf\=\&quot;parent\&quot;\n            app\:layout_constraintTop_toTopOf\=\&quot;parent\&quot; \/\&gt;\n    \&lt;\/ScrollView\&gt;\n\n\&lt;\/android\.support\.constraint\.ConstraintLayout\&gt;\n</find>
+      <find>child</find>
+      <find>list</find>
+      <find>Log</find>
+      <find>copyText</find>
+      <find>backColor</find>
+      <find>삼상 21</find>
       <find>L</find>
+      <find>Log.</find>
+      <find>log</find>
+      <find>total</find>
+      <find>통독</find>
       <find>Log.d</find>
-      <find>size</find>
+      <find>spinner2</find>
+      <find>bookLastName</find>
     </findStrings>
     <dirStrings>
-      <dir>C:\DEV\Android\workplace\BibleReader\app\src\main</dir>
-      <dir>C:\DEV\Android\workplace\BibleReader\app\src\main\java\com\example\p048293\biblereader</dir>
+      <dir>D:\DEV\Android\BibleReader\app\src\main\java\com\example\p048293\biblereader</dir>
+      <dir>D:\DEV\Android\BibleReader\app\src\main\java</dir>
     </dirStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -1822,65 +1813,65 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_old_testament.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_new_testament.xml" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/spinner_border_with_arrow.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_eng_han_old.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/spinner_border_with_arrow_2.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_eng_han_new.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/spinner_border_img_arrow.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_kinder_read.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_child_read.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/SongActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/DispalySettingActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/raw/child_read_list.txt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/ChildTestamemtActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_child_testamemt.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_word_search.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/WordSearchActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_word_search2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/ReadHistActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/CommonActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/NewTestamentActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultTestamemtActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_daekwang_notice.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultTotTestamemtActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultRead6Activity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultReadTotalActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_adult_6_read.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_adult_total_read.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_adult_total_testamemt.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_adult_6_testamemt.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/SongActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/WordSearchActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_child_testamemt.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_kinder_read.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_kinder_testamemt.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/raw/subject.txt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/DispalySettingActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/ChildTestamemtActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/KinderTestamemtActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_help.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/HelpActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/SettingMenuActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/OldTestamentActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/EngHanNewActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_setting_menu.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/WordSearch2Activity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_daekwang_notice.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/DaekwangNoticeActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/EngHanOldActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultTotalReadActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/ChildReadActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/KinderReadActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/Adult6ReadActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/raw/adult_total_read_list.txt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/raw/adult_6_read_list.txt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultTotalTestamemtActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/Adult6TestamemtActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/spinner_border_img_arrow.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/spinner_border_with_arrow.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/spinner_border_with_arrow_2.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/background.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_eng_han_old.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_eng_han_new.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_new_testament.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_old_testament.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_song.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/raw/kinder_read_list.txt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_read_hist.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/raw/adult_total_list.txt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/raw/adult_total_read_list" />
+        <option value="$PROJECT_DIR$/app/src/main/res/raw/adult_total_read_list.txt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/EngHanNewActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/OldTestamentActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/NewTestamentActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/raw/child_read_list.txt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/ChildReadActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultTotalReadActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/KinderReadActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/EngHanOldActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_file_check.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_setting_menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/FileCheckActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/raw/adult_6_read_list.txt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/Adult6ReadActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/Adult6TestamemtActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultTotalTestamemtActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/raw/help.txt" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="11" />
-    <option name="y" value="4" />
-    <option name="width" value="1883" />
-    <option name="height" value="1027" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator currentView="Scope" currentSubView="Project Files" proportions="" version="1">
@@ -1897,121 +1888,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="main">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="main">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="res">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="app">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="main">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="com/example/p048293/biblereader">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2100,8 +1976,27 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
+      <pane id="Scratches" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2113,18 +2008,17 @@
     <property name="ExportApk.BuildType" value="release" />
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BibleReader_spon" />
     <property name="ExportApk.SignV1" value="true" />
     <property name="ExportApk.SignV2" value="true" />
-    <property name="VectorAssetImportPath" value="C:\DEV\Android" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\DEV\Android\workplace\BibleReader\app\src\main\res\drawable" />
-      <recent name="D:\DEV\Android\BibleReader\app\src\main\res\raw" />
-      <recent name="D:\DEV\Android\BibleReader\app\src\main\java\com\example\p048293\biblereader" />
-      <recent name="D:\DEV\Android\BibleReader\app\src\main\res\layout" />
       <recent name="D:\DEV\Android\BibleReader\app\src\main\res\drawable" />
+      <recent name="D:\DEV\Android\BibleReader\app\src\main\res\menu" />
+      <recent name="D:\DEV\Android\BibleReader\app\src\main\java\com\example\p048293\biblereader" />
+      <recent name="D:\DEV\Android\BibleReader\app\src\main\res\raw" />
+      <recent name="D:\DEV\Android\BibleReader\app\src\main\res\layout" />
     </key>
     <key name="android.template.packageName">
       <recent name="com.example.p048293.biblereader" />
@@ -2218,8 +2112,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1525770606708" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1525856512102" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2266,8 +2159,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
       </Profilers>
       <method>
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1525770606708" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1525856512105" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2299,6 +2191,27 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -2428,8 +2341,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1525770606709" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1525856512118" />
       </method>
     </configuration>
     <list size="1">
@@ -2468,26 +2380,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="11" y="4" width="1883" height="1027" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32756758" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27120537" sideWeight="0.5112452" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.49808007" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39675677" sideWeight="0.50852877" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.4958859" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27120537" sideWeight="0.4887548" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.4978678" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39675677" sideWeight="0.4914712" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27120537" sideWeight="0.509051" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39675677" sideWeight="0.50852877" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22380692" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2553305" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2500,7 +2412,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2578168" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22974414" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -2512,332 +2424,113 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_kinder_testamemt.xml">
-      <provider editor-type-id="android-designer2">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/spinner_back.png">
+      <provider selected="true" editor-type-id="images">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/main_icon_2_web.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/main_icon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/cover01_320_240.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/border.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/KinderTestamemtActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/child_read_list.txt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/button_round_boder.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_word_search.xml">
-      <provider editor-type-id="android-designer2">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/back_1024x500.png">
+      <provider selected="true" editor-type-id="images">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="17" column="27" lean-forward="true" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_word_search2.xml">
-      <provider editor-type-id="android-designer2">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/arrow_drop_down_grey_192x192.png">
+      <provider selected="true" editor-type-id="images">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="49" lean-forward="false" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
-        </state>
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/WordSearchActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2033">
-          <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="170" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/MyIntentService.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/CommonActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_adult_read_total.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_adult_read6.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_common.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_adult_testamemt.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultTestamemtActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_adult_read_6.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultTotTestamemtActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultRead6Activity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultReadTotalActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_child_read.xml">
-      <provider editor-type-id="android-designer2">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/wwpzT.png" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_arrow_drop_down_48px_svg.png">
+      <provider selected="true" editor-type-id="images">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="32" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_adult_6_read.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_adult_total_read.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_child_testamemt.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_adult_total_testamemt.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="129" column="28" lean-forward="false" selection-start-line="129" selection-start-column="28" selection-end-line="129" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/SettingMenuActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-          <folding>
-            <element signature="e#969#2018#0" expanded="false" />
-            <element signature="e#1333#1598#0" expanded="false" />
-            <element signature="e#1597#1598#0" expanded="false" />
-            <element signature="e#2017#2018#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/OldTestamentActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/spinner_border_with_arrow.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
-          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-          <folding />
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="28" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_adult_6_testamemt.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/spinner_border_img_arrow.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
+          <caret line="18" column="12" lean-forward="false" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="97" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/EngHanNewActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_arrow_drop_down.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/spinner_border_with_arrow_2.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-          <folding />
+        <state relative-caret-position="76">
+          <caret line="4" column="60" lean-forward="false" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_dispaly_setting.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/background.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="34" lean-forward="false" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_eng_han_new.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="44" lean-forward="false" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+        <state relative-caret-position="1672">
+          <caret line="88" column="40" lean-forward="true" selection-start-line="88" selection-start-column="40" selection-end-line="88" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_daekwang_notice.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_old_testament.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/DaekwangNoticeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="25" column="62" lean-forward="true" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/WordSearch2Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="315" column="5" lean-forward="true" selection-start-line="305" selection-start-column="0" selection-end-line="315" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_setting_menu.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="62" column="35" lean-forward="false" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/EngHanOldActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="78" column="94" lean-forward="true" selection-start-line="78" selection-start-column="94" selection-end-line="78" selection-end-column="94" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/ChildTestamemtActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-          <folding>
-            <marker date="1525169320000" expanded="true" signature="9719:9727" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/Adult6ReadActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="271" column="21" lean-forward="false" selection-start-line="271" selection-start-column="21" selection-end-line="271" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/KinderReadActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="251" column="28" lean-forward="true" selection-start-line="251" selection-start-column="28" selection-end-line="251" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultTotalReadActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="259" column="24" lean-forward="false" selection-start-line="259" selection-start-column="24" selection-end-line="259" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/ChildReadActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="259" column="0" lean-forward="true" selection-start-line="259" selection-start-column="0" selection-end-line="259" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/adult_total_read_list.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="133" column="11" lean-forward="false" selection-start-line="133" selection-start-column="11" selection-end-line="133" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/adult_6_read_list.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="133" column="11" lean-forward="false" selection-start-line="133" selection-start-column="11" selection-end-line="133" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultTotalTestamemtActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="302" column="0" lean-forward="false" selection-start-line="302" selection-start-column="0" selection-end-line="368" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/Adult6TestamemtActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3088">
-          <caret line="351" column="0" lean-forward="true" selection-start-line="351" selection-start-column="0" selection-end-line="351" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="7" lean-forward="false" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="37" column="39" lean-forward="true" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="41" column="65" lean-forward="true" selection-start-line="41" selection-start-column="65" selection-end-line="41" selection-end-column="65" />
+        <state relative-caret-position="221">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="41" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -2846,9 +2539,25 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="126" column="56" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="126" selection-end-column="56" />
-          <folding />
+        <state relative-caret-position="646">
+          <caret line="67" column="25" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="67" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/kinder_read_list.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1267">
+          <caret line="365" column="18" lean-forward="false" selection-start-line="365" selection-start-column="18" selection-end-line="365" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_song.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -2857,17 +2566,128 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="19" selection-end-column="46" />
-          <folding />
+        <state relative-caret-position="240">
+          <caret line="30" column="40" lean-forward="false" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="56" column="18" lean-forward="false" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/adult_total_list.txt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/adult_total_read_list" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/adult_total_read_list.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="383" column="16" lean-forward="false" selection-start-line="383" selection-start-column="16" selection-end-line="383" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/bible_old.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7782" column="5" lean-forward="false" selection-start-line="7782" selection-start-column="0" selection-end-line="7782" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/ReadHistActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="147" column="27" lean-forward="true" selection-start-line="147" selection-start-column="27" selection-end-line="147" selection-end-column="27" />
+        <state relative-caret-position="38">
+          <caret line="202" column="0" lean-forward="true" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/OldTestamentActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="252" column="25" lean-forward="false" selection-start-line="252" selection-start-column="25" selection-end-line="252" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/child_read_list.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/KinderReadActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="215" column="30" lean-forward="false" selection-start-line="215" selection-start-column="30" selection-end-line="215" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/ChildReadActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="235" column="71" lean-forward="true" selection-start-line="235" selection-start-column="71" selection-end-line="235" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_eng_han_old.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="60" column="60" lean-forward="false" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/EngHanNewActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6384">
+          <caret line="369" column="88" lean-forward="false" selection-start-line="369" selection-start-column="88" selection-end-line="369" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/EngHanOldActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="57" column="30" lean-forward="false" selection-start-line="57" selection-start-column="22" selection-end-line="57" selection-end-column="30" />
+          <folding>
+            <element signature="e#5004#5579#0" expanded="true" />
+            <element signature="e#5578#5579#0" expanded="true" />
+            <element signature="e#5645#6338#0" expanded="true" />
+            <element signature="e#6337#6338#0" expanded="true" />
+            <element signature="e#6404#6682#0" expanded="true" />
+            <element signature="e#6681#6682#0" expanded="true" />
+            <element signature="e#6741#8006#0" expanded="true" />
+            <element signature="e#8005#8006#0" expanded="true" />
+            <element signature="e#8066#8983#0" expanded="true" />
+            <element signature="e#8982#8983#0" expanded="true" />
+            <element signature="e#9043#12307#0" expanded="true" />
+            <element signature="e#12306#12307#0" expanded="true" />
+            <element signature="e#14972#14980#0" expanded="true" />
+            <element signature="e#16491#16499#0" expanded="true" />
+            <element signature="e#16560#16568#0" expanded="true" />
+            <element signature="e#19264#20218#0" expanded="true" />
+            <element signature="e#20217#20218#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultTotalReadActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -2876,32 +2696,114 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5643">
-          <caret line="297" column="0" lean-forward="false" selection-start-line="297" selection-start-column="0" selection-end-line="297" selection-end-column="0" />
+        <state relative-caret-position="289">
+          <caret line="210" column="46" lean-forward="false" selection-start-line="210" selection-start-column="37" selection-end-line="210" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_setting_menu.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="36" column="51" lean-forward="true" selection-start-line="36" selection-start-column="51" selection-end-line="36" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/SettingMenuActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="49" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/NewTestamentActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3515">
-          <caret line="306" column="40" lean-forward="false" selection-start-line="306" selection-start-column="40" selection-end-line="306" selection-end-column="40" />
-          <folding>
-            <element signature="e#12540#12548#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="226">
+          <caret line="462" column="0" lean-forward="false" selection-start-line="462" selection-start-column="0" selection-end-line="463" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/adult_6_read_list.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="364" column="53" lean-forward="false" selection-start-line="364" selection-start-column="53" selection-end-line="364" selection-end-column="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/FileCheckActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="338" column="34" lean-forward="true" selection-start-line="338" selection-start-column="34" selection-end-line="338" selection-end-column="34" />
+        <state relative-caret-position="285">
+          <caret line="134" column="43" lean-forward="false" selection-start-line="134" selection-start-column="43" selection-end-line="134" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/Adult6ReadActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-256">
+          <caret line="245" column="25" lean-forward="false" selection-start-line="245" selection-start-column="25" selection-end-line="245" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="232" column="0" lean-forward="true" selection-start-line="232" selection-start-column="0" selection-end-line="232" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/AdultTotalTestamemtActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="96" column="74" lean-forward="false" selection-start-line="96" selection-start-column="74" selection-end-line="96" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/Adult6TestamemtActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/help.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="47" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-261">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/p048293/biblereader/DaekwangNoticeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-817">
+          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding>
-            <element signature="e#3542#4708#0" expanded="true" />
-            <element signature="e#3893#4248#0" expanded="true" />
-            <element signature="e#4247#4248#0" expanded="true" />
-            <element signature="e#4707#4708#0" expanded="true" />
-            <element signature="e#12570#12578#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

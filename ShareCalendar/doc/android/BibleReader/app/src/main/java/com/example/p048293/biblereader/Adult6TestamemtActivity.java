@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,7 +34,7 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
     private float fontSize = 20;         // 글자크기
     private int scrollSpeed = 5;        // 스크롤 속도
     int scrollDist = 7139;      // 스크롤 전체길이 7139
-    int scrollTime = 145000;    // 스크롤 시간  145000
+    long scrollTime = 145000;    // 스크롤 시간  145000
 
     int nowYear = 0;    // 올해
     int nowMon = 0;     // 당월
@@ -55,6 +56,7 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adult_6_testamemt);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   // 화면꺼짐 방지
 
         final TextView textView = (TextView)findViewById(R.id.textView001);
         final TextView calText = (TextView)findViewById(R.id.calText);
@@ -94,7 +96,7 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 scrollDist = textView.getMeasuredHeight();
-                scrollTime =  textView.getMeasuredHeight() * 145000 / 7139;   // 최초 기준값 - 길이:3719, 시간:145000
+                scrollTime =  textView.getMeasuredHeight() / 7139 * 145000;   // 최초 기준값 - 길이:3719, 시간:145000
 
                 objectAnimator.setIntValues(scrollDist); // 전체수행길이
                 objectAnimator.setDuration(scrollTime * (6 - scrollSpeed));    // 전체수행시간
@@ -191,81 +193,54 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
                 readHist6 = line;   // 6장반 완독 저장용
 
                 String newConfig[] = line.split(":");
+                String tempStentence = "";  // 화면 표시용
 
-                // 시작 ~ 끝 형식으로 되어있을 경우
-                if(newConfig[2].indexOf("~") > -1) {
-                    String sectence[] = newConfig[2].split("~");
-                    String pageTemp[] = sectence[0].split(" ");
+                for(int i=1; i<newConfig.length; i++) {
+                    readHist.add(newConfig[i].replaceAll(" ", ":"));    // 성경읽기표 완독 저장용
 
-                    nowBook = pageTemp[0];      // 페이지 뺀 책 약어 (창, 출)
-                    minSentence = pageTemp[1];  // 시작페이지
-                    maxSentence = sectence[1];    // 종료페이지가 있을 때
-                } else {                            // 단독 페이지일 경우
-                    String pageTemp[] = newConfig[2].split(" ");
-                    nowBook = pageTemp[0];      // 페이지 뺀 책 약어 (창, 출)
-                    minSentence = pageTemp[1];
-                    maxSentence = pageTemp[1];
-                }
+                    String tempReadStr[] = newConfig[i].split(" ");
 
-                bookSe = newConfig[1];      // NEW, OLD
+                    bookSe = tempReadStr[0];
+                    nowBook = tempReadStr[1];
+                    minSentence = tempReadStr[2];
 
-                Date date = new Date();
-                nowYear = date.getYear() + 1900;
-                nowMon = Integer.parseInt(newConfig[0].substring(0, 2));
-                nowDate = Integer.parseInt(newConfig[0].substring(2, 4));
+                    // 책 full name 찾기 ---  내용 첫줄에 표시할 책이름, 장 찾기
+                    ArrayAdapter adapter;
+                    ArrayAdapter adapter2;
 
-                if(newConfig.length > 4) {
-                    calText.setText("<" + newConfig[4] + ">  " + nowYear + "-" + nowMon + "-" + nowDate);
-                } else {
-                    calText.setText(nowYear + "-" + nowMon + "-" + nowDate);
-                }
-
-                String tempStentence = sentence.getText().toString();
-                if(tempStentence.equals("") || tempStentence == null || tempStentence == "") {
-                    if(minSentence.equals(maxSentence)) {
-                        sentence.setText(nowBook + " " + minSentence);
+                    if(bookSe.equals("OLD")) {
+                        adapter = ArrayAdapter.createFromResource(Adult6TestamemtActivity.this, R.array.bible_old_name_kor_ac, android.R.layout.simple_spinner_item);
+                        adapter2 = ArrayAdapter.createFromResource(Adult6TestamemtActivity.this, R.array.bible_old_name_kor, android.R.layout.simple_spinner_item);
                     } else {
-                        sentence.setText(nowBook + " " + minSentence + "~" + maxSentence);
+                        adapter = ArrayAdapter.createFromResource(Adult6TestamemtActivity.this, R.array.bible_new_name_kor_ac, android.R.layout.simple_spinner_item);
+                        adapter2 = ArrayAdapter.createFromResource(Adult6TestamemtActivity.this, R.array.bible_new_name_kor, android.R.layout.simple_spinner_item);
                     }
-                } else {
+
+                    int bookIndex = adapter.getPosition(nowBook);
+                    String bookFullName = (String)adapter2.getItem(bookIndex);
+                    String bookLastName = "";
+
+                    if(nowBook.equals("시")) {
+                        bookLastName += "편";
+                    } else {
+                        bookLastName += "장";
+                    }
+
+                    if(tempStentence.equals("") || tempStentence == "") {
+                        ;
+                    } else {
+                        tempStentence += ", ";
+                    }
+
+                    // 상단에 오늘 읽을 6장 표시
+                    tempStentence += nowBook + " " + minSentence;
                     sentence.setTextSize(15);
-                    if(minSentence.equals(maxSentence)) {
-                        sentence.setText(tempStentence + ", " + nowBook + " " + minSentence);
-                    } else {
-                        sentence.setText(tempStentence + ", " + nowBook + " " + minSentence + "~" + maxSentence);
-                    }
-                }
+                    sentence.setText(tempStentence);
 
-                // 책 full name 찾기 ---  내용 첫줄에 표시할 책이름, 장 찾기
-                ArrayAdapter adapter;
-                ArrayAdapter adapter2;
-                String bookLastName;
+                    readHist.add(bookSe + ":" + nowBook + ":" + minSentence); // 성경읽기표 저장용
 
-                if(bookSe.equals("OLD")) {
-                    adapter = ArrayAdapter.createFromResource(Adult6TestamemtActivity.this, R.array.bible_old_name_kor_ac, android.R.layout.simple_spinner_item);
-                    adapter2 = ArrayAdapter.createFromResource(Adult6TestamemtActivity.this, R.array.bible_old_name_kor, android.R.layout.simple_spinner_item);
-                } else {
-                    adapter = ArrayAdapter.createFromResource(Adult6TestamemtActivity.this, R.array.bible_new_name_kor_ac, android.R.layout.simple_spinner_item);
-                    adapter2 = ArrayAdapter.createFromResource(Adult6TestamemtActivity.this, R.array.bible_new_name_kor, android.R.layout.simple_spinner_item);
-                }
-
-                int bookIndex = adapter.getPosition(nowBook);
-                String bookFullName = (String)adapter2.getItem(bookIndex);
-
-                if(nowBook.equals("시")) {
-                    bookLastName = "편";
-                } else {
-                    bookLastName = "장";
-                }
-
-
-                String line2 = "";
-
-                for(int i=Integer.parseInt(minSentence); i<=Integer.parseInt(maxSentence); i++) {
-                    readHist.add(bookSe + ":" + nowBook + ":" + i); // 성경읽기표 저장용
-
-                    readStr += "\n" + "<" + bookFullName + " " + i + bookLastName + ">" + "\n"; // 내용 첫줄에 표시할 책이름, 장
-                    String findStr = nowBook + " " + i + ":";
+                    readStr += "\n" + "<" + bookFullName + " " + minSentence + bookLastName + ">" + "\n"; // 내용 첫줄에 표시할 책이름, 장
+                    String findStr = nowBook + " " + minSentence + ":";
 
                     //raw 폴더 읽기
                     InputStream is = null;
@@ -275,6 +250,8 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
                         is = getResources().openRawResource(R.raw.bible_new);
                     }
                     BufferedReader br2 = new BufferedReader(new InputStreamReader(is));
+
+                    String line2 = "";
                     while((line2=br2.readLine()) != null) {
                         if(line2.indexOf(findStr) > -1) {
                             readStr += line2 + "\n\n";
@@ -283,11 +260,17 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
                     br2.close();
                 }
 
+                // 날짜셋팅
+                Date date = new Date();
+                nowYear = date.getYear() + 1900;
+                nowMon = Integer.parseInt(newConfig[0].substring(0, 2));
+                nowDate = Integer.parseInt(newConfig[0].substring(2, 4));
+                calText.setText(nowYear + "-" + nowMon + "-" + nowDate);
+
+                readStr += "\n\n\n\n\n";
+                textView.setText(readStr);
             }
             br.close();
-
-            readStr += "\n\n\n\n\n";
-            textView.setText(readStr);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             textView.setText("파일을 찾을 수 없습니다.");
@@ -306,6 +289,9 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
 
         try {
             for(int i=0;i<readHist.size(); i++) {
+                String tempReadHist[] = readHist.get(i).split(":");
+                bookSe = tempReadHist[0];
+
                 // 리스트 파일이 없을 경우 생성
                 File fileList = new File(getFilesDir() + "/readHist" + bookSe + "List.txt");
                 if( !fileList.exists() ) {
@@ -338,7 +324,7 @@ public class Adult6TestamemtActivity extends AppCompatActivity {
 
                             BufferedReader br2 = new BufferedReader(new FileReader(histFile));
                             while ((line = br2.readLine()) != null) {
-                                if (line.indexOf(readHist.get(i)) != -1) {
+                                if (line.indexOf(tempReadHist[1] + " " + tempReadHist[2]) != -1) {
                                     chaSu++;
                                     break;
                                 }

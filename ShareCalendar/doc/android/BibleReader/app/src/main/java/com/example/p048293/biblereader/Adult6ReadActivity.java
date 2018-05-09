@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -191,7 +192,7 @@ public class Adult6ReadActivity extends AppCompatActivity {
                 tdParams.setMargins(1, 1, 1, 1);
 
                 if(tr == 0) {   // 요일 셋팅
-                    dayTtext[tr][td].setHeight(50);
+                    dayTtext[tr][td].setMinHeight(50);
                     dayTtext[tr][td].setText(dayName[td]);
                     dayTtext[tr][td].setTextColor(dayColor[td]);     // 폰트컬러
                     dayTtext[tr][td].setTextSize(20);                // 폰트사이즈
@@ -230,11 +231,17 @@ public class Adult6ReadActivity extends AppCompatActivity {
 
                         while ((line = br.readLine()) != null) {
                             if(line.indexOf(tempDate) > -1) {
-                                readStrTemp += line + "\n"; // 완독 기록용
+                                readStrTemp += line; // 완독 기록용
 
                                 String[] tempDayStr = line.split(":");
 
-                                readStr += "\n" + tempDayStr[2];
+                                readStr += "\n" + tempDayStr[1].substring(4);
+                                readStr += "\n" + tempDayStr[2].substring(4);
+                                readStr += "\n" + tempDayStr[3].substring(4);
+                                readStr += "\n" + "...";
+                                //readStr += "\n" + tempDayStr[4].substring(4);
+                                //readStr += "\n" + tempDayStr[5].substring(4);
+                                //readStr += "\n" + tempDayStr[6].substring(4);
                             }
                         }
                         br.close();
@@ -246,6 +253,7 @@ public class Adult6ReadActivity extends AppCompatActivity {
 //                    dayTtext[tr][td].setMaxWidth(95);
 //                    dayTtext[tr][td].setMinHeight(280);
                     dayTtext[tr][td].setTextSize(15);                // 폰트사이즈
+                    //dayTtext[tr][td].setEllipsize(TextUtils.TruncateAt.END);
                     dayTtext[tr][td].setGravity(Gravity.RIGHT|Gravity.TOP);       // 폰트정렬
                     dayTtext[tr][td].setBackgroundColor(Color.GRAY); // 배경색
                     dayTtext[tr][td].setTextColor(dayColor[td]);     // 폰트컬러

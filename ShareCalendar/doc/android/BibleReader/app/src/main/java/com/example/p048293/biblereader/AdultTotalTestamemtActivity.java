@@ -33,7 +33,7 @@ public class AdultTotalTestamemtActivity extends AppCompatActivity {
     private float fontSize = 20;         // 글자크기
     private int scrollSpeed = 5;        // 스크롤 속도
     int scrollDist = 7139;      // 스크롤 전체길이 7139
-    int scrollTime = 145000;    // 스크롤 시간  145000
+    long scrollTime = 145000;    // 스크롤 시간  145000
 
     int nowYear = 0;    // 올해
     int nowMon = 0;     // 당월
@@ -94,7 +94,7 @@ public class AdultTotalTestamemtActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 scrollDist = textView.getMeasuredHeight();
-                scrollTime =  textView.getMeasuredHeight() * 145000 / 7139;   // 최초 기준값 - 길이:3719, 시간:145000
+                scrollTime =  textView.getMeasuredHeight() / 7139 * 145000;   // 최초 기준값 - 길이:3719, 시간:145000
 
                 objectAnimator.setIntValues(scrollDist); // 전체수행길이
                 objectAnimator.setDuration(scrollTime * (6 - scrollSpeed));    // 전체수행시간

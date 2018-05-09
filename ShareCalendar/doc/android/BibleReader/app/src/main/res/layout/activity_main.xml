@@ -237,7 +237,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:paddingRight="8dp"
-            android:text="2018.4    Copyright by CHJ Ver 1.4"
+            android:text="2018.4    Copyright by CHJ Ver 1.5"
             android:gravity="right"
             android:textColor="#BDBDBD"
             android:textSize="15dp" />

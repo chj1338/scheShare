@@ -8,57 +8,48 @@
     tools:context="com.example.p048293.biblereader.DaekwangNoticeActivity"
     android:weightSum="1">
 
-        <LinearLayout
-            android:orientation="horizontal"
+    <LinearLayout
+        android:id="@+id/inner02"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <ScrollView
+            android:id="@+id/scrollView1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <EditText
-                android:layout_width="252dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtURL"
-                android:text="http://www.daekwang.org/board/dgboard.php?board=dk_02" />
-
-            <LinearLayout
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:id="@+id/tableLayout1"
+                android:background="#000000">
 
-                <Button
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Go"
-                    android:id="@+id/btnGo" />
+                    android:layout_height="match_parent" >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:background="#FF0000"
+                        android:text="11" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:background="#FF00FF"
+                        android:text="21" />
+                </TableRow>
+            </TableLayout>
 
-            </LinearLayout>
+        </ScrollView>
 
-        </LinearLayout>
-
-        <WebView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/webView"
-            android:layout_weight="0.83"/>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.13">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Elapsed time :"
-                android:id="@+id/tvElapsedTime" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="sec"
-                android:id="@+id/tvSec" />
-        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -47,6 +48,7 @@ public class KinderTestamemtActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kinder_testamemt);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   // 화면꺼짐 방지
 
         final TextView textView = (TextView)findViewById(R.id.textView001);
         final TextView calText = (TextView)findViewById(R.id.calText);

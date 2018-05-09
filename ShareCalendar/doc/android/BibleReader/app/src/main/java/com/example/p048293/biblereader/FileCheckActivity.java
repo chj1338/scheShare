@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -42,6 +44,7 @@ public class FileCheckActivity extends AppCompatActivity {
         final Spinner spinner12 = (Spinner) findViewById(R.id.spinner12);   // 책 목록
         final Spinner spinner13 = (Spinner) findViewById(R.id.spinner13);   // 부터 장 목록
         final Spinner spinner14 = (Spinner) findViewById(R.id.spinner14);   // 까지 장 목록
+        final Button btnReadAdd = (Button) findViewById(R.id.btnReadAdd);   // 읽기 기록 추가
 
         // spinner1 child 셋팅
         ArrayList<String> bookSeItems = new ArrayList<>();
@@ -65,8 +68,10 @@ public class FileCheckActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(spinner1.getSelectedItemPosition() == 0) {
                     bookSe = "OLD";
+                    spinner11.setSelection(0);
                 } else {
                     bookSe = "NEW";
+                    spinner11.setSelection(1);
                 }
 
                 readHistList(textView001, spinner2);
@@ -124,8 +129,10 @@ public class FileCheckActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0) {
                     bookSe = "OLD";
+                    spinner1.setSelection(0);
                 } else {
                     bookSe = "NEW";
+                    spinner1.setSelection(1);
                 }
 
                 initSpinnerBook(spinner11, spinner12, spinner13, spinner14);
@@ -174,6 +181,29 @@ public class FileCheckActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        btnReadAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(FileCheckActivity.this)
+                        .setTitle("선택")
+                        .setMessage( "선택하신 부분을 읽기 기록에 추가하시겠습니까?")
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                addReadHist();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                return;
+                            }
+                        })
+                        .create()
+                        .show();
             }
         });
 
@@ -337,7 +367,91 @@ public class FileCheckActivity extends AppCompatActivity {
         spinner14.setAdapter(adapter13);
 
         spinner13.setSelection(0);
-        spinner14.setSelection(spinner14.getCount());
+        spinner14.setSelection(spinner14.getCount() - 1);
+    }
+
+
+    // 읽기 기록 추가
+    public void addReadHist() {
+
+        Spinner bookSpinner = (Spinner)findViewById(R.id.spinner12);
+        Spinner startPageSpinner = (Spinner)findViewById(R.id.spinner13);
+        Spinner endPageSpinner = (Spinner)findViewById(R.id.spinner14);
+
+        ArrayAdapter adapter;
+        if(bookSe.equals("OLD")) {
+            adapter = ArrayAdapter.createFromResource(FileCheckActivity.this, R.array.bible_old_name_kor_ac, android.R.layout.simple_spinner_item);
+        } else {
+            adapter = ArrayAdapter.createFromResource(FileCheckActivity.this, R.array.bible_new_name_kor_ac, android.R.layout.simple_spinner_item);
+        }
+        String nowBook = (String)adapter.getItem(bookSpinner.getSelectedItemPosition());
+        int startIndex = Integer.parseInt(startPageSpinner.getSelectedItem().toString());
+        int endIndex = Integer.parseInt(endPageSpinner.getSelectedItem().toString());
+
+        try {
+            for(int i=startIndex;i<=endIndex; i++) {
+                // 리스트 파일이 없을 경우 생성
+                File fileList = new File(getFilesDir() + "/readHist" + bookSe + "List.txt");
+                if( !fileList.exists() ) {
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(fileList, true));
+                    bw.write("");
+                    bw.close();
+                }
+
+                // 몇 차수 까지 존재하는지 확인 (한번 읽으면 1차, 두번 읽으면 2차)
+                int chaSu = 1;  // 몇차에 저장해야 하는지 확인용
+                int chaSuCnt = 0;   // 전체 몇차까지 있는지 확인용
+
+                String line = null;
+                BufferedReader br = new BufferedReader(new FileReader(fileList));
+                while((line=br.readLine())!=null) {
+                    int temp = Integer.parseInt(line.replaceAll("readHist", "").replaceAll(bookSe, "").replaceAll("_", "").replaceAll(".txt", ""));
+
+                    if(chaSuCnt < temp) {
+                        chaSuCnt = temp;
+                    }
+                }
+                br.close();
+
+                // 현재의 strHist 내용이 몇차까지 기록되었는지 확인
+                for(int j=1; j<=chaSuCnt; j++) {
+                    try {
+                        File histFile = new File(getFilesDir() + "/readHist" + bookSe + "_" + j + ".txt");
+                        if (histFile.exists()) {
+                            line = "";
+
+                            BufferedReader br2 = new BufferedReader(new FileReader(histFile));
+                            while ((line = br2.readLine()) != null) {
+                                if (line.indexOf(nowBook + ":" + i) != -1) {
+                                    chaSu++;
+                                    break;
+                                }
+                            }
+                            br2.close();
+                        }
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                // 현재 차수 리스트에 있는 읽기차수 보다 초과하면 그다음 파일명 저장
+                if(chaSu > chaSuCnt) {
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(fileList, true));
+                    bw.write("readHist" + bookSe + "_" + chaSu + ".txt" + "\n");
+                    bw.close();
+                }
+
+                // 읽기 리스트에 읽은 책:장 저장
+                BufferedWriter bw2 = new BufferedWriter(new FileWriter(getFilesDir() + "/readHist" + bookSe + "_" + chaSu + ".txt", true));
+                bw2.write(bookSe + ":" + nowBook + ":" + i + "\n");
+                bw2.close();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(FileCheckActivity.this, nowBook + " " + startIndex + "~" + endIndex + "을 읽기 기록에 추가하였습니다.", Toast.LENGTH_SHORT).show();
     }
 
 

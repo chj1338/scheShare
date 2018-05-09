@@ -6,9 +6,9 @@ android {
         applicationId 'com.p048293.biblereader'
         minSdkVersion 15
         targetSdkVersion 26
-        versionName '1.38'
+        versionName '1.50'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 138
+        versionCode 150
     }
     buildTypes {
         release {
