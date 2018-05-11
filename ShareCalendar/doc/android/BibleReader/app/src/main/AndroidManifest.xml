@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".OldTestamentActivity" />
         <activity android:name=".NewTestamentActivity" />
+        <activity android:name=".NewTestament2Activity" />
         <activity android:name=".EngHanOldActivity" />
         <activity android:name=".EngHanNewActivity" />
         <activity android:name=".ReadHistActivity" />

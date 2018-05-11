@@ -1,5 +1,6 @@
 package com.example.p048293.biblereader;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,7 +24,13 @@ public class SettingMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_menu);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   // 화면꺼짐 방지
+
+        // 화면꺼짐 방지
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        // 액션바 타이틀 관련
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_title_bar);
 
         Button btnReset = (Button) findViewById(R.id.button3);
 
@@ -138,4 +145,9 @@ public class SettingMenuActivity extends AppCompatActivity {
         }
     }
 
+    // 설정메뉴로 이동
+    public void btnGoSettingMenu(View v) {
+        Intent intent006 = new Intent(this, SettingMenuActivity.class);
+        startActivity(intent006);
+    }
 }

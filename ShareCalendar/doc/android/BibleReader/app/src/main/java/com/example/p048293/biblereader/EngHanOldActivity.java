@@ -427,14 +427,14 @@ public class EngHanOldActivity extends AppCompatActivity {
 
             // 그리드 생성
             TableRow row[] = new TableRow[trCt];            // 테이블 ROW 생성
-            final EditText text[][] = new EditText[trCt][tdCt];   // 데이터
+            final TextView text[][] = new TextView[trCt][tdCt];   // 데이터
 
             for (int tr = 0; tr < trCt; tr++) {
                 row[tr] = new TableRow(this);
                 row[tr].setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
 
                 for(int td=0; td<tdCt; td++) {
-                    text[tr][td] = new EditText(this);
+                    text[tr][td] = new TextView(this);
 
                     String lineText = "";
                     if(td == 0) {
@@ -448,18 +448,19 @@ public class EngHanOldActivity extends AppCompatActivity {
                     TableRow.LayoutParams textParam = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
 
                     // 속성 지정
-                    text[tr][td].setId(td);
+                    //text[tr][td].setId(td);
                     text[tr][td].setTextSize(fontSize);                // 폰트사이즈
                     //text[tr][td].setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
                     text[tr][td].setGravity(Gravity.LEFT);    // 폰트정렬
                     text[tr][td].setBackgroundDrawable(new ColorDrawable(Integer.parseInt(backColor)));
                     text[tr][td].setTextColor(Integer.parseInt(fontColor));
 
-                    text[tr][td].setInputType(0);
+                    //text[tr][td].setInputType(0);
                     text[tr][td].setSingleLine(false);      // 한줄로만 표시 여부
                     text[tr][td].setTextIsSelectable(true); // 텍스트 선택 가능여부
                     text[tr][td].setSelectAllOnFocus(true); // 클릭시 문장 전체 선택
 
+/*
                     // 클립보드에 복사
                     final int tempTR = tr;
                     final int tempTD = td;
@@ -472,7 +473,7 @@ public class EngHanOldActivity extends AppCompatActivity {
 //                            registerForContextMenu(v);
 //                            openContextMenu(v);
 //                            unregisterForContextMenu(v);
-/*
+
                             if(text[tempTR][tempTD].isSelected()) {
 //                                Toast.makeText(EngHanOldActivity.this, "선택되어 있음", Toast.LENGTH_LONG).show();
                                 text[tempTR][tempTD].setSelected(false);
@@ -481,9 +482,10 @@ public class EngHanOldActivity extends AppCompatActivity {
                                 text[tempTR][tempTD].setSelected(true);
 
 //                                copyText(text[tempTR][tempTD]);
-                            }*/
+                            }
                         }
                     });
+*/
 
                     textParam.setMargins(5, 5, 5, 5);
                     textParam.weight = 1;

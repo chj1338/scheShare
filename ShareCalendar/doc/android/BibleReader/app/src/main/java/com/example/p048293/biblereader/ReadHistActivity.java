@@ -1,5 +1,6 @@
 package com.example.p048293.biblereader;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -33,7 +34,13 @@ public class ReadHistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_hist);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   // 화면꺼짐 방지
+
+        // 화면꺼짐 방지
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        // 액션바 타이틀 관련
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_title_bar);
 
         final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
         final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
@@ -323,4 +330,9 @@ public class ReadHistActivity extends AppCompatActivity {
         tableLayout1.addView(tempRow);
     }
 
+    // 설정메뉴로 이동
+    public void btnGoSettingMenu(View v) {
+        Intent intent006 = new Intent(this, SettingMenuActivity.class);
+        startActivity(intent006);
+    }
 }

@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
@@ -26,12 +27,12 @@ import java.io.InputStreamReader;
 public class DispalySettingActivity extends AppCompatActivity {
     String configFile = "/configDisp.txt";
 
-    private String backColor = "-16777216";      // 배경색
-    private String fontColor = "-4342339";      // 글자색
-    private float fontSize = 20;         // 글자크기
-    private int scrollSpeed = 5;        // 스크롤 속도
-    int scrollDist = 7139;      // 스크롤 전체길이 7139
-    int scrollTime = 145000;    // 스크롤 시간  145000
+    private String backColor = "-16777216"; // 배경색
+    private String fontColor = "-4342339";  // 글자색
+    private float fontSize = 20;            // 글자크기
+    private int scrollSpeed = 5;            // 스크롤 속도
+    int scrollDist = 7139;                  // 스크롤 전체길이 7139
+    long scrollTime = 145000;                // 스크롤 시간  145000
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,8 @@ public class DispalySettingActivity extends AppCompatActivity {
         int fontPx = (int)(textView001.getTextSize() / density);
         fontText.setText(fontPx + "");
 
+        scrollText.setText(scrollSpeed + "");
+
         // (DP -> PX로 변환)
         //Resources r = getResources();
         //int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, Integer.parseInt(fontText.getText().toString()), r.getDisplayMetrics());
@@ -88,8 +91,7 @@ public class DispalySettingActivity extends AppCompatActivity {
 
         readBook(textView001);
 
-        // ========== 이벤트 시작 =============== //
-
+        /** ========== 이벤트 시작 =============== **/
         back01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -302,8 +304,8 @@ public class DispalySettingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 현재 내용 전체길이
                 scrollDist = textView001.getMeasuredHeight();
-                scrollTime =  textView001.getMeasuredHeight() / 7139 * 145000;   // 최초 기준값 - 길이:3719, 시간:145000
-                //Toast.makeText(DispalySettingActivity.this, textView001.getMeasuredHeight() + " : " + textView001.getBottom() + " : " + textView001.getHeight(), Toast.LENGTH_LONG).show();
+                scrollTime =  textView001.getMeasuredHeight() * 145000 / 7139;   // 최초 기준값 - 길이:3719, 시간:145000
+Log.d("============", scrollDist + " : " + scrollTime);
 
                 scrollText.setText(scrollSpeed + "");
 
@@ -314,33 +316,32 @@ public class DispalySettingActivity extends AppCompatActivity {
             }
         });
 
+        // 자동스크롤 속도 증가
         btnScrollUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 btnScrollStop.callOnClick();
 
-                //scrollDist = scrollDist - textView001.getBottom();
                 scrollSpeed++;
-                if(scrollSpeed > 5 ) {
-                    scrollSpeed = 5;
-                    Toast.makeText(DispalySettingActivity.this, "최저 속도입니다.", Toast.LENGTH_SHORT).show();
+                if(scrollSpeed > 10 ) {
+                    scrollSpeed = 10;
+                    Toast.makeText(DispalySettingActivity.this, "최고 속도입니다.", Toast.LENGTH_SHORT).show();
                 }
 
                 btnScrollStart.callOnClick();
             }
         });
 
+        // 자동스크롤 속도 감소
         btnScrollDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 btnScrollStop.callOnClick();
 
-                //scrollDist = scrollDist - textView001.getBottom();
-
                 scrollSpeed--;
                 if(scrollSpeed == 0 ) {
                     scrollSpeed = 1;
-                    Toast.makeText(DispalySettingActivity.this, "최고 속도입니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DispalySettingActivity.this, "최저 속도입니다.", Toast.LENGTH_SHORT).show();
                 }
 
                 btnScrollStart.callOnClick();
@@ -419,6 +420,9 @@ public class DispalySettingActivity extends AppCompatActivity {
                 textView.setBackgroundDrawable(new ColorDrawable(Integer.parseInt(backColor)));
                 textView.setTextColor(Integer.parseInt(fontColor));
                 textView.setTextSize(fontSize);
+
+                fontText.setText(fontSize + "");
+
                 scrollText.setText(scrollSpeed + "");
             }
             br.close();
@@ -429,7 +433,7 @@ public class DispalySettingActivity extends AppCompatActivity {
         }
     }
 
-    // 성경찾기
+    // 성경찾기 - 화면 디스플레이용
     public void readBook(TextView textView) {
         // last page item
         ArrayAdapter adapter_ac_name = ArrayAdapter.createFromResource (this, R.array.bible_old_name_kor_ac, android.R.layout.simple_spinner_item);

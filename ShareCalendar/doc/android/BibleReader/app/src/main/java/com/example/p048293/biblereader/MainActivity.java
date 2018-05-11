@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,24 +21,28 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private final long FINSH_INTERVAL_TIME = 2000; //2초
     private long backPressedTime = 0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   // 화면꺼짐 방지
 
-        checkPermission();
+        // 화면꺼짐 방지
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        configBackup(); // 시작하면 주요파일 백업
+        // 액션바 타이틀 관련
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_title_bar);
+
+        checkPermission();  // 외장메모리 권한
+        configBackup();     // 시작하면 주요파일 백업
     }
 
+/*
     // 액션바 메뉴
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,15 +59,16 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent006 = new Intent(this, SettingMenuActivity.class);
                 startActivity(intent006);
                 return true;
-/*
+
             case R.id.action_settings:
                 //Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
                 return true;
-*/
+
             default:
         }
         return super.onOptionsItemSelected(item);
     }
+*/
 
 
     // 권한 체크
@@ -207,9 +211,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    // 신약
     public void btnGoNewBook(View v) {
-        Intent intent001 = new Intent(this, NewTestamentActivity.class);
+        Intent intent001 = new Intent(this, NewTestament2Activity.class);
         startActivity(intent001);
     }
 

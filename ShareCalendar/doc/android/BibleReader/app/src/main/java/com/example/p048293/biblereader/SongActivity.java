@@ -1,5 +1,7 @@
 package com.example.p048293.biblereader;
 
+import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
@@ -37,7 +39,13 @@ public class SongActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   // 화면꺼짐 방지
+
+        // 화면꺼짐 방지
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        // 액션바 타이틀 관련
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_title_bar);
 
         imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
 
@@ -219,5 +227,11 @@ public class SongActivity extends AppCompatActivity {
 
         ScrollView scrollView = (ScrollView)findViewById(R.id.scrollView3);
         scrollView.setScrollY(0);
+    }
+
+    // 설정메뉴로 이동
+    public void btnGoSettingMenu(View v) {
+        Intent intent006 = new Intent(this, SettingMenuActivity.class);
+        startActivity(intent006);
     }
 }

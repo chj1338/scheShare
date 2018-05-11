@@ -9,7 +9,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,6 +39,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -52,16 +56,48 @@ public class DaekwangNoticeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_eng_han_old);
+        setContentView(R.layout.activity_daekwang_notice);
 
         final TableLayout tableLayout = (TableLayout)findViewById(R.id.tableLayout1);
         tableLayout.removeAllViewsInLayout();
         tableLayout.setStretchAllColumns(true);
+
+        Log.d("==========" , "시작");
+        //String tempContent[trCt][tdCt] = webParsData();
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    webParsData(tempContent);
+
+                    Message message = handler.obtainMessage();
+                    handler.sendMessage(message);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                // 여기에서 UI 수정
+                readBookHan(tableLayout);
+            }
+        };
+
+
+
+        Log.d("==========" , "끝");
+
+
     }
 
     // book index 조합으로 찾기 (한글)
     String tempContent[][];
-    public void readBookHan(View v, TableLayout tableLayout) {
+    public void readBookHan(TableLayout tableLayout) {
 
         tableLayout.removeAllViewsInLayout();
 
@@ -71,10 +107,8 @@ public class DaekwangNoticeActivity extends AppCompatActivity {
 
             // 그리드 생성
             TableRow row[] = new TableRow[trCt];            // 테이블 ROW 생성
-            final TextView text[][] = new EditText[trCt][tdCt];   // 데이터
+            final TextView text[][] = new TextView[trCt][tdCt];   // 데이터
 
-            //String tempContent[trCt][tdCt] = webParsData();
-            webParsData(tempContent);
 
             for (int tr = 0; tr < trCt; tr++) {
                 row[tr] = new TableRow(this);
@@ -131,64 +165,86 @@ public class DaekwangNoticeActivity extends AppCompatActivity {
 
 
     // 일정 가져오기
+    Handler handler = new Handler();
+    StringBuilder stringBuilder = new StringBuilder();
+
     public void webParsData(String[][] tempContent) {
         tempContent = new String[10][3];
 
         try {
             URL url = new URL("http://www.daekwang.org/");
-            URLConnection con = (URLConnection)url.openConnection();
-            InputStreamReader reader = new InputStreamReader(con.getInputStream(), "euc-kr");
-            BufferedReader br = new BufferedReader(reader);
-            String pageContent = null;
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 
-            int maxNo = 0;
+            if(conn!=null) {
+                conn.setConnectTimeout(10000);
+                conn.setRequestMethod("GET");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
 
-            while((pageContent = br.readLine()) != null) {
-                if(pageContent.indexOf("www.daekwang.org/board/dgboard.php") > -1) {
-                    String tempStr[] = pageContent.split("=");
-                    String tempNo = tempStr[4].replace("&call", "");
+                int resCode = conn.getResponseCode();
+                if (resCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader reader = new InputStreamReader(conn.getInputStream(), "euc-kr");
+                    BufferedReader br = new BufferedReader(reader);
+                    String pageContent = null;
 
-                    if(maxNo < Integer.parseInt(tempNo)) maxNo = Integer.parseInt(tempNo);
-                }
-            }
+                    int maxNo = 0;
 
-            for(int j=(maxNo-10); j<=maxNo; j++) {
-                url = new URL("http://www.daekwang.org/board/dgboard.php?board=dk_02&mode=view&no=" + j + "&call=y");
-                con = (URLConnection)url.openConnection();
-                reader = new InputStreamReader(con.getInputStream(), "euc-kr");
-                br = new BufferedReader(reader);
-                String line = null;
+                    while((pageContent = br.readLine()) != null) {
+                        Log.d("==========" , pageContent);
+                        if(pageContent.indexOf("www.daekwang.org/board/dgboard.php") > -1) {
+                            String tempStr[] = pageContent.split("=");
+                            String tempNo = tempStr[4].replace("&call", "");
 
-                int checkNum = 0;
-                while((line = br.readLine()) != null) {
-                    if(checkNum == 1) {
-                        String lineStr = line.replaceAll("<br>","").replaceAll("</td>","")
-                                             .replaceAll("\t","").replaceAll("  ","").replaceAll("  ","");
-                        String arrayStr1[] = lineStr.split("/");
-                        String arrayStr2[] = arrayStr1[0].split(":");
-
-                        if(arrayStr1.length == 2) {
-                            //System.out.println(j + "==========" + arrayStr2[0] + " | " + arrayStr2[1] + " | " + arrayStr1[1]);
-                            tempContent[j][0] = arrayStr2[0];
-                            tempContent[j][1] = arrayStr2[1];
-                            tempContent[j][2] = arrayStr1[1];
-                        } else {
-                            //System.out.println(j + "==========" + arrayStr2[0] + " | " + arrayStr2[1]);
-                            tempContent[j][0] = arrayStr2[0];
-                            tempContent[j][1] = arrayStr2[1];
-                            tempContent[j][2] = "";
+                            if(maxNo < Integer.parseInt(tempNo)) maxNo = Integer.parseInt(tempNo);
                         }
-
-                        checkNum = 0;
                     }
 
-                    if(line.indexOf("<td colspan=2 height=100 valign=top>") > -1) {
-                        checkNum = 1;
-                    } else {
-                        checkNum = 0;
+                    conn.disconnect();
+
+                    for(int j=(maxNo-10); j<=maxNo; j++) {
+                        url = new URL("http://www.daekwang.org/board/dgboard.php?board=dk_02&mode=view&no=" + j + "&call=y");
+                        conn = (HttpURLConnection)url.openConnection();
+                        reader = new InputStreamReader(conn.getInputStream(), "euc-kr");
+                        br = new BufferedReader(reader);
+                        String line = null;
+
+                        int checkNum = 0;
+                        while((line = br.readLine()) != null) {
+                            if(checkNum == 1) {
+                                String lineStr = line.replaceAll("<br>","").replaceAll("</td>","")
+                                        .replaceAll("\t","").replaceAll("  ","").replaceAll("  ","");
+                                String arrayStr1[] = lineStr.split("/");
+                                String arrayStr2[] = arrayStr1[0].split(":");
+
+                                if(arrayStr1.length == 2) {
+                                    Log.d(j + "==========" , arrayStr2[0] + " | " + arrayStr2[1] + " | " + arrayStr1[1]);
+                                    tempContent[j][0] = arrayStr2[0];
+                                    tempContent[j][1] = arrayStr2[1];
+                                    tempContent[j][2] = arrayStr1[1];
+                                } else {
+                                    Log.d(j + "==========" ,arrayStr2[0] + " | " + arrayStr2[1]);
+                                    tempContent[j][0] = arrayStr2[0];
+                                    tempContent[j][1] = arrayStr2[1];
+                                    tempContent[j][2] = "";
+                                }
+
+                                checkNum = 0;
+                            }
+
+                            if(line.indexOf("<td colspan=2 height=100 valign=top>") > -1) {
+                                checkNum = 1;
+                            } else {
+                                checkNum = 0;
+                            }
+                        }
                     }
                 }
+
             }
+
+
+
+
         } catch(Exception e) {
             e.printStackTrace();
         }

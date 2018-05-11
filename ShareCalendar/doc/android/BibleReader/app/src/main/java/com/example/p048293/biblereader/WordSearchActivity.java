@@ -1,6 +1,8 @@
 package com.example.p048293.biblereader;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,7 +49,13 @@ public class WordSearchActivity extends AppCompatActivity implements TextView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_search);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   // 화면꺼짐 방지
+
+        // 화면꺼짐 방지
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        // 액션바 타이틀 관련
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_title_bar);
 
         textView = (TextView)findViewById(R.id.textView001);
         editText = (EditText)findViewById(R.id.editText);
@@ -245,6 +253,12 @@ public class WordSearchActivity extends AppCompatActivity implements TextView.On
             readBook();
         }
         return false;
+    }
+
+    // 설정메뉴로 이동
+    public void btnGoSettingMenu(View v) {
+        Intent intent006 = new Intent(this, SettingMenuActivity.class);
+        startActivity(intent006);
     }
 }
 

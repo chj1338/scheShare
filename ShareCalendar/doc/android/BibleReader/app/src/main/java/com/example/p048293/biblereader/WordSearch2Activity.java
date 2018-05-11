@@ -1,11 +1,13 @@
 package com.example.p048293.biblereader;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -60,7 +62,13 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_search2);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   // 화면꺼짐 방지
+
+        // 화면꺼짐 방지
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        // 액션바 타이틀 관련
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_title_bar);
 
         searchWord = (EditText)findViewById(R.id.editText);
         final Button button3 = (Button)findViewById(R.id.button3);
@@ -351,5 +359,12 @@ public class WordSearch2Activity extends AppCompatActivity implements TextView.O
         ClipData.Item item = clip.getItemAt(0);
 
         pasteText.setText(item.getText());
+    }
+
+
+    // 설정메뉴로 이동
+    public void btnGoSettingMenu(View v) {
+        Intent intent006 = new Intent(this, SettingMenuActivity.class);
+        startActivity(intent006);
     }
 }

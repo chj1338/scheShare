@@ -3,12 +3,12 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId 'com.p048293.biblereader'
+        applicationId 'com.example.p048293.biblereader'
         minSdkVersion 15
         targetSdkVersion 26
-        versionName '1.50'
+        versionName '1.51'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 150
+        versionCode 151
     }
     buildTypes {
         release {

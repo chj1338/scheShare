@@ -424,14 +424,14 @@ public class EngHanNewActivity extends AppCompatActivity {
 
             // 그리드 생성
             TableRow row[] = new TableRow[trCt];            // 테이블 ROW 생성
-            final EditText text[][] = new EditText[trCt][tdCt];   // 데이터
+            final TextView text[][] = new TextView[trCt][tdCt];   // 데이터
 
             for (int tr = 0; tr < trCt; tr++) {
                 row[tr] = new TableRow(this);
                 row[tr].setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
 
                 for(int td=0; td<tdCt; td++) {
-                    text[tr][td] = new EditText(this);
+                    text[tr][td] = new TextView(this);
 
                     String lineText = "";
                     if(td == 0) {
@@ -451,10 +451,12 @@ public class EngHanNewActivity extends AppCompatActivity {
                     text[tr][td].setBackgroundDrawable(new ColorDrawable(Integer.parseInt(backColor)));
                     text[tr][td].setTextColor(Integer.parseInt(fontColor));
 
-                    text[tr][td].setInputType(0);
-                    text[tr][td].setSingleLine(false);
+                    //text[tr][td].setInputType(0);
+                    text[tr][td].setSingleLine(false);      // 한줄로만 표시 여부
+                    text[tr][td].setTextIsSelectable(true); // 텍스트 선택 가능여부
                     text[tr][td].setSelectAllOnFocus(true); // 클릭시 문장 전체 선택
 
+/*
                     // 클립보드에 복사
                     final int tempTR = tr;
                     final int tempTD = td;
@@ -464,6 +466,7 @@ public class EngHanNewActivity extends AppCompatActivity {
                             copyText(text[tempTR][tempTD]);
                         }
                     });
+*/
 
                     textParam.setMargins(5, 5, 5, 5);
                     textParam.weight = 1;
